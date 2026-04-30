@@ -1,0 +1,39 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {chapter}{Introduzione}{1}{chapter*.5}%
+\contentsline {chapter}{\numberline {1}Caratteristiche e obiettivi di TSN \& WiFi 7}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Sincronizzazione temporale}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Latenza Limitata e 0 perdite causate da congestione}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Algoritmi di accodamento}{5}{subsection.1.2.1}%
+\contentsline {subsubsection}{TAS - Time Aware Shaper}{5}{section*.9}%
+\contentsline {subsubsection}{CBS - Credit Base Shaper}{6}{section*.10}%
+\contentsline {subsubsection}{CQF - Cyclic Queuing Forwarding}{6}{section*.11}%
+\contentsline {subsubsection}{Frame Preemption}{6}{section*.12}%
+\contentsline {subsubsection}{ATS - Asynchronous Traffic Shaping}{7}{section*.14}%
+\contentsline {section}{\numberline {1.3}Affidabilità}{8}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}FRER - Frame Replication and Elimination for Reliability }{8}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}PCR - Path Control and Reservation}{9}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}PSFP - Per-Stream Filtering and Policing }{9}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Gestione risorse e rete}{9}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Modello Completamente Distribuito}{10}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Modello a Rete Centralizzata e Utente Distribuito}{10}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Modello Completamente Centralizzato}{11}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Allocazione delle risorse}{11}{subsection.1.4.4}%
+\contentsline {section}{\numberline {1.5}WiFi 7}{13}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Supporto al TSN}{15}{subsection.1.5.1}%
+\contentsline {chapter}{\numberline {2}Stack 802.11 in Linux e supporto al TSN}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Stack 802.11}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Mappare servizi TSN in Linux}{20}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Sincronizzazione temporale: Linux PTP}{20}{subsection.2.2.1}%
+\contentsline {subsubsection}{Gerarchie}{20}{section*.23}%
+\contentsline {subsubsection}{Modalità PTP e Scambio di messaggi}{20}{section*.24}%
+\contentsline {section}{\numberline {2.3}Latenza Limitata e 802.1Q: VLAN, TAPRIO, Frame Preemption}{22}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}tc}{22}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Frame Preemption}{23}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Affidabilità: FRER}{23}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Gestione delle risorse}{24}{section.2.5}%
+\contentsline {chapter}{Riferimenti bibliografici}{25}{chapter*.26}%
+\contentsline {chapter}{Appendici}{}{section*.27}%
+\contentsline {chapter}{Appendice \numberline {A}Appendice 1}{}{appendix.alph1.Alph1}%
+\contentsline {chapter}{Appendice \numberline {B}Appendice B}{}{appendix.alph1.Alph2}%
+\contentsline {chapter}{Appendice \numberline {C}Embed di interi PDF}{}{appendix.alph1.Alph3}%
