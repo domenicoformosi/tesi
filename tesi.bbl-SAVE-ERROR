@@ -412,6 +412,36 @@
       \field{pages}{314\bibrangedash 329}
       \range{pages}{16}
     \endentry
+    \entry{8021Qci}{article}{}
+      \name{author}{3}{}{%
+        {{hash=ebd7fd91e29f13f47941c3f0d4c92975}{%
+           family={Mahamid},
+           familyi={M\bibinitperiod},
+           given={Abdalla},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3aee9e4946be1bacbf937629d1eced87}{%
+           family={Rezabek},
+           familyi={R\bibinitperiod},
+           given={Filip},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d747606ccbaf1b962cbaa0f126397e84}{%
+           family={Holzinger},
+           familyi={H\bibinitperiod},
+           given={Kilian},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{ffa8dc6b5b65d339824c22de79dbd75f}
+      \strng{fullhash}{dd614641ecdcf709df1d6224273845ea}
+      \strng{bibnamehash}{dd614641ecdcf709df1d6224273845ea}
+      \strng{authorbibnamehash}{dd614641ecdcf709df1d6224273845ea}
+      \strng{authornamehash}{ffa8dc6b5b65d339824c22de79dbd75f}
+      \strng{authorfullhash}{dd614641ecdcf709df1d6224273845ea}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Time Sensitive Networking - 802.1Qci}
+    \endentry
     \entry{frer_algs}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=7ca71dda688a610c2fdd2174adc6f974}{%
@@ -932,7 +962,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{802.1Qci}
 \endrefsection
 \endinput
 

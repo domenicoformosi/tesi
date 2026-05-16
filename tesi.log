@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.3)  23 APR 2026 20:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.3)  30 APR 2026 13:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -708,6 +708,8 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 Package: chngcntr 2018/04/09 v1.1a change counter resetting
 Package chngcntr Info: \counterwithout already defined.
 (chngcntr)             Quitting chngcntr on input line 21.
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/spverbatim/spverbatim.sty
+Package: spverbatim 2009/08/10 v1.0 Verbatim with breakable spaces
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/base/newlfont.sty
 Package: newlfont 1998/08/17 v2.2m Standard LaTeX package
 LaTeX Info: Redefining \em on input line 57.
@@ -1064,7 +1066,7 @@ File: pppdftex.def 2024/01/21 v0.5y Pdfpages driver for pdfTeX (AM)
 \AM@templatesizebox=\box70
 )
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 53.
+(Font)              scaled to size 12.0pt on input line 93.
 
 
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
@@ -1072,47 +1074,54 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count493
 \@quotereset=\count494
-(./tesi.aux)
+(./tesi.aux
+
+LaTeX Warning: Label `code:enable_frame_preemption' multiply defined.
+
+
+LaTeX Warning: Label `code:enable_frame_preemption@cref' multiply defined.
+
+)
 \openout1 = `tesi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/npxmi/m/it on input line 53.
-LaTeX Font Info:    Trying to load font information for OML+npxmi on input line 53.
+LaTeX Font Info:    Checking defaults for OML/npxmi/m/it on input line 93.
+LaTeX Font Info:    Trying to load font information for OML+npxmi on input line 93.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/newpx/omlnpxmi.fd
 File: omlnpxmi.fd 2013/03/21 Fontinst v1.933 font definitions for OML/npxmi.
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/npxexa/m/n on input line 53.
-LaTeX Font Info:    Trying to load font information for U+npxexa on input line 53.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for U/npxexa/m/n on input line 93.
+LaTeX Font Info:    Trying to load font information for U+npxexa on input line 93.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/newpx/unpxexa.fd
 File: unpxexa.fd 2013/03/24 Fontinst v1.933 font definitions for U/npxexa.
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for LMS/npxsy/m/n on input line 53.
-LaTeX Font Info:    Trying to load font information for LMS+npxsy on input line 53.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for LMS/npxsy/m/n on input line 93.
+LaTeX Font Info:    Trying to load font information for LMS+npxsy on input line 93.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/newpx/lmsnpxsy.fd
 File: lmsnpxsy.fd 2016/07/04 Fontinst v1.933 font definitions for LMS/npxsy.
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for LMX/npxexx/m/n on input line 53.
-LaTeX Font Info:    Trying to load font information for LMX+npxexx on input line 53.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for LMX/npxexx/m/n on input line 93.
+LaTeX Font Info:    Trying to load font information for LMX+npxexx on input line 93.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/newpx/lmxnpxexx.fd
 File: lmxnpxexx.fd 2016/07/04 Fontinst v1.933 font definitions for LMX/npxexx.
 )
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    ... okay on input line 93.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1149,13 +1158,13 @@ LaTeX Font Info:    ... okay on input line 53.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count495
-Package hyperref Info: Link coloring OFF on input line 53.
+Package hyperref Info: Link coloring OFF on input line 93.
 (./tesi.out) (./tesi.out)
 \@outlinefile=\write5
 \openout5 = `tesi.out'.
 
-LaTeX Info: Redefining \it@ocap on input line 53.
-LaTeX Info: Redefining \it@ccap on input line 53.
+LaTeX Info: Redefining \it@ocap on input line 93.
+LaTeX Info: Redefining \it@ccap on input line 93.
  (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count496
@@ -1177,8 +1186,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 \c@mv@tabular=\count502
 \c@mv@boldtabular=\count503
-LaTeX Info: Command `\dddot' is already robust on input line 53.
-LaTeX Info: Command `\ddddot' is already robust on input line 53.
+LaTeX Info: Command `\dddot' is already robust on input line 93.
+LaTeX Info: Command `\ddddot' is already robust on input line 93.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 Package biblatex Info: Trying to load language 'italian'...
@@ -1194,8 +1203,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'tesi.bbl' found.
  (./tesi.bbl)
-Package biblatex Info: Reference section=0 on input line 53.
-Package biblatex Info: Reference segment=0 on input line 53.
+Package biblatex Info: Reference section=0 on input line 93.
+Package biblatex Info: Reference segment=0 on input line 93.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
  (/usr/local/texlive/2024/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
@@ -1234,23 +1243,23 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<img/marchio-di-ateneo.png, id=127, 185.0112pt x 133.6995pt>
+<img/marchio-di-ateneo.png, id=119, 185.0112pt x 133.6995pt>
 File: img/marchio-di-ateneo.png Graphic file (type png)
 <use img/marchio-di-ateneo.png>
-Package pdftex.def Info: img/marchio-di-ateneo.png  used on input line 68.
+Package pdftex.def Info: img/marchio-di-ateneo.png  used on input line 108.
 (pdftex.def)             Requested size: 184.95145pt x 133.73792pt.
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 14.4pt on input line 73.
+(Font)              scaled to size 14.4pt on input line 113.
 LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 73.
+(Font)              scaled to size 14.4pt on input line 113.
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 17.28pt on input line 78.
+(Font)              scaled to size 17.28pt on input line 118.
 LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 78.
+(Font)              scaled to size 17.28pt on input line 118.
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 24.88pt on input line 82.
+(Font)              scaled to size 24.88pt on input line 122.
 LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
-(Font)              scaled to size 24.88pt on input line 82.
+(Font)              scaled to size 24.88pt on input line 122.
  [1
 
 
@@ -1259,16 +1268,16 @@ LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
 
 ]
 LaTeX Font Info:    Font shape `T1/zpltlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 147.
+(Font)              scaled to size 12.0pt on input line 187.
 LaTeX Font Info:    Font shape `T1/zpltlf/m/it' will be
-(Font)              scaled to size 20.74pt on input line 147.
+(Font)              scaled to size 20.74pt on input line 187.
  [3] [4] [1
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.155 \tableofcontents
+l.195 \tableofcontents
                        [2
 
 ] (./tesi.toc
@@ -1303,7 +1312,7 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.36 ...tsline {chapter}{Appendici}{}{section*.27}
+l.41 ...tsline {chapter}{Appendici}{}{section*.32}
                                                   % [3])
 \tf@toc=\write6
 \openout6 = `tesi.toc'.
@@ -1312,7 +1321,7 @@ l.36 ...tsline {chapter}{Appendici}{}{section*.27}
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.157 \listoftables
+l.197 \listoftables
                     [4] (./tesi.lot)
 \tf@lot=\write7
 \openout7 = `tesi.lot'.
@@ -1321,14 +1330,14 @@ l.157 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.159 \listoffigures
+l.199 \listoffigures
                      [5
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.159 \listoffigures
+l.199 \listoffigures
                      [6
 
 ] (./tesi.lof)
@@ -1339,164 +1348,185 @@ l.159 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.161 \newpage
+l.201 \newpage
               ~\newpage [7]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.161 \newpage~\newpage
+l.201 \newpage~\newpage
                         [8]
-Underfull \hbox (badness 10000) in paragraph at lines 173--177
+Underfull \hbox (badness 10000) in paragraph at lines 213--217
 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+zpltlf on input line 179.
+LaTeX Font Info:    Trying to load font information for TS1+zpltlf on input line 219.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
 File: ts1zpltlf.fd 2021/11/24 v1.0 fd file for TS1/zpltlf
 )
 LaTeX Font Info:    Font shape `TS1/zpltlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 179.
+(Font)              scaled to size 12.0pt on input line 219.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.183     \item \textbf
+l.223     \item \textbf
                        {VLAN tagging}: permette allo switch di aggiungere ai... [1
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newpx/zpl_TOsF.enc}]
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.186 \chapter
+l.226 \chapter
               {Caratteristiche e obiettivi di TSN \& WiFi 7}\label{chap:cap1} [2]
 Capitolo 1.
-<img/tsn_obiettivi.png, id=252, 1039.885pt x 481.8pt>
-File: img/tsn_obiettivi.png Graphic file (type png)
-<use img/tsn_obiettivi.png>
-Package pdftex.def Info: img/tsn_obiettivi.png  used on input line 190.
-(pdftex.def)             Requested size: 341.43437pt x 158.19315pt.
-LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 191.
-LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 191.
-LaTeX Font Info:    Trying to load font information for T1+npxtt on input line 199.
+LaTeX Font Info:    Trying to load font information for T1+npxtt on input line 234.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/newpx/t1npxtt.fd
 File: t1npxtt.fd 2000/12/14 v1.0
 )
 LaTeX Font Info:    Font shape `T1/npxtt/m/n' will be
-(Font)              scaled to size 12.0pt on input line 199.
+(Font)              scaled to size 12.0pt on input line 234.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.204 \section
-              {Latenza Limitata e 0 perdite causate da congestione} [3
+l.249 \begin{center}
+                     [3
 
- <./img/tsn_obiettivi.png>]
+]
+<img/tsn_obiettivi.png, id=253, 1039.885pt x 481.8pt>
+File: img/tsn_obiettivi.png Graphic file (type png)
+<use img/tsn_obiettivi.png>
+Package pdftex.def Info: img/tsn_obiettivi.png  used on input line 263.
+(pdftex.def)             Requested size: 341.43437pt x 158.19315pt.
+LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 264.
+LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 264.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.220 \begin{itemize}
-                      [4]
-<img/8021q.png, id=270, 973.6375pt x 292.09125pt>
+l.270 
+       [4]
+<img/8021q.png, id=260, 973.6375pt x 292.09125pt>
 File: img/8021q.png Graphic file (type png)
 <use img/8021q.png>
-Package pdftex.def Info: img/8021q.png  used on input line 231.
+Package pdftex.def Info: img/8021q.png  used on input line 273.
 (pdftex.def)             Requested size: 426.79135pt x 128.03473pt.
- [5 <./img/8021q.png>]
-<img/frameprem.png, id=281, 832.10875pt x 619.31375pt>
+ [5 <./img/tsn_obiettivi.png> <./img/8021q.png>] [6]
+<img/frameprem.png, id=283, 832.10875pt x 619.31375pt>
 File: img/frameprem.png Graphic file (type png)
 <use img/frameprem.png>
-Package pdftex.def Info: img/frameprem.png  used on input line 256.
+Package pdftex.def Info: img/frameprem.png  used on input line 309.
 (pdftex.def)             Requested size: 341.43437pt x 254.11873pt.
- [6]
-<img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg, id=292, 665.48625pt x 635.37375pt>
+ [7 <./img/frameprem.png>]
+<img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg, id=294, 665.48625pt x 635.37375pt>
 File: img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg Graphic file (type jpg)
 <use img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg>
-Package pdftex.def Info: img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg  used on input line 269.
-(pdftex.def)             Requested size: 170.71393pt x 162.9828pt.
- [7 <./img/frameprem.png>] [8 <./img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg>]
-<img/frer.png, id=309, 923.45pt x 242.9075pt>
+Package pdftex.def Info: img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg  used on input line 326.
+(pdftex.def)             Requested size: 256.07741pt x 244.48875pt.
+ [8 <./img/Asynchronous-Traffic-Shaping-ATS-state-machine-illustrating-the-states-and-transitional.jpeg>]
+<img/frer.png, id=304, 923.45pt x 242.9075pt>
 File: img/frer.png Graphic file (type png)
 <use img/frer.png>
-Package pdftex.def Info: img/frer.png  used on input line 290.
+Package pdftex.def Info: img/frer.png  used on input line 347.
 (pdftex.def)             Requested size: 426.79135pt x 112.2651pt.
  [9 <./img/frer.png>]
-<img/fully_distribuited.png, id=323, 979.66pt x 159.59625pt>
+<img/fully_distribuited.png, id=316, 979.66pt x 159.59625pt>
 File: img/fully_distribuited.png Graphic file (type png)
 <use img/fully_distribuited.png>
-Package pdftex.def Info: img/fully_distribuited.png  used on input line 310.
+Package pdftex.def Info: img/fully_distribuited.png  used on input line 368.
 (pdftex.def)             Requested size: 426.79135pt x 69.5285pt.
-<img/half_cetralized.png, id=324, 979.66pt x 286.06876pt>
+ [10 <./img/fully_distribuited.png>]
+<img/half_cetralized.png, id=327, 979.66pt x 286.06876pt>
 File: img/half_cetralized.png Graphic file (type png)
 <use img/half_cetralized.png>
-Package pdftex.def Info: img/half_cetralized.png  used on input line 321.
+Package pdftex.def Info: img/half_cetralized.png  used on input line 379.
 (pdftex.def)             Requested size: 426.79135pt x 124.6266pt.
- [10 <./img/fully_distribuited.png> <./img/half_cetralized.png>]
-<img/fully_centralized.png, id=332, 979.66pt x 425.59pt>
+<img/fully_centralized.png, id=329, 979.66pt x 425.59pt>
 File: img/fully_centralized.png Graphic file (type png)
 <use img/fully_centralized.png>
-Package pdftex.def Info: img/fully_centralized.png  used on input line 336.
+Package pdftex.def Info: img/fully_centralized.png  used on input line 394.
 (pdftex.def)             Requested size: 426.79135pt x 185.40938pt.
- [11 <./img/fully_centralized.png>] [12]
-<img/preamble_puncturing.png, id=350, 1004.75375pt x 317.185pt>
+ [11 <./img/half_cetralized.png>] [12 <./img/fully_centralized.png>] [13]
+<img/preamble_puncturing.png, id=354, 1004.75375pt x 317.185pt>
 File: img/preamble_puncturing.png Graphic file (type png)
 <use img/preamble_puncturing.png>
-Package pdftex.def Info: img/preamble_puncturing.png  used on input line 371.
+Package pdftex.def Info: img/preamble_puncturing.png  used on input line 429.
 (pdftex.def)             Requested size: 426.79135pt x 134.7268pt.
- [13 <./img/preamble_puncturing.png>]
-<img/mlo.png, id=360, 738.76pt x 532.99126pt>
+ [14 <./img/preamble_puncturing.png>]
+<img/mlo.png, id=364, 738.76pt x 532.99126pt>
 File: img/mlo.png Graphic file (type png)
 <use img/mlo.png>
-Package pdftex.def Info: img/mlo.png  used on input line 392.
+Package pdftex.def Info: img/mlo.png  used on input line 455.
 (pdftex.def)             Requested size: 426.79135pt x 307.91522pt.
- [14] [15 <./img/mlo.png>] [16]
+ [15] [16 <./img/mlo.png>] [17] [18
+
+]
 Capitolo 2.
-<img/linuxstack.png, id=384, 697.60625pt x 914.41624pt>
+<img/linuxstack.png, id=392, 697.60625pt x 914.41624pt>
 File: img/linuxstack.png Graphic file (type png)
 <use img/linuxstack.png>
-Package pdftex.def Info: img/linuxstack.png  used on input line 421.
+Package pdftex.def Info: img/linuxstack.png  used on input line 484.
 (pdftex.def)             Requested size: 341.43437pt x 447.55164pt.
-[17
-
-] [18 <./img/linuxstack.png>] [19] [20]
-<img/ptp.png, id=407, 391.4625pt x 524.96124pt>
+[19] [20 <./img/linuxstack.png>] [21] [22]
+<img/ptp.png, id=416, 391.4625pt x 524.96124pt>
 File: img/ptp.png Graphic file (type png)
 <use img/ptp.png>
-Package pdftex.def Info: img/ptp.png  used on input line 487.
+Package pdftex.def Info: img/ptp.png  used on input line 551.
 (pdftex.def)             Requested size: 213.39568pt x 286.1743pt.
- [21 <./img/ptp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 494--498
+ [23] [24 <./img/ptp.png>]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 573.
+LaTeX Font Info:    Font shape `T1/npxtt/m/n' will be
+(Font)              scaled to size 10.95pt on input line 573.
+LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
+(Font)              scaled to size 10.95pt on input line 613.
+ [25] [26] [27]
+Underfull \hbox (badness 10000) in paragraph at lines 688--692
 
  []
 
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 511--513
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 705--707
+
+ []
+
+[29]
+Overfull \hbox (7.48508pt too wide) in paragraph at lines 737--738
+[]\T1/npxtt/m/n/12 sched-entry\T1/zpltlf/m/n/12 : Ogni ri-ga de-fi-ni-sce uno slot del-la GCL nel for-ma-to \T1/npxtt/m/n/12 sched-entry
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 742--751
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 514--525
+Underfull \hbox (badness 10000) in paragraph at lines 742--751
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 514--525
-
+[30] [31]
+Overfull \hbox (4.1158pt too wide) in paragraph at lines 825--832
+\T1/zpltlf/m/n/12 Mentre \T1/npxtt/m/n/12 nsx xdpfrer -m elim -i enp4s0:55 -i enp7s0:56 -e beth0:20 \T1/zpltlf/m/n/12 si-gni-
  []
 
-[23] [24]
+[32] [33] [34] [35] [36] [37] [38
+
+]
 LaTeX Font Info:    Font shape `T1/zpltlf/m/sc' will be
-(Font)              scaled to size 12.0pt on input line 547.
- [25
-
-{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc}]
-Overfull \hbox (91.74986pt too wide) in paragraph at lines 547--547
+(Font)              scaled to size 12.0pt on input line 1002.
+ [39{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc}]
+Overfull \hbox (91.74986pt too wide) in paragraph at lines 1002--1002
 []\T1/zpltlf/m/n/12 Computer Net-wor-king No-tes. \T1/zpltlf/m/it/12 VLAN Tag-ging\T1/zpltlf/m/n/12 . \T1/zpltlf/m/sc/12 url\T1/zpltlf/m/n/12 : []$\T1/npxtt/m/n/12 https : / / www . computernetworkingnotes .
  []
 
-[26]
-Overfull \hbox (7.82787pt too wide) in paragraph at lines 547--547
+[40]
+Overfull \hbox (7.82787pt too wide) in paragraph at lines 1002--1002
 []\T1/zpltlf/m/n/12 Tektronix. \T1/zpltlf/m/it/12 Wi-Fi: Over-view of the 802.11 Phy-si-cal Layer\T1/zpltlf/m/n/12 . \T1/zpltlf/m/sc/12 url\T1/zpltlf/m/n/12 : []$\T1/npxtt/m/n/12 https : / / download .
  []
 
@@ -1504,143 +1534,129 @@ Overfull \hbox (7.82787pt too wide) in paragraph at lines 547--547
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.553 \begin{appendices}
-                         [1]
+l.1008 \begin{appendices}
+                          [1]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.553 \begin{appendices}
-                         [2
+l.1008 \begin{appendices}
+                          [2
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.553 \begin{appendices}
-                         [3
+l.1008 \begin{appendices}
+                          [3
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.553 \begin{appendices}
-                         [4]
+l.1008 \begin{appendices}
+                          [4]
 Appendice A.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/02/21 1.10 listings language file
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/02/21 1.10 listings language file
+)
+LaTeX Font Info:    Font shape `T1/npxtt/m/n' will be
+(Font)              scaled to size 8.0pt on input line 1017.
+ (./file/script.sh
+LaTeX Font Info:    Font shape `T1/npxtt/m/it' in size <8> not available
+(Font)              Font shape `T1/npxtt/m/sl' tried instead on input line 1.
+LaTeX Font Info:    Font shape `T1/npxtt/m/sl' will be
+(Font)              scaled to size 8.0pt on input line 1.
+LaTeX Font Info:    Font shape `T1/npxtt/b/n' in size <8> not available
+(Font)              Font shape `T1/npxtt/bx/n' tried instead on input line 6.
+LaTeX Font Info:    Font shape `T1/npxtt/bx/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 40.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.559 \chapter
-              {Appendice B} [5
+l.40  
+       "$NETWORK_NAME" [5
+
+]
+LaTeX Font Info:    Font shape `OT1/zpltlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 78.
+LaTeX Font Info:    Font shape `OT1/zpltlf/m/n' will be
+(Font)              scaled to size 6.2pt on input line 78.
+LaTeX Font Info:    Font shape `OT1/zpltlf/m/n' will be
+(Font)              scaled to size 5.5pt on input line 78.
+
+
+LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 78.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.102 docker 
+             exec "$CONTAINER_1" apk add --no-cache bash \ [6{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newpx/px-lms.enc}]
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.161 ok 
+         "Esegui: source /tmp/docker_aliases.sh" [7])
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1023 \newpage
+               ~\newpage [8]
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1023 \newpage~\newpage
+                         [9]
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1024 \chapter
+               *{Ringraziamenti} [10
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.559 \chapter
-              {Appendice B} [6
-
-]
-Appendice B.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.563 \chapter
-              {Embed di interi PDF} [7]
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.563 \chapter
-              {Embed di interi PDF} [8
-
-]
-Appendice C.
-<pdf/sample.pdf, id=513, 614.295pt x 794.97pt>
-File: pdf/sample.pdf Graphic file (type pdf)
-<use pdf/sample.pdf>
-Package pdftex.def Info: pdf/sample.pdf  used on input line 567.
-(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: pdf/sample.pdf Graphic file (type pdf)
-<use pdf/sample.pdf>
-Package pdftex.def Info: pdf/sample.pdf  used on input line 567.
-(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-<pdf/sample.pdf, id=516, page=1, 614.295pt x 794.97pt>
-File: pdf/sample.pdf Graphic file (type pdf)
-<use pdf/sample.pdf, page 1>
-Package pdftex.def Info: pdf/sample.pdf , page1 used on input line 567.
-(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: pdf/sample.pdf Graphic file (type pdf)
-<use pdf/sample.pdf, page 1>
-Package pdftex.def Info: pdf/sample.pdf , page1 used on input line 567.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.567 \includepdf[pages=1]{pdf/sample.pdf}
-                                           [9]
-File: pdf/sample.pdf Graphic file (type pdf)
-<use pdf/sample.pdf, page 1>
-Package pdftex.def Info: pdf/sample.pdf , page1 used on input line 567.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: pdf/sample.pdf Graphic file (type pdf)
-<use pdf/sample.pdf, page 1>
-Package pdftex.def Info: pdf/sample.pdf , page1 used on input line 567.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.567 \includepdf[pages=1]{pdf/sample.pdf}
-                                          
-File: pdf/sample.pdf Graphic file (type pdf)
-<use pdf/sample.pdf, page 1>
-Package pdftex.def Info: pdf/sample.pdf , page1 used on input line 567.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [10
-
- <./pdf/sample.pdf>]
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.570 \newpage~\newpage
-                        [11]
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.571 \chapter
-              *{Ringraziamenti} [12
-
-]
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.573 \end{document}
-                     [13] (./tesi.aux)
+l.1026 \end{document}
+                      [11] (./tesi.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.5pt have occurred.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `tesi.out' has not changed.
-(rerunfilecheck)             Checksum: D326813D895F90C8678B0D9AB0B717E1;6061.
+(rerunfilecheck)             Checksum: BCFEB0D7BC95F7AF249B1205704F2473;5810.
 Package logreq Info: Writing requests to 'tesi.run.xml'.
 \openout1 = `tesi.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39038 strings out of 474116
- 723533 string characters out of 5743683
- 1940187 words of memory out of 5000000
- 60678 multiletter control sequences out of 15000+600000
- 610173 words of font info for 81 fonts, out of 8000000 for 9000
+ 39973 strings out of 474116
+ 735455 string characters out of 5743683
+ 2266187 words of memory out of 5000000
+ 61196 multiletter control sequences out of 15000+600000
+ 629265 words of font info for 114 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 102i,17n,117p,899b,2450s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/zplb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/zplr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/zplri.pfb>
-Output written on tesi.pdf (51 pages, 573821 bytes).
+ 102i,6n,117p,899b,2720s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/pxsys.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/zplb.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/zplr.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/newpx/zplri.pfb>
+Output written on tesi.pdf (63 pages, 657768 bytes).
 PDF statistics:
- 593 PDF objects out of 1000 (max. 8388607)
- 495 compressed objects within 5 object streams
- 124 named destinations out of 1000 (max. 500000)
- 338 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1139 PDF objects out of 1200 (max. 8388607)
+ 1021 compressed objects within 11 object streams
+ 521 named destinations out of 1000 (max. 500000)
+ 302 words of extra memory for PDF output out of 10000 (max. 10000000)
 

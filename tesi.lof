@@ -1,19 +1,17 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Obiettivi principali di TSN}}{3}{figure.caption.7}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Obiettivi principali di TSN}}{5}{figure.caption.7}%
 \contentsline {figure}{\numberline {1.2}{\ignorespaces IEEE 802.3 Ethernet Frame Format con IEEE 802.1Q Tag Insertion}}{5}{figure.caption.8}%
 \contentsline {figure}{\numberline {1.3}{\ignorespaces Differenza nella gestione del traffico con e senza frame preemption}}{7}{figure.caption.13}%
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Macchiona a stati di ATS, fonte: \blx@tocontentsinit {0}\cite {ats}}}{8}{figure.caption.15}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Macchina a stati di ATS, fonte: \blx@tocontentsinit {0}\cite {ats}}}{8}{figure.caption.15}%
 \contentsline {figure}{\numberline {1.5}{\ignorespaces Flusso da host A ad host B mediante switch S1-S4}}{9}{figure.caption.16}%
 \contentsline {figure}{\numberline {1.6}{\ignorespaces Modello Completamente Distribuito}}{10}{figure.caption.17}%
-\contentsline {figure}{\numberline {1.7}{\ignorespaces Modello a Rete Centralizzata e Utente Distribuito}}{10}{figure.caption.18}%
-\contentsline {figure}{\numberline {1.8}{\ignorespaces Modello Completamente Centralizzato}}{11}{figure.caption.19}%
-\contentsline {figure}{\numberline {1.9}{\ignorespaces Effetti del preamble puncturing nella gestione della banda}}{13}{figure.caption.20}%
-\contentsline {figure}{\numberline {1.10}{\ignorespaces Diagramma MLO}}{15}{figure.caption.21}%
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Modello a Rete Centralizzata e Utente Distribuito}}{11}{figure.caption.18}%
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Modello Completamente Centralizzato}}{12}{figure.caption.19}%
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Effetti del preamble puncturing nella gestione della banda}}{14}{figure.caption.20}%
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Diagramma MLO}}{16}{figure.caption.21}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Stack 802.11 in Linux}}{18}{figure.caption.22}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Processo di sincronizzazione two-step mode}}{21}{figure.caption.25}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Stack 802.11 in Linux}}{20}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Processo di sincronizzazione two-step mode}}{24}{figure.caption.25}%
 \addvspace {10\p@ }

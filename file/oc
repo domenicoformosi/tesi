@@ -1,0 +1,13 @@
+# /etc/oc.conf
+[global]
+priority1               128 # Primo criterio di elezione del master
+priority2               128 # Secondo criterio di elezione del master per tie-break
+clockClass              135 # Descrive la qualità della sorgente di tempo del clock
+clockAccuracy           0xFE # Descrive la precisione del clock (0xFE indica che la precisione è sconosciuta)
+offsetScaledLogVariance 0xFFFF # Descrive la varianza scalata del clock (0xFFFF indica che la varianza è sconosciuta)
+domainNumber            0 # Numero di dominio PTP (0-255), tutti i nodi devono essere nello stesso domincio per comunicare
+logAnnounceInterval     1 # Intervallo dei messaggi di annuncio 
+logSyncInterval         0 # Intervallo dei messaggi di sincronizzazione 
+logMinDelayReqInterval  0 # Intervallo minimo di richiesta di ritardo 
+announceReceiptTimeout  3 # Numero di intervalli Announce consecutivi che possono trascorrere senza ricevere un messaggio Announce prima che la porta dichiari il master assente e riavvii il BMCA
+dataset_comparison      ieee1588 # Algoritmo usato per il confronto dei dataset nel BMCA
