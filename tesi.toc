@@ -1,42 +1,60 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {chapter}{Introduzione}{1}{chapter*.5}%
-\contentsline {chapter}{\numberline {1}Caratteristiche e obiettivi di TSN \& WiFi 7}{3}{chapter.1}%
+\contentsline {chapter}{Introduzione}{1}{chapter*.3}%
+\contentsline {chapter}{\numberline {1}Caratteristiche e obiettivi di TSN \& Wi-Fi 7}{3}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Sincronizzazione temporale}{3}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Latenza Limitata e 0 perdite causate da congestione}{4}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Algoritmi di accodamento}{5}{subsection.1.2.1}%
-\contentsline {subsubsection}{TAS - Time Aware Shaper}{6}{section*.9}%
-\contentsline {subsubsection}{CBS - Credit Base Shaper}{6}{section*.10}%
-\contentsline {subsubsection}{CQF - Cyclic Queuing Forwarding}{6}{section*.11}%
-\contentsline {subsubsection}{Frame Preemption}{6}{section*.12}%
-\contentsline {subsubsection}{ATS - Asynchronous Traffic Shaping}{7}{section*.14}%
-\contentsline {section}{\numberline {1.3}Affidabilità}{8}{section.1.3}%
+\contentsline {subsubsection}{TAS - Time Aware Shaper}{6}{section*.7}%
+\contentsline {subsubsection}{CBS - Credit Base Shaper}{6}{section*.8}%
+\contentsline {subsubsection}{CQF - Cyclic Queuing Forwarding}{6}{section*.9}%
+\contentsline {subsubsection}{Frame Preemption}{6}{section*.10}%
+\contentsline {subsubsection}{ATS - Asynchronous Traffic Shaping}{8}{section*.13}%
+\contentsline {section}{\numberline {1.3}Affidabilità}{9}{section.1.3}%
 \contentsline {subsection}{\numberline {1.3.1}FRER - Frame Replication and Elimination for Reliability }{9}{subsection.1.3.1}%
 \contentsline {subsection}{\numberline {1.3.2}PCR - Path Control and Reservation}{10}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}PSFP - Per-Stream Filtering and Policing }{10}{subsection.1.3.3}%
-\contentsline {section}{\numberline {1.4}Gestione risorse e rete}{10}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Modello Completamente Distribuito}{10}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.3.3}PSFP - Per-Stream Filtering and Policing }{11}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Gestione risorse e rete}{11}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Modello Completamente Distribuito}{11}{subsection.1.4.1}%
 \contentsline {subsection}{\numberline {1.4.2}Modello a Rete Centralizzata e Utente Distribuito}{11}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Modello Completamente Centralizzato}{11}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}Allocazione delle risorse}{12}{subsection.1.4.4}%
-\contentsline {section}{\numberline {1.5}WiFi 7}{13}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Supporto al TSN}{16}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.4.3}Modello Completamente Centralizzato}{12}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Allocazione delle risorse}{13}{subsection.1.4.4}%
+\contentsline {section}{\numberline {1.5}Wi-Fi 7}{14}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Supporto al TSN}{17}{subsection.1.5.1}%
 \contentsline {chapter}{\numberline {2}Stack 802.11 in Linux e supporto al TSN}{19}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Stack 802.11}{19}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Mappare servizi TSN in Linux}{22}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Sincronizzazione temporale: Linux PTP}{22}{subsection.2.2.1}%
-\contentsline {subsubsection}{Gerarchie}{22}{section*.23}%
-\contentsline {subsubsection}{Modalità PTP e Scambio di messaggi}{22}{section*.24}%
-\contentsline {subsubsection}{Esempio di configurazione e utilizzo Linux PTP}{24}{section*.26}%
+\contentsline {subsubsection}{Gerarchie}{22}{section*.22}%
+\contentsline {subsubsection}{Modalità PTP e Scambio di messaggi}{22}{section*.23}%
+\contentsline {subsubsection}{Esempio di configurazione e utilizzo Linux PTP}{24}{section*.25}%
 \contentsline {section}{\numberline {2.3}Latenza Limitata e 802.1Q: VLAN, TAPRIO, Frame Preemption}{28}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}tc}{28}{subsection.2.3.1}%
-\contentsline {subsubsection}{Esempio di configurazione taprio tramite tc}{29}{section*.27}%
+\contentsline {subsubsection}{Esempio di configurazione taprio tramite tc}{29}{section*.26}%
 \contentsline {subsection}{\numberline {2.3.2}Frame Preemption}{30}{subsection.2.3.2}%
-\contentsline {subsubsection}{Esempio di configurazione frame preemption tramite tc}{31}{section*.28}%
-\contentsline {section}{\numberline {2.4}Affidabilità: FRER}{32}{section.2.4}%
-\contentsline {subsubsection}{Esempio utilizzo XDP FRER}{32}{section*.29}%
-\contentsline {section}{\numberline {2.5}Gestione delle risorse}{35}{section.2.5}%
-\contentsline {subsubsection}{Esempio di utilizzo RESTCONF e modello YAML per configurazione PTP}{35}{section*.30}%
-\contentsline {chapter}{Riferimenti bibliografici}{39}{chapter*.31}%
-\contentsline {chapter}{Appendici}{}{section*.32}%
+\contentsline {subsubsection}{Esempio di configurazione frame preemption tramite tc}{30}{section*.27}%
+\contentsline {section}{\numberline {2.4}Affidabilità: FRER}{31}{section.2.4}%
+\contentsline {subsubsection}{Esempio utilizzo XDP FRER}{32}{section*.28}%
+\contentsline {section}{\numberline {2.5}Gestione delle risorse}{34}{section.2.5}%
+\contentsline {subsubsection}{Esempio di utilizzo RESTCONF e modello YAML per configurazione PTP}{35}{section*.29}%
+\contentsline {chapter}{\numberline {3}Prototipo}{37}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Obiettivi e assunzioni}{37}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Struttura}{39}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Motivazioni e scelte progettuali}{41}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}FRER}{41}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}TAPRIO}{43}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}PTP}{44}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Unidirezionalità}{47}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Test e Considerazioni}{47}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}FRER}{47}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}PTP}{49}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}TAPRIO}{51}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Conclusioni}{57}{subsection.3.4.4}%
+\contentsline {chapter}{Riferimenti bibliografici}{59}{chapter*.33}%
+\contentsline {chapter}{Appendici}{}{section*.34}%
 \contentsline {chapter}{Appendice \numberline {A}Ambiente docker per test Linux PTP}{}{appendix.alph1.Alph1}%
+\contentsline {chapter}{Appendice \numberline {B}Macchina Host e Ambiente}{}{appendix.alph1.Alph2}%
+\contentsline {chapter}{Appendice \numberline {C}Configurazione strumenti wireless}{}{appendix.alph1.Alph3}%
+\contentsline {chapter}{Appendice \numberline {D}Tool Linux per il networking}{}{appendix.alph1.Alph4}%
+\contentsline {section}{\numberline {D.1}veth}{}{section.alph1.Alph4.1}%
+\contentsline {section}{\numberline {D.2}network namespace}{}{section.alph1.Alph4.2}%

@@ -6,6 +6,7 @@
 
 \usepackage[titletoc,title,toc,page]{appendix}
 \usepackage{verbatim}
+\usepackage{pgfplots}
 \usepackage{placeins}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -30,6 +31,7 @@
 
 \usepackage{multirow}
 \usepackage{hyphenat}
+\usepackage{multicol}
 
 
 %start roba script
@@ -73,8 +75,9 @@
 
 
 \hyphenation{mate-mati-ca recu-perare}
-
-\usepackage{lscape} 
+\pgfplotsset{compat=1.18}
+\usepackage{lscape}
+\usepackage{rotating}
 
 \usepackage[
     backend=biber,
@@ -189,17 +192,29 @@
 \newpage~\newpage
 \pagenumbering{gobble}
 \chapter*{Abstract}
-Abstract qui (ti consiglio di farlo alla fine)
+\itshape
+La letteratura economica moderna, in particolare i modelli di crescita endogena, suggerisce che lo sviluppo di lungo periodo di un sistema dipende soprattutto dalla capacità di generare e diffondere innovazione. In questo contesto, le infrastrutture di comunicazione non sono più semplici canali passivi, ma diventano attori centrali nel processo di crescita. \\
+In campi come Industria 4.0 (ma anche automotive,audio/video, sanità ecc..) riscontriamo la necessità di migliorare l'accesso alle informazioni, dato che ciò porta a:
+\begin{itemize}
+    \item Abbassare i costi
+    \item Aumentare l'efficienza
+    \item Garantire sicurezza
+\end{itemize}
+
+Questi sono gli obiettivi principali dei processi di convergenza IT/OT a cui stiamo assistendo oggi, che puntano ad un cambio di paradigma, passando da gerarchia rigide (si veda ISA 95) a modelli “piatti” che favoriscono l'interoperabilità e l'interazione diretta tra i diversi livelli della piramide industriale, e ci permettono di pensare alle informazioni come ad un flusso unico e continuo.
+\\
+Per supportare questa convergenza è necessario far convivere le caratteristiche intrinseche dei due mondi, e gestire aspetti come:
+\begin{itemize}
+    \item La presenza di più flussi di informazioni, ognuno con il proprio grado di “criticità”
+    \item Comunicazione deterministica, e cosa ciò comporta nel “mondo” IT, ricordando che la semantica di comunicazione che prevale nelle reti è di tipo \textit{best-effort}
+\end{itemize}
+
+Nei prossimi capitoli verranno presentate alcune delle tecnologie fondamentali per supportare questa transizione, e come queste possono essere usate in situazioni reali.
+\normalfont
+
 
 \topmargin=-1cm
 \tableofcontents
-\thispagestyle{empty}
-\listoftables
-\thispagestyle{empty}
-\listoffigures
-\thispagestyle{empty}
-\newpage~\newpage
-
 
 \pagenumbering{arabic}
 \setcounter{chapter}{0}
@@ -210,7 +225,9 @@ Abstract qui (ti consiglio di farlo alla fine)
 
 \pagestyle{plain}
 \setcounter{page}{1}
-A supportare la maggior parte delle infrastrutture di rete troviamo i protocolli 802.3 e 802.11, ethernet standard e WiFi rispettivamente, protocolli che si occupano di gestire il livello 1 (livello fisico) e il livello 2 (livello di data link) della pila protocollare, attraverso una semantica di comunicazione di tipo \textit{best-effort} essi non forniscono garanzie sulla ricezione dei frame, ma il compito viene delegato ai livelli superiori. 
+A supportare la maggior parte delle infrastrutture di rete troviamo i protocolli 802.3 e 802.11, ethernet standard e WiFi rispettivamente, protocolli che si occupano di gestire il livello 1 (livello fisico) e il livello 2 (livello di data link) della pila protocollare.
+\\
+attraverso una semantica di comunicazione di tipo \textit{best-effort} essi non forniscono garanzie sulla ricezione dei frame, ma il compito viene delegato ai livelli superiori. 
 \\
 Per questi motivi viene introdotto da parte dell' 802.1 Time-Sensitive Networking Task Group, a partire dagli standard definiti dal protocollo 802.1Q, un insieme di standard e strumenti per fornire comunicazioni mediante reti 802 in grado garantire il trasferimento dei pacchetti in maniera deterministica e affidabile. \cite{TSN_group}
 \\
@@ -223,7 +240,7 @@ Per questi motivi viene introdotto da parte dell' 802.1 Time-Sensitive Networkin
     \item \textbf{VLAN tagging}: permette allo switch di aggiungere ai frame (Livello 2) informazioni riguardo la VLAN, così facendo altri dispositivi in grado di "capire" le VLAN sapranno cosa fare con quel frame, il tag verrà rimosso prima di mandare il frame all'end device \cite{VLAN_tagging}
     \item \textbf{SDN}: Insieme di meccanismi che permette di disaccoppiare il control plane (scelte di routing, topologia di rete, gestione policy) dal data plane, un approccio del genere porta ad infrastruttura programmabile e scalabile centralizzata \cite{Software_Defined_Networking_for_Organizations_Network_Automation}
 \end{itemize}
-\chapter{Caratteristiche e obiettivi di TSN \& WiFi 7}\label{chap:cap1}
+\chapter{Caratteristiche e obiettivi di TSN \& Wi-Fi 7}\label{chap:cap1}
 
 
 
@@ -231,7 +248,7 @@ Per questi motivi viene introdotto da parte dell' 802.1 Time-Sensitive Networkin
 \section{Sincronizzazione temporale}
 Uno dei requisiti fondamentali per una rete deterministica è una visione condivisa e universale del tempo, TSN utilizza lo standard IEEE 802.1AS o gPTP - \textit{Generalized Precision Time Protocol}, esso definisce un meccanismo di sincronizzazione del clock basato su IEEE 1588.
 \\
-Il Precision Time Protocol una volta eletto un GM - \textit{GrandMaster}, ovvero il dispositivo con la sorgente temporale più precisa, utilizza frame Ethernet per sincronizzare il clock dei dispositivi della rete utilizzando un approccio GrandMaster - Slave mediante messaggi di \texttt{Sync}, al quale gli Slave risponderanno con richieste per informazioni temporali aggiuntive, a queste il GM risponderà con messaggi di \texttt{Follow-Up} e \texttt{Delay-Resp} che permettono agli Slave di calcolare la differenza dei loro orologi rispetto a quella del GM e avere quindi una visione condivisa del tempo.
+Il Precision Time Protocol una volta eletto un GM - Grandmaster, ovvero il dispositivo con la sorgente temporale più precisa, utilizza frame Ethernet per sincronizzare il clock dei dispositivi della rete utilizzando un approccio Grandmaster - Slave mediante messaggi di \texttt{Sync}, al quale gli Slave risponderanno con richieste per informazioni temporali aggiuntive, a queste il GM risponderà con messaggi di \texttt{Follow-Up} e \texttt{Delay-Resp} che permettono agli Slave di calcolare la differenza dei loro orologi rispetto a quella del GM e avere quindi una visione condivisa del tempo.
 \\
 Per estendere i servizi offerti da 802.1AS in reti wireless sarà necessario l'utilizzo di protocolli come TM - \textit{Timing Measurement}  o FTM - \textit{Fine Timing Measurement} che nascono come standard per misurare con precisione la distanza tra un STA e un AP sfruttando RTT, esistono in letteratura \cite{TSN_FTM} soluzioni che propongono un mapping tra gPTP e FTM. I timestamp ottenuti tramite lo scambio di messaggi IEEE 802.1AS sul lato cablato vengono correlati con le misurazioni del tempo di volo, ToF - \textit{Time of Flight}, effettuate tramite il protocollo FTM sul lato wireless.
 \\
@@ -239,7 +256,7 @@ Questo processo permette di compensare le variazioni del mezzo trasmissivo e di 
 \section{Latenza Limitata e 0 perdite causate da congestione}
 Uno degli obiettivi di TSN è quello di garantire bassa latenza e azzerare le perdite di frame causate dal congestionamento della rete, per rispettare questi vincoli si utilizzano diversi meccanismi basati sui concetti di schedulazione,modellazione del traffico e prelazione dei frame. 
 \\
-Se nel paradigma \textit{best-effort} abbiamo una semantica di gestione del medium e dei nodi di inoltro del tipo \emph{“Fai ciò che dice il pacchetto appena lo ricevi”}, \cite{intro_to_TSN} in TSN la necessità di determinismo e affidabilità \ref{fig:tsn_obiettivi}, porta ad una semantica: \emph{“Fai ciò che dice il pacchetto quando lo dice il pacchetto”}.
+Se nel paradigma \textit{best-effort} abbiamo una semantica di gestione del medium e dei nodi di inoltro del tipo \emph{“Fai ciò che dice il pacchetto appena lo ricevi”}, \cite{intro_to_TSN} in TSN la necessità di determinismo e affidabilità (si veda la figura \ref{fig:tsn_obiettivi}) porta ad una semantica: \emph{“Fai ciò che dice il pacchetto quando lo dice il pacchetto”}.
 \\
 Alla base di tutti gli standard definiti ritroviamo il concetto di \textit{classe di traffico}, che permette di suddividere per l'appunto, il traffico, in diversi livelli di priorità, utilizzati poi dagli algoritmi di accodamento \ref{algoritmi_accodamento}.
 \\
@@ -295,11 +312,23 @@ Ad ogni coda è associato un credito che viene accumulato quando questa è inatt
 \subsubsection{CQF - Cyclic Queuing Forwarding} 
 IEEE 802.1Qch come TAS utilizza una pianificazione ciclica per la trasmissione, ma quest'ultima avviene anche per le porte in ingresso, il risultato è un pattern trasmissivo regolare senza le complicazioni introdotte da TAS, in quanto i frame si “spostano in gruppi”.
 \subsubsection{Frame Preemption}
+\label{subsec:frame_prempt}
 802.1Qbu e 802.3br permettono di definire due tipi di code:
 \begin{itemize}
     \item \textbf{Express}: I frame in queste code possono causare la prelazione di frame in code \textit{preemptable}
     \item \textbf{Preemptable}: La trasmissione dei frame appartenenti a queste code può essere prelazionata per favorire traffico prioritario, la trasmissione riprenderà dopo la fine dei pacchetti critici
 \end{itemize}
+
+In figura \ref{fig:mac_merge_layer} è possibile osservare l'architettura che supporta la \textit{frame preamption}, il componente principale è MAC Merge layer, definito dallo standard IEEE 802.3br-2016 ``Interspersing Express Traffic'' \cite{IEEE802_3br2016}, come un sottolivello opzionale che permette di alternare traffico espresso con traffico prelazionabile utilizzando un \textit{preemptable Media Access Control} - pMAC ed un \textit{express Media Access Control} - eMAC, il MAC Client è il livello che si occupa di definire quali pacchetti devono essere mandati all'eMAC o pMAC.
+\begin{figure}[H]
+     \centering
+    \includegraphics[width=0.4\textwidth]{img/mac_merge_layer.png}
+    \caption{Relazioni tra MAC Merge Layer ed altri sottolivelli}
+    \label{fig:mac_merge_layer}
+\end{figure}
+
+Quando necessario, il MAC Merge layer consente di frammentare un frame prelazionabile, inserire il frame critico e riprendere successivamente la trasmissione del traffico interrotto. 
+
 L'utilizzo di questi meccanismi di prelazione riduce l'interferenza apportata dal traffico non critico in una rete deterministica, questo studio \cite{tsn_exp} mostra come sia possibile ottenere un miglioramento di circa il 91\% sulla latenza massima e del 94,5\% sul jitter.
 \\
 In figura \ref{fig:frame_preemption} è mostrata la differenza nella gestione del traffico con e senza frame preemption, si può notare come senza questo meccanismo, il traffico critico subisce un ritardo causato dalla trasmissione di frame non critici, mentre con la prelazione, il traffico critico viene trasmesso immediatamente a meno di un delay \textit{d} introdotto dai meccanismi di prelazione.
@@ -332,6 +361,7 @@ Questo algoritmo è ideale per situazioni ibride in cui coesistono sia traffico 
 \section{Affidabilità}
 Un elevato grado di affidabilità è richiesto per reti TSN, non essendo possibile basarsi su ritrasmissioni dei pacchetti data la natura \emph{time-sensitive} del traffico, si introducono diversi meccanismi:
 \subsection{FRER - 	Frame Replication and Elimination for Reliability }
+\label{subsec:frer}
 Lo standard 802.1CB, permette di replicare i frame attraverso diversi percorsi, successivamente eliminando i duplicati.
 Ogni flusso duplicato viene chiamato \emph{member stream}, all'interno di esso frame duplicati verranno identificati tramite IRF - \textit{Individual Recovery Function}, member stream contenenti le stesse informazioni vengono chiamati \emph{compound stream}. 
 SRF - \textit{Stream Recovery Function} si occupa invece di assegnare gli ID di sequenza prima che i frame vengano replicati.
@@ -359,7 +389,10 @@ IEEE 802.1Qci definisce protocolli e procedure volti a proteggere le reti filtra
 Il controllo della rete e la gestione delle risorse sono aspetti cruciali per garantire l'allocazione efficiente della banda, la priorità del traffico e il rispetto dei requisiti di QoS - \textit{Quality of Service}.
 Per gestire le prenotazioni dei flussi e configurare la rete, gli standard TSN (in particolare IEEE 802.1Qcc, che estende lo Stream Reservation Protocol) definiscono tre opzioni o modelli architetturali principali  \cite{architetture}.
 \subsection{Modello Completamente Distribuito}
-In questo modello non vi è alcuna entità di gestione centrale. Come è possibile osservare in \ref{fig:full_dist} la rete viene configurata in modo completamente distribuito: i dispositivi finali (Talker e Listener) e i bridge (switch TSN) negoziano direttamente tra loro la registrazione e la prenotazione delle risorse (code, buffer, banda) scambiandosi U/NCI - \textit{User-to-Network Configuration Information}, che viaggia in modalità \textit{hop-by-hop} tra i nodi della rete.
+\label{subsec:modello_completamento_distribuito}
+
+
+In questo modello non vi è alcuna entità di gestione centrale. Come è possibile osservare in figura \ref{fig:full_dist} la rete viene configurata in modo completamente distribuito: i dispositivi finali (Talker e Listener) e i bridge (switch TSN) negoziano direttamente tra loro la registrazione e la prenotazione delle risorse (code, buffer, banda) scambiandosi U/NCI - \textit{User-to-Network Configuration Information}, che viaggia in modalità \textit{hop-by-hop} tra i nodi della rete.
 In questo modello il compito della UNI - \textit{User-Network Interface} è quello di agire come confine tra dispositivo finale e bridge.
 
 
@@ -372,6 +405,7 @@ In questo modello il compito della UNI - \textit{User-Network Interface} è quel
 
 
 \subsection{Modello a Rete Centralizzata e Utente Distribuito}
+\label{subsec:modello_rete_centralizzata}
 In questo modello, come mostrato in figura \ref{fig:half_cent}, i dispositivi finali inviano le loro specifiche esigenze di rete ai bridge di confine tramite l'interfaccia UNI. La rete, a questo punto, utilizza un'entità centrale chiamata CNC - \textit{Centralized Network Configuration} che riceve questi requisiti e si occupa di configurare tutti i bridge della rete per soddisfare le specifiche.
 
 \begin{figure}[H]
@@ -383,6 +417,8 @@ In questo modello, come mostrato in figura \ref{fig:half_cent}, i dispositivi fi
 
 
 \subsection{Modello Completamente Centralizzato}
+\label{subsec:modello_completamente_centralizzato}
+
 Questo è il modello più avanzato per reti complesse, è possibile notare in figura \ref{fig:full_cent} come qui vengano affiancate due entità software centralizzate:
 \begin{itemize}
     \item \textbf{CUC - Centralized User Configuration:} È un'applicazione che funge da proxy per i dispositivi finali. Comunica con essi, raccoglie i requisiti di comunicazione deterministica di cui hanno bisogno e formula una richiesta unica da passare al CNC
@@ -398,6 +434,7 @@ Questo è il modello più avanzato per reti complesse, è possibile notare in fi
 
 
 \subsection{Allocazione delle risorse}
+\label{subsec: allocazione}
 L'ecosistema TSN si avvale di una suite di standard specifici per modellare e allocare le risorse
 \begin{itemize}
     \item \textbf{IEEE 802.1Qcp - Modello Dati YANG:} È il cuore della standardizzazione. Fornisce un linguaggio di modellazione unificato (YANG) per descrivere i dati di configurazione, lo stato dei dispositivi e le operazioni. Utilizzando protocolli di gestione di rete sicuri come NETCONF o RESTCONF ,i controller possono inviare queste configurazioni standardizzate a dispositivi di produttori diversi, eliminando il "vendor lock-in"
@@ -414,7 +451,8 @@ Il flusso di lavoro operativo si articola in quattro fasi principali:
     \item \emph{Configurazione della Rete}: Il CNC riceve le richieste, calcola i percorsi di routing ottimali e le schedulazioni temporali complesse (come le Gate Control List per lo standard 802.1Qbv). Converte poi questi calcoli in "profili" YANG e li distribuisce agli switch fisici tramite NETCONF. Infine, conferma l'avvenuta allocazione al CUC
     \item \emph{Monitoraggio e Ripristino}: La rete viene costantemente monitorata. Se si verifica un guasto, i nodi adiacenti lo segnalano al CNC, che ricalcola istantaneamente le rotte e invia nuove configurazioni per isolare o aggirare il problema
 \end{enumerate}
-\section{WiFi 7}
+\section{Wi-Fi 7}
+\label{sec: wifi7}
 Obiettivo di questa sezione è descrivere le funzionalità introdotte in 802.11be e come esse risultano fondamentali per permettere lo sviluppo di infrastrutture di comunicazioni deterministiche su reti wireless, per un introduzione allo standard 802.11 si veda \cite{80211overview}.
 Le caratteristiche principali introdotte in 802.11be sono:
 \begin{itemize}
@@ -466,8 +504,10 @@ Wi-Fi 7 nasce esplicitamente per rispondere a questo obiettivo: comunicazioni EH
 È possibile trovare lavori in letteratura \cite{wifi7tsn}, dove viene sottolineata la possibilità di mappare il protocollo 802.1CB su 802.11be grazie all'introduzione del MLO.
 
 
-\chapter{Stack 802.11 in Linux e supporto al TSN}
+\chapter{Stack 802.11 in Linux e supporto al TSN}\label{chap:Linux}
 \section{Stack 802.11}
+\label{sec: stack80211}
+
 Originariamente, la gestione del wireless in Linux era affidata alle WEXT - \textit{Wireless Extensions}. Sebbene funzionali per i primi standard (802.11b/g), le WEXT  presentavano limitazioni strutturali, come l'uso di \texttt{ioctl} e l'incapacità di scalare verso configurazioni multi-interfaccia complesse.
 Ad oggi per fornire un canale di comunicazione bidirezione tra lo \textit{userspace} e il \textit{kernelspace} sono disponibili le Netlink socket, un meccanismo nato come estensione delle socket standard per supportare IPC. 
 \\
@@ -525,7 +565,7 @@ Linux PTP - \textit{Precision Time Protocol} è una suite di software nata per i
 \subsubsection{Gerarchie}
 Linux PTP sfrutta una struttura gerarchica per delineare diversi tipi di dispositivi all'interno del dominio PTP:
 \begin{itemize}
-    \item \textbf{GM - Grand Master Clock}: È l'orologio di riferimento, scelto mediante algoritmo BMCA - \textit{Best Master Clock Algorithm}, 
+    \item \textbf{GM - Grandmaster Clock}: È l'orologio di riferimento, scelto mediante algoritmo BMCA - \textit{Best Master Clock Algorithm},
     rappresenta la sorgente temporale di riferimento per il dominio PTP 
     \item \textbf{OC - Ordinary Clock}: È un qualsiasi dispositivo dotato di una singola porta, che si comporta o da master o da slave
     \item \textbf{BC - Boundary Clock}: È un dispositivo dotato di più porte, su una porta, esso si sincronizza rispetto ad un master, e sulle altre porte assume il ruolo di master alla quale degli slave si sincronizzeranno
@@ -563,11 +603,12 @@ Le tre macchine virtuali sono collegate tra loro tramite un bridge Docker, e son
 Configuriamo le due macchine \texttt{node1} e \texttt{node2}, che svolgeranno il ruolo di OC, con il seguente file di configurazione per \texttt{ptp4l}
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Esempio di configurazione PTP per OC (/etc/ptp4l.conf)},
     label={code:ptp_oc_conf}
 ]
@@ -590,11 +631,12 @@ Configuriamo le due macchine \texttt{node1} e \texttt{node2}, che svolgeranno il
 Configuraiamo invece  \texttt{node3} con il ruolo di GM nel seguente modo:
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Esempio di configurazione PTP per GM (/etc/ptp4l.conf)},
     label={code:ptp_gm_conf}
 ]
@@ -623,14 +665,14 @@ Una volta scritti i file di configurazione, è possibile avviare il servizio ese
     \item \texttt{-q}: Disablita logging su syslog
 \end{itemize}
 
-Osservando output di \texttt{ptp4l} su \texttt{node3} in \ref{code:node3_ptp} è possibile notare che esso assume il ruolo di GM, mentre \texttt{node1} e \texttt{node2} assumono il ruolo di slave e avviano il processo di sincronizzazione come è possibile osservare \ref{code:node1_ptp} (viene mostrato un singolo output in quanto analoghi).
+Osservando l'output di \texttt{ptp4l} su \texttt{node3} nel listato \ref{code:node3_ptp} è possibile notare che esso assume il ruolo di GM, mentre \texttt{node1} e \texttt{node2} assumono il ruolo di slave e avviano il processo di sincronizzazione come è possibile osservare nel listato \ref{code:node1_ptp} (viene mostrato un singolo output in quanto analoghi).
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Stdout node3 - processo di elezione del master},
     label={code:node3_ptp}
 ]
@@ -648,11 +690,11 @@ Osservando output di \texttt{ptp4l} su \texttt{node3} in \ref{code:node3_ptp} è
 \vspace{2.5cm}
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Stdout node1 - processo di elezione del master e sincronizzazione},
     label={code:node1_ptp}
 ]
@@ -678,7 +720,7 @@ Osservando output di \texttt{ptp4l} su \texttt{node3} in \ref{code:node3_ptp} è
     ptp4l[5346.283]: clockcheck: clock frequency changed unexpectedly!
 \end{lstlisting}
 
-Nell'output di \texttt{node1} mostrato in \ref{code:node1_ptp} è possibile osservare che esso assume il ruolo di slave, e poi la successione di tre fasi principali del processo di sincronizzazione:
+Nell'output di \texttt{node1} mostrato nel listato \ref{code:node1_ptp} è possibile osservare che esso assume il ruolo di slave, e poi la successione di tre fasi principali del processo di sincronizzazione:
 \begin{itemize}
     \item \textbf{s0}: Fase iniziale in cui lo \textit{slave} ha appena iniziato a ricevere messaggi dal \textit{master}, ma non ha ancora abbastanza informazioni per calcolare un offset accurato quindi non effettua operazioni di correzione del clock
     \item \textbf{s1}: Fase in cui \texttt{ptp4l} invoca una primitiva di sistema per spostare il clock locale esattamente al tempo del \textit{master}, in questo modo si ha un salto temporale che può essere significativo, ma permette di avvicinare lo slave al master, non avviene sempre, ma solo quando l'offset è superiore ad una certa soglia chiamata \textit{first\_step\_threshold}
@@ -693,7 +735,7 @@ In Linux \texttt{iproute2} è un insieme di strumenti a riga di comando per la g
 Tra le diverse funzionalità di \texttt{iproute2} è presente anche \texttt{tc} - \textit{Traffic Control}, che ci permette di configurare lo scheduler dei pacchetti kernel, i pilastri di \texttt{tc} sono:
 \begin{itemize}
     \item \textbf{qdisc - Queueing Discipline}: È la disciplina di accodamento, ovvero l'algoritmo che decide quale pacchetto trasmettere, è possibile configurare più \texttt{qdisc} in cascata, ad esempio, è possibile utilizzare un \texttt{qdisc} per implementare una coda per ogni classe di traffico e un secondo \texttt{qdisc} per implementare l'algoritmo di accodamento
-    \item \textbf{class}: Rappresenta una classe di traffico, è possibile configurare più classi di traffico, ad esempio, una per il traffico critico e una per il traffico best-effort
+    \item \textbf{class}: Rappresenta una classe di traffico, è possibile configurare più classi di traffico, ad esempio, una per il traffico critico e una per il traffico \textit{best-effort}
     \item \textbf{filter}: Permette di classificare i pacchetti in ingresso, ad esempio, è possibile configurare un filtro per classificare i pacchetti in base al campo PCP del frame 802.1Q
 \end{itemize}
 Ad oggi i \texttt{qdisc} offerti da Linux che supportano TSN sono:
@@ -707,11 +749,12 @@ Per maggiori informazioni riguardo gli algoritmi e le loro implementazioni si fa
 \subsubsection{Esempio di configurazione taprio tramite tc}
 In figura \ref{code:tc_taprio} è riportato un comando per configurare tramite \texttt{tc} una \texttt{qdisc} che implementa \texttt{taprio}:
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Esempio di configurazione di taprio con tc},
     label={code:tc_taprio}
 ]
@@ -742,57 +785,58 @@ I campi principali sono:
 In Linux, il supporto alla Frame Preemption è fornito attraverso \texttt{ethtool} e le \texttt{qdisc} \texttt{mqprio} o \texttt{taprio}.
 \\
 \texttt{ethtool} è l'utility di amministrazione delle interfacce Ethernet e consente di interrogare e configurare alcune funzionalità avanzate del controller di rete, comprese quelle necessarie per abilitare la preemption. Il meccanismo implementa quanto previsto dagli standard IEEE 802.1Qbu e IEEE 802.3br, distinguendo tra traffico critico, che non può essere interrotto, e traffico preemptable, che può essere sospeso temporaneamente per consentire la trasmissione immediata di frame più urgenti.
-\\
-\\
-Dal punto di vista architetturale, la funzionalità si basa sul MAC Merge layer, un sottolivello del MAC che coordina due flussi logici distinti: uno dedicato al traffico express e uno a quello prelazionabile.
-\\
-Quando necessario, il MAC Merge layer consente di frammentare un frame prelazionabile, inserire il frame critico e riprendere successivamente la trasmissione del traffico interrotto. 
-\\
+
 \subsubsection{Esempio di configurazione frame preemption tramite tc}
 Per configurare e utilizzare Frame Preemption in Linux è necessario innanzitutto abilitare la funzionalità tramite il comando
+
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
-    caption={Abilitazione della Frame Preemption con ethtool},
-    label={code:enable_frame_preemption}
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Abilitazione del MAC Merge layer con ethtool},
+    label={code:enable_mac_merge}
 ]
-    ethtool --set-frame-preemption eth0 \
-        fp on \
-        min-frag-size 60
+    ethtool --set-mm eth0 \
+        pmac-enabled on \
+        tx-enabled on \
+        verify-enabled on \
+        tx-min-frag-size 60
 \end{lstlisting}
 
 Successivamente sarà necessario configurare una \texttt{qdisc} che supporti la preemption, ad esempio \texttt{mqprio} o \texttt{taprio}, in questo caso mostreremo un esempio di configurazione con \texttt{taprio} in quanto già introdotta in precedenza.
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
-    caption={Abilitazione della Frame Preemption con ethtool},
-    label={code:enable_frame_preemption}
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Configurazione di taprio con Frame Preemption},
+    label={code:taprio_preemption}
 ]
     tc qdisc replace dev eth0 \
         parent root handle 100: taprio \
         num_tc 3 \
         map 2 2 2 2 1 1 0 0 \
         queues 1@0 1@1 1@2 \
+        fp P E P \
         base-time 1000000000 \
         sched-entry S 01 200000 \
         sched-entry S 02 300000 \
         sched-entry S 04 500000 \
         flags 0x2 \
-        fp expr expr preemptable \
-        clockid CLOCK_TAI0
+        clockid CLOCK_TAI
 \end{lstlisting}
 
-La configurazione è analoga a quella mostrata in \ref{code:tc_taprio}, l'unica differenza è il campo \texttt{flags} impostato a \texttt{0x2} per indicare che \texttt{taprio} è in modalità hardware, dove i gate sono gestiti dalla NIC, e la presenza dell'opzione \texttt{fp expr expr preemptable} che assegna alle prime due classi di traffico la possibilità di interrompere la trasmissione di pacchetti appartenenti all'ultima classe definita preemptable.
+La configurazione è analoga a quella mostrata nel listato \ref{code:tc_taprio}; le differenze sono il campo \texttt{flags} impostato a \texttt{0x2}, che pone \texttt{taprio} in modalità full offload — i gate e il MAC Merge layer sono gestiti direttamente dalla NIC, condizione necessaria poiché la frammentazione dei frame è una funzione hardware — e l'opzione \texttt{fp}, che assegna a ciascuna traffic class il ruolo di preemptable (\texttt{P}) o express (\texttt{E}). Nell'esempio le classi TC0 e TC2 sono prelazionabili e TC1 è express.
 \\
 In \ref{chap:cap1}, si è discusso di come algoritmi di schedulazione del traffico basati su un clock condiviso non siano sempre ideali, per questo veniva introdotto ATS, attualmente non è presente un'implementazione ufficiale dello standard IEEE 802.1Qcr, ma in letteratura sono presenti lavori \cite{ats_linux_tc} che dimostrano che con \texttt{tc} si può approssimare ATS nella variante UBS/TBE, nonostante ciò viene sottolineato che per un'implementazione completa servirebbero nuove primitive o nuove \texttt{qdisc} dedicate nel kernel.
 
 \section{Affidabilità: FRER}
+\label{sec:frer_impl}
 Nel kernel Linux non è attualmente disponibile un'implementazione nativa e completa dello standard IEEE 802.1CB - Frame Replication and Elimination for Reliability comparabile, ad esempio, al supporto offerto per altri meccanismi TSN tramite \texttt{qdisc} dedicate.
 \\
 Tuttavia, il sistema mette a disposizione strumenti programmabili a basso livello che consentono di realizzarne implementazioni sperimentali. Un esempio rilevante è XDP FRER, che propone una realizzazione parziale del paradigma FRER mediante eBPF/XDP \cite{xdp}. 
@@ -800,16 +844,17 @@ Tuttavia, il sistema mette a disposizione strumenti programmabili a basso livell
 In tale approccio, la replicazione dei frame viene effettuata su più interfacce di uscita, mentre sul nodo ricevente una funzione di eliminazione provvede a riconoscere e scartare le copie duplicate, consegnando allo stack superiore un solo pacchetto valido. Sebbene questa soluzione non costituisca un supporto standard integrato nel kernel, essa dimostra che Linux dispone di primitive sufficientemente flessibili per implementare meccanismi di affidabilità per-packet in modo efficiente.
 
 \subsubsection{Esempio utilizzo XDP FRER}
-Per mostrare il funzionamento di XDP FRER, faremo riferimento all'ambiente di test fornito dall'autore di \cite{xdp}, in cui viene proposta un'infrastrutta composta da due nodi, un \textit{Transitter} ed un \textit{Listener}, collegati tra loro tramite una serie di switch virtuali.
+Per mostrare il funzionamento di XDP FRER, faremo riferimento all'ambiente di test fornito dall'autore di \cite{xdp}, in cui viene proposta un'infrastrutta composta da due nodi, un \textit{Transmitter} ed un \textit{Listener}, collegati tra loro tramite una serie di switch virtuali.
 
 Per configurare gli switch virtuali in entrambe le direzioni per abilitare la replicazione ed eliminazione dei frame, è possibile utilizzare i seguenti comandi:
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Avvio di XDP FRER per replicazione ed eliminazione dei frame},
     label={code:xdpfrer_config}
 ]
@@ -828,14 +873,14 @@ Mentre \texttt{nsx xdpfrer -m elim -i enp4s0:55 -i enp7s0:56 -e beth0:20} signif
 \\
 Si noti che \texttt{nsx} è l'alias per entrare nel namesapce dello switch FRER, in questa implementazione il VLAN ID si comporta stream ID per identificare a quale flusso appartiene un frame e come trattarlo (replicare vs eliminare). Senza VLAN diverse per andata/ritorno, il programma XDP non saprebbe distinguere se un frame che arriva su una determinata interfaccia appartiene allo stream in arrivo dal percorso, o è un frame di ritorno da instradare verso il talker.
 \\
-Possiamo effetture il test vero e proprio effettuando un \texttt{ping} come mostrato in \ref{code:xdpfrer_ping} tra il Transmitter ed il Listener, e osservare che nonostante i frame vengano replicati su due percorsi diversi come si può osservare in \ref{code:xdpfrer_duplicate}, il Listener riceve correttamente i pacchetti senza duplicati come mostrato in \ref{code:xdpfrer_tcpdump}, dimostrando l'efficacia del meccanismo eliminazione,che si può osservare in \ref{code:xdpfrer_elim}.
+Possiamo effettuare il test vero e proprio effettuando un \texttt{ping} come mostrato nel listato \ref{code:xdpfrer_ping} tra il Transmitter ed il Listener, e osservare che nonostante i frame vengano replicati su due percorsi diversi come si può osservare nel listato \ref{code:xdpfrer_duplicate}, il Listener riceve correttamente i pacchetti senza duplicati come mostrato nel listato \ref{code:xdpfrer_tcpdump}, dimostrando l'efficacia del meccanismo di eliminazione, che si può osservare nel listato \ref{code:xdpfrer_elim}.
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Ping tra Transmitter e Listener con XDP FRER abilitato},
     label={code:xdpfrer_ping}
 ]
@@ -848,11 +893,11 @@ Possiamo effetture il test vero e proprio effettuando un \texttt{ping} come most
 \end{lstlisting}
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={tcpdiump su Listener},
     label={code:xdpfrer_tcpdump}
 ]
@@ -885,11 +930,11 @@ Possiamo effetture il test vero e proprio effettuando un \texttt{ping} come most
 \end{lstlisting}
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Stdout di switch virtuale in modalità replicazione},
     label={code:xdpfrer_duplicate}
 ]
@@ -902,11 +947,11 @@ Possiamo effetture il test vero e proprio effettuando un \texttt{ping} come most
 \end{lstlisting}
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Stdout di switch virtuale in modalità eliminazione},
     label={code:xdpfrer_elim}
 ]
@@ -931,14 +976,15 @@ In tale prospettiva, gli standard come IEEE 802.1Qcp trovano applicazione median
 \subsubsection{Esempio di utilizzo RESTCONF e modello YAML per configurazione PTP}
 Nel seguente esempio, mostriamo come è possibile replicare la configurazione di Linux PTP mostrata in \ref{section:esempio_ptp} utilizzando un modello YANG e RESTCONF.
 \\
-In \ref{code:restconf_ptp_config} è riportato un esempio di comando \texttt{curl} per inviare una richiesta RESTCONF di tipo \texttt{PUT} a \texttt{node1}, con l'obiettivo di configurare il servizio PTP secondo i parametri definiti nel file JSON mostrato in \ref{code:json_ptp_config} che rappresenta il modello YANG corrispondente al file \ref{code:ptp_oc_conf}.
+Nel listato \ref{code:restconf_ptp_config} è riportato un esempio di comando \texttt{curl} per inviare una richiesta RESTCONF di tipo \texttt{PUT} a \texttt{node1}, con l'obiettivo di configurare il servizio PTP secondo i parametri definiti nel listato \ref{code:json_ptp_config} che rappresenta il modello YANG corrispondente al listato \ref{code:ptp_oc_conf}.
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={PUT RESTCONF per configurare Linux PTP su node1},
     label={code:restconf_ptp_config}
 ]
@@ -952,11 +998,11 @@ In \ref{code:restconf_ptp_config} è riportato un esempio di comando \texttt{cur
 \end{lstlisting}
 
 \begin{lstlisting}[
-    basicstyle=\ttfamily\small,
-    breaklines=true,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
     breakatwhitespace=true,
-    frame=single,
-    numberstyle=\tiny,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
     caption={Payload JSON per configurare Linux PTP su node1 (ptp\_node1.json)},
     label={code:json_ptp_config}
 ]
@@ -997,6 +1043,728 @@ In \ref{code:restconf_ptp_config} è riportato un esempio di comando \texttt{cur
     }
 \end{lstlisting}
 Si noti che i valori precedentemente definiti nel file di configurazione \texttt{ptp4l.conf} erano in formato esadecimale, mentre nel payload JSON sono rappresentati in formato decimale, questo perché il modello YANG definisce i campi come interi.
+\chapter{Prototipo}
+L'intero codice sorgente sviluppato per la realizzazione del prototipo, comprendente gli script di configurazione dei network namespace, l'infrastruttura di routing e il codice di test, è accessibile e consultabile pubblicamente. Il repository GitHub contenente i file di progetto e le istruzioni per la riproduzione dell'ambiente emulato è disponibile al seguente indirizzo: \url{https://github.com/domenicoformosi/TSN-over-WiFi7}.
+\\
+Per un approfondimento sulla macchina host e l'ambiente utilizzato per lo sviluppo si veda l'appendice \ref{Appendice:host-ambiente}.
+\section{Obiettivi e assunzioni}
+Il prototipo presentato in questo capitolo si pone come obiettivo quello di mostrare come sia possibile far coesistere le caratteristiche principali del TSN e protocolli di gestione del livello fisico e MAC di ultima generazione come 802.11be.
+\\
+Gli obiettivi del TSN a cui il prototipo vuole andare in contro sono:
+\begin{itemize}
+    \item Sincronizzazione temporale
+    \item Affidabilità
+    \item Latenza limitata
+\end{itemize}
+In figura \ref{fig:componenti} è possibile osservare un diagramma in cui sono presenti i principali componenti del prototipo e come essi comunicano.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/componenti.png}
+    \caption{Diagramma dei componenti prototipo}
+    \label{fig:componenti}
+\end{figure}
+L'implementazione del prototipo si base su un insieme di assunzioni:
+\begin{itemize}
+    \item Gli endpoint della comunicazione sono un \texttt{talker} ed un \texttt{listener}, ci interessa garantire determinate caratteristiche di qualità ed affidabilità in maniera unidirezionale
+    \item Il prototipo sfrutta emulazione di hardware Wi-Fi 7 tramite \texttt{mac80211\_hwsim}, modulo kernel citato nella sezione \ref{sec: stack80211}. 
+    \\
+    Questo approccio permette di dimostrare la fattibilità a livello infrastrutturale, mostrando che i vari protocolli possono lavorare insieme, ha però richiesto di accettare dei compromessi in termini di prestazioni e funzionalità
+    \item Le tecniche di isolazione della rete utilizzate vincolano l'intera infrastruttura ad avere un unico kernel ed un unico dominio di clock
+\end{itemize}
+
+Per un'analisi più dettagliata delle conseguenze causate dall'emulazione hardware e dalla presenza di un unico kernel si veda la sezione \ref{sec:emulazione_prezzo_da_pagare}.
+\section{Struttura}
+Il modello utilizzato per il prototipo, in maniera coerente con l'obiettivo principale di voler dimostrare la fattibilità dell'infrastruttura stessa,non prevede entità centrali come CNC o CUC visti in \ref{subsec:modello_rete_centralizzata} o \ref{subsec:modello_completamente_centralizzato}, nè meccanismi di configurazione distribuiti visti in \ref{subsec:modello_completamento_distribuito}.
+\\
+Nello specifico verranno implementati i protocolli:
+\begin{itemize}
+    \item PTP mediante \texttt{ptp4l}
+    \item TAS mediante il comando \texttt{tc} e la \textit{queueing discipline} \texttt{taprio}
+    \item FRER mediante l'implementazione sperimantale XDP FRER \cite{xdp}
+\end{itemize}
+La topologia di rete del prototipo, mostrata in figura \ref{fig:topologia_prototipo},  prevede che i collegamenti mediante Wi-Fi 7 siano quelli tra il \texttt{talker} e \texttt{bridge-repl}, ed il \texttt{listener} ed il \texttt{bridge-elim}, i due bridge sono connessi tra loro tramite un \texttt{veth} \ref{subsec:veth}.
+
+Le interfacce di rete Wi-Fi 7 sono emulate tramite il modulo \texttt{mac80211\_hwsim} e iniettate nei diversi \textit{network namespaces} \ref{subsec:namespaces}, sulla quale verrano utilizzati i tool \texttt{wpa\_supplicant} e \texttt{hostapd} per gesire rispettivamente stazioni client - STA e access point - AP. Per un approfondimento sulla configurazione dei due tool si veda l'appendice \ref{Appendice:config-wifi}.
+
+
+\begin{center}
+    \includegraphics[angle=90, width=0.8\textwidth]{img/topologia_prototipo.png}
+    \captionof{figure}{Topologia di rete del prototipo}
+    \label{fig:topologia_prototipo}
+\end{center}
+
+\section{Motivazioni e scelte progettuali}
+\label{sec:emulazione_prezzo_da_pagare}
+In fase di progettazione è stata inizialmente considerata l'opzione di utilizzare tecnologie di containerizzazione come LXD/LXC o Podman, ma è stato infine scelto di utilizzare i network namespace offerti dal kernel Linux (per un approfondimento si veda la sezione \ref{subsec:namespaces}).
+\\
+Le motivazioni dietro questa scelta risiedono nel livello di astrazione introdotto dall'utilizzo dei container, il quale rende le operazioni di configurazione dello stack di rete problematiche e, a volte, non realizzabili in questo specifico scenario.
+\\ 
+I network namespace forniscono uno spazio dei nomi isolato per interfacce di rete, socket e tabelle di routing, permettendo di lavorare in maniera più granulare sullo stack di rete. In entrambi i casi (namespace e container), tutte le entità condividono lo stesso kernel e lo stesso dominio di clock; ciò comporta che la sincronizzazione temporale non sarà valutabile dal punto di vista dell'accuratezza dei risultati, ma assumerà una valenza puramente infrastrutturale per il prototipo. Lo stesso limite concettuale si applica alle tecniche di schedulazione del traffico.
+\\
+Infine, è importante sottolineare i vincoli intrinseci nati dall'emulazione dell'hardware Wi-Fi 7: una NIC Wi-Fi 7 fisica può esporre diverse code hardware sulle quali il kernel andrà a depositare i pacchetti, e sarà poi la NIC stessa a implementare le funzioni del livello MAC e del livello fisico, come ad esempio la \textit{frame preemption}. La presenza di code multiple, come discusso nel capitolo \ref{chap:cap1}, è fondamentale per le tecniche di schedulazione del traffico, poiché permette di suddividerlo in diverse classi gestite secondo logiche deterministiche.
+\\
+Andando ad emulare un dispositivo Wi-Fi 7, nello specifico utilizzando \texttt{mac80211\_hwsim}, non si ha a disposizione un hardware virtuale dotato di code multiple, rendendo di fatto impossibile, \textit{senza ricorrere ad accorgimenti ad-hoc}, l'utilizzo di protocolli basati sul \textit{Traffic Control} come \texttt{taprio}.
+\\
+Inoltre, non sarà possibile implementare le tecniche di \textit{frame preemption} viste in \ref{subsec:frame_prempt}, in quanto il dispositivo emulato utilizza dei loopback virtuali per comunicare e non possiede un livello MAC effettivo (non sono disponibili i sottolivelli MAC Merge Layer, pMAC ed eMAC).
+\\
+Nelle sezioni successive verranno presentate, per ogni protocollo implementato, le problematiche riscontrate in fase di progettazione e le rispettive soluzioni architetturali, evidenziando come alcune di queste operino in sinergia.
+
+\subsection{FRER}
+In figura \ref{fig:topologia_prototipo} è possibile notare che i bridge sono collegati tra loro tramite diverse \texttt{veth}, e non tramite un collegamento radio come avviene invece tra bridge ed endpoint. La necessità di utilizzare un collegamento ethernet, virtuale o meno (rappresentato in figura dalle coppie \texttt{veth-repl-0:veth-elim0}, \texttt{veth-repl-1:veth-elim1}, ... , \texttt{veth-repl-N:veth-elimN}), nasce dall'utilizzo di un'implementazione sperimentale del protocollo FRER (analizzata in \ref{sec:frer_impl}) che attualmente non supporta la duplicazione e rimozione dei pacchetti mediante collegamenti radio.  
+\\
+In aggiunta, il programma XDP FRER non può elaborare direttamente i pacchetti in ingresso dalle interfacce radio a causa della natura del framework \texttt{mac80211}: quest'ultimo non implementa gli hook \texttt{ndo\_bpf} e \texttt{ndo\_xdp\_xmit}, i quali sono requisiti fondamentali per poter eseguire XDP in modalità \texttt{XDP\_MODE\_NATIVE}. I pacchetti provenienti dalle interfacce radio costringono quindi all'utilizzo di XDP in modalità \texttt{XDP\_MODE\_SKB}. 
+Come è possibile osservare nel listato \ref{code:xdp},
+
+\begin{lstlisting}[
+    language=C,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={fonte: https://github.com/torvalds/linux/blob/master/net/core/dev.c},
+    label={code:xdp}
+    ]
+    static u32 netif_receive_generic_xdp(struct sk_buff *skb,
+                                        struct xdp_buff *xdp,
+                                        struct bpf_prog *xdp_prog)
+    {
+        ...
+        if (skb_cloned(skb) || skb_is_nonlinear(skb) ||
+            skb_headroom(skb) < XDP_PACKET_HEADROOM) {
+        if (netif_skb_check_for_xdp(pskb, xdp_prog))
+            goto do_drop;
+        }
+        ...
+    }
+\end{lstlisting}
+
+se il programma XDP riceve un \texttt{sk\_buff}\footnote{La struttura dati principale utilizzata nel kernel Linux per rappresentare un pacchetto di rete.} non lineare, tenta di ripristinarlo richiamando il metodo \texttt{netif\_skb\_check\_for\_xdp(pskb, xdp\_prog)}; in caso di fallimento, il pacchetto subisce un \texttt{drop}.
+\\
+I dispositivi Wi-Fi, specialmente quelli in grado di aggregare molti MPDU in un unico frame, utilizzano un approccio di accesso alla memoria di tipo \textit{Scatter/Gather}, il quale dà vita nativamente a \texttt{sk\_buff} non lineari. Durante i test effettuati, si è dimostrato empiricamente che la procedura di ripristino o linearizzazione di questi \texttt{sk\_buff} fallisce sistematicamente.
+\\
+Per risolvere questa incompatibilità, l'interfaccia radio viene incapsulata all'interno di una \texttt{veth}, la quale ha il compito di linearizzare lo \texttt{sk\_buff} sfruttando l'azione \texttt{redirect} del sottosistema \texttt{tc}. Questa soluzione di incapsulamento risolve il limite imposto da XDP e, come si vedrà nella sezione \ref{subsec:taprio}, fornisce contemporaneamente l'infrastruttura necessaria ad aggirare i limiti delle code radio.
+\\
+Considerando il Bridge Replication presente in figura \ref{fig:topologia_prototipo}, viene creata una coppia \texttt{veth} nominata \texttt{vproxy-repl-in:vproxy-repl-out} e confinata all'interno del namespace. Successivamente, tramite i comandi mostrati nel listato \ref{code:wrap_tc}, viene aggiunta una \textit{queuing discipline} in ingresso all'interfaccia \texttt{wlan1}. Tramite l'azione \texttt{redirect}, i pacchetti che soddisfano le condizioni \texttt{flower vlan\_id 10 vlan\_prio 5} vengono reindirizzati verso \texttt{vproxy-repl-in}. Essendo quest'ultima uno degli endpoint della \texttt{veth}, i pacchetti emergono linearizzati sull'interfaccia \texttt{vproxy-repl-out}, sulla quale il programma XDP FRER sarà in ascolto per effettuare la replicazione (come mostrato nel listato \ref{code:xdp_launch}).
+\\
+Si noti che in \ref{code:wrap_tc} è presente anche l'azione \texttt{skbedit priority 5}. Questo accorgimento è strettamente necessario per poter implementare correttamente \texttt{taprio} sulla medesima topologia; il suo ruolo tecnico verrà approfondito nella sottosezione successiva.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Comandi per incapsulare wlan1 (scripts/wrapper\_tc.sh)},
+    label={code:wrap_tc}
+    ]
+    ip netns exec bridge-repl tc qdisc add dev wlan1 ingress
+    ip netns exec bridge-repl tc filter add dev wlan1 ingress protocol 802.1Q prio 1 flower vlan_id 10 vlan_prio 5 action skbedit priority 5 pipe action mirred egress redirect dev vproxy-repl-in
+\end{lstlisting}
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Comando per lanciare programma di replicazione XDP (scripts/launch\_frer.sh)},
+    label={code:xdp_launch}
+    ]
+    ip netns exec bridge-repl stdbuf -oL -eL xdpfrer -m repl -i vproxy-repl-out:10 -e veth-repl:55 -e veth-repl-b:56 >/tmp/frer_repl.log 2>&1 &
+\end{lstlisting}
+
+\subsection{TAPRIO}
+\label{subsec:taprio}
+È stato precedentemente sottolineato come, su un dispositivo emulato tramite \texttt{mac80211\_hwsim}, non sia possibile applicare direttamente la \textit{queuing discipline} \texttt{taprio}, a causa della presenza di una singola coda di trasmissione. 
+\\
+Tuttavia, durante la creazione di una \texttt{veth}, il kernel permette di specificare arbitrariamente il numero di code da allocare. La soluzione a questo limite si sovrappone elegantemente a quella adottata per il protocollo FRER: è sufficiente riutilizzare la medesima interfaccia virtuale \texttt{vproxy-repl-in:vproxy-repl-out} introdotta per linearizzare gli \texttt{sk\_buff}, assicurandosi di dichiarare il numero di code necessarie in fase di istanziazione, come evidenziato nel listato \ref{code:create_vproxy}.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Creazione veth proxy con 3 code per supportare taprio (scripts/namesapace\_setup.sh)},
+    label={code:create_vproxy}
+    ]
+    ip netns exec bridge-repl ip link add vproxy-repl-in numtxqueues 3 numrxqueues 3 type veth peer name vproxy-repl-out numtxqueues 3 numrxqueues 3
+\end{lstlisting}
+
+Una volta ridiretti i pacchetti in ingresso da \texttt{wlan1} verso \texttt{vproxy-repl-in} (tramite \texttt{tc redirect}), subentra la necessità dell'azione \texttt{skbedit priority 5}, anticipata nel listato \ref{code:taprio_vproxy}.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Ridirezione dei pacchetti entranti in wlan1 a vproxy-repl-in (scripts/wrapper\_tc.sh)},
+    label={code:taprio_vproxy}
+    ]
+    ip netns exec bridge-repl tc filter add dev wlan1 ingress protocol 802.1Q prio 1 flower vlan_id 10 vlan_prio 5 action skbedit priority 5 pipe action mirred egress redirect dev vproxy-repl-in
+\end{lstlisting}
+
+Tramite l'azione \texttt{skbedit}, si va a modificare esplicitamente il campo \texttt{priority} della struttura \texttt{sk\_buff} del kernel, impostandolo a 5. Questa operazione manuale è imprescindibile: il qdisc \texttt{taprio} si basa esclusivamente su questo parametro interno (\texttt{skb->priority}) per assegnare i pacchetti alle corrette \textit{Traffic Class} (TC). Effettuando una ridirezione diretta (tramite l'azione \texttt{mirred}), il pacchetto scavalca i normali percorsi di elaborazione dello stack di rete. In assenza di questo intervento mirato, il valore PCP presente nel tag VLAN originale non verrebbe propagato o mappato automaticamente, privando di fatto \texttt{taprio} delle informazioni necessarie per la schedulazione.
+\\ 
+Infine, attraverso il comando riportato nel listato \ref{code:taprio_qdisc}, si associano le 3 classi di traffico alle rispettive code e si configurano le finestre temporali (Gate Control List) per la trasmissione deterministica.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Creazione qdisc taprio (scripts/launch\_taprio.sh)},
+    label={code:taprio_qdisc}
+    ]
+    ip netns exec bridge-repl tc qdisc replace dev vproxy-repl-in root taprio \
+        num_tc 3 \
+        map 0 0 0 1 0 2 0 0 0 0 0 0 0 0 0 0 \
+        queues 1@0 1@1 1@2 \
+        base-time 0 \
+        sched-entry S 04 100000 \
+        sched-entry S 02 800000 \
+        sched-entry S 01 100000 \
+        clockid CLOCK_TAI
+\end{lstlisting}
+
+\subsection{PTP}
+In assenza di hardware dotato di \textit{Physical Hardware Clock} - PHC e capacità di \textit{hardware timestamping}, l'utilizzo di \texttt{ptp4l} richiede che l'interfaccia di rete sia dotata delle \textit{capabilities} \texttt{software-receive} e \texttt{software-transmit}.
+\\
+I dispositivi creati mediante \texttt{mac80211\_hwsim} dispongono unicamente della \textit{capability} \texttt{software-receive}. Tuttavia, come nei casi precedenti, le interfacce \texttt{veth} possiedono entrambe le \textit{capabilities}: risulta quindi sufficiente incapsulare l'interfaccia radio all'interno di una \texttt{veth} per consentirle di comunicare correttamente con il processo \texttt{ptp4l}.
+\\
+Nella figura \ref{fig:ptp_wrap} è possibile osservare lo schema dell'incapsulamento all'interno del Talker. In modo analogo ai casi precedenti, l'unica differenza risiede nella bidirezionalità della comunicazione: se prima il traffico procedeva dal Talker verso il Listener tramite il percorso FRER e tornava indietro su un percorso dedicato, in questo caso il traffico deve poter viaggiare dal processo \texttt{ptp4l} all'interfaccia \texttt{wlan0} e viceversa.
+
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{img/ptp_talker_wrap.png}
+    \captionof{figure}{Incapsulamento wlan0 per l'utilizzo di ptp4l}
+    \label{fig:ptp_wrap}
+\end{center}
+
+Supponendo di aver attivato il processo \texttt{ptp4l} sull'interfaccia \texttt{ptp-tal0}, risulta necessario definire due regole distinte mediante \texttt{tc redirect}. La prima, mostrata nel listato \ref{code:ptp0}, si occupa di reindirizzare tutto il traffico generato da \texttt{ptp4l} verso \texttt{wlan0}.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Redirect dal processo ptp4l a wlan0 (scripts/wrapper\_tc.sh)},
+    label={code:ptp0}
+    ]
+    ip netns exec talker tc filter add dev ptp-tal1 parent ffff: protocol all u32 match u32 0 0 at 0 action mirred egress redirect dev wlan0
+\end{lstlisting}
+
+La seconda regola, mostrata in \ref{code:ptp1}, effettua invece il redirect su \texttt{ptp-tal1} esclusivamente del traffico appartenente al protocollo PTP (EtherType \texttt{0x88f7}) in ingresso su \texttt{wlan0}.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Redirect da wlan0 al processo ptp4l (scripts/wrapper\_tc.sh)},
+    label={code:ptp1}
+    ]
+    ip netns exec talker tc filter add dev wlan0 parent ffff: protocol 0x88f7 prio 1 u32 match u32 0 0 at 0 action mirred egress redirect dev ptp-tal1
+\end{lstlisting}
+
+Il ragionamento applicato in questo caso al Talker rimane valido per ogni nodo del prototipo. Tuttavia, sui Bridge, il processo \texttt{ptp4l} deve essere in ascolto su due interfacce distinte: quella che lo collega alla sua controparte e quella che lo collega all'endpoint.
+\\
+Considerando il caso del Bridge Replication mostrato in figura \ref{fig:ptp_wrap_bridge}, il processo \texttt{ptp4l} è attivo, tramite incapsulamento, sull'interfaccia \texttt{wlan1} (che lo connette attraverso Wi-Fi 7 al Talker) e sull'interfaccia \texttt{mgmt}, la quale rappresenta uno dei due endpoint della \texttt{veth} che collega il namespace Bridge Replication a quello Bridge Elimination.
+
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{img/ptp_bridge_wrap.png}
+    \captionof{figure}{Incapsulamento wlan1 per l'utilizzo di ptp4l}
+    \label{fig:ptp_wrap_bridge}
+\end{center}
+
+La necessità di utilizzare una \texttt{veth} dedicata esclusivamente allo scambio di traffico PTP tra i due Bridge deriva dal comportamento del programma XDP FRER, il quale richiede che l'intero traffico elaborato sia provvisto di tag VLAN.
+\\
+Infine, il fatto che tutte le entità emulate condividano il medesimo dominio di clock (quello del sistema host) solleva una problematica fondamentale: \texttt{ptp4l} non può e non deve assolvere alla sua funzione primaria, ovvero \textbf{correggere} l'orologio locale. 
+\\
+Sebbene il processo possa tecnicamente applicare tali correzioni (come dimostrabile in scenari di test isolati), in una topologia complessa gli interventi effettuati da un nodo andrebbero ad alterare l'orologio letto contemporaneamente dagli altri. Questo fenomeno di interferenza (\textit{clock fighting}) rende instabile il loop di controllo interno al protocollo, che faticherebbe a convergere e rischierebbe di rimanere bloccato in uno stato \texttt{UNCALIBRATED}. 
+\\
+Per garantire la stabilità dell'emulazione, la soluzione architetturale adottata è configurare \texttt{ptp4l} in modalità \texttt{free\_running 1}: in questo modo il demone disabilita le correzioni attive del clock, ma il protocollo continua a operare normalmente, scambiando regolarmente i messaggi ed eleggendo il Grandmaster tramite l'algoritmo BMCA.
+\subsection{Unidirezionalità}
+Come precedentemente accennato, lo scopo del prototipo è quello di garantire determinati requisiti di qualità e affidabilità in maniera strettamente unidirezionale, ovvero dal Talker verso il Listener.
+\\
+In figura \ref{fig:topologia_prototipo} è possibile osservare una coppia \texttt{veth}, nominata \texttt{veth\allowbreak-ret\allowbreak-repl\allowbreak:veth\allowbreak-ret\allowbreak-elim}, il cui scopo è fornire un percorso di ritorno dal Listener al Talker. Questo canale di comunicazione inverso non è infatti offerto dalle \texttt{veth} adibite esclusivamente alle operazioni di duplicazione ed eliminazione del traffico. 
+\\
+Sebbene teoricamente possibile, l'implementazione del protocollo FRER in maniera simmetrica (bidirezionale) tra i due endpoint avrebbe comportato una notevole complessità architetturale, richiedendo l'esecuzione di altre due istanze attive del programma XDP e un ulteriore incapsulamento (\textit{wrapping}) dell'interfaccia \texttt{wlan1}.
+
+\section{Test e Considerazioni}
+\subsection{FRER}
+Per validare il corretto funzionamento dell'applicazione XDP FRER sono stati condotti due test:
+\begin{enumerate}
+    \item Il primo verifica che i pacchetti vengano effettivamente duplicati dal Bridge Replication ed eliminati dal Bridge Elimination.
+    \item Il secondo verifica che, nel caso in cui un collegamento venga meno, l'infrastruttura di comunicazione sia preservata, garantendo l'alta disponibilità del servizio.
+\end{enumerate}
+
+Per il primo test, si faccia riferimento al listato \ref{code:repl-elim}. Una prima fase di inizializzazione registra il valore di partenza del contatore \texttt{xdp\_xmit} sulle due interfacce \texttt{veth-repl} e \texttt{veth-repl-b} (che rappresenta il numero di pacchetti instradati verso le rispettive interfacce dal layer XDP). Successivamente, viene rilevato il valore iniziale dei contatori \textit{Passed} e \textit{Dropped} forniti dal programma XDP.
+\\ 
+In seguito, viene effettuata la trasmissione di 10 pacchetti ICMP dal Talker verso il Listener tramite il comando \texttt{ping}, al termine della quale vengono nuovamente campionati i valori dei contatori al fine di poterne effettuare il confronto.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Test di replicazione ed eliminazione XDP FRER (test/test\_prototipo.sh)},
+    label={code:repl-elim}
+    ]
+    A0=$(ip netns exec bridge-repl ethtool -S veth-repl   | awk '/xdp_xmit:/{print $2; exit}')
+    B0=$(ip netns exec bridge-repl ethtool -S veth-repl-b | awk '/xdp_xmit:/{print $2; exit}')
+    P0=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $2}' | tr -dc 0-9) # contatore passed
+    D0=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $4}' | tr -dc 0-9) # contatore dropped
+    ip netns exec talker ping -c 10 -i 0.3 -W 1 10.0.0.20 | tail -2
+    sleep 2
+    A1=$(ip netns exec bridge-repl ethtool -S veth-repl   | awk '/xdp_xmit:/{print $2; exit}')
+    B1=$(ip netns exec bridge-repl ethtool -S veth-repl-b | awk '/xdp_xmit:/{print $2; exit}')
+    P1=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $2}' | tr -dc 0-9) # contatore passed
+    D1=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $4}' | tr -dc 0-9) # contatore dropped
+    echo di output..
+\end{lstlisting}
+
+È possibile osservare l'esito di questo test nel listato \ref{code:out-repl-elim}:
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Output del test di replicazione ed eliminazione XDP FRER},
+    label={code:out-repl-elim}
+    ]
+    replicazione  percorso A (veth-repl)   : 10
+    replicazione  percorso B (veth-repl-b) : 10
+    eliminazione  passati al listener      : 10
+    eliminazione  duplicati scartati       : 10
+\end{lstlisting}
+
+Il test conferma che la replicazione è avvenuta con successo (su entrambi i percorsi ridondanti sono transitati 10 pacchetti) e che la fase di eliminazione ha operato correttamente, facendo sì che il Listener ricevesse esattamente i 10 pacchetti originali.
+
+Nel listato \ref{code:test-rimozione} è presentato lo script che simula la caduta di uno dei percorsi. La logica applicata è analoga a quella del caso precedente; tuttavia, essendo i due test progettati per essere eseguiti in sequenza stretta, questo secondo script non ricalcola la baseline iniziale dei contatori, bensì sfrutta l'ultimo stato acquisito.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Script per il test di rimozione di un percorso XDP FRER (test/test\_prototipo.sh)},
+    label={code:test-rimozione}
+    ]
+    ip netns exec bridge-repl ip link set veth-repl down
+    sleep 1
+    A0=$A1; B0=$B1
+    ip netns exec talker ping -c 10 -i 0.3 -W 1 10.0.0.20 | tail -2
+    sleep 2
+    A1=$(ip netns exec bridge-repl ethtool -S veth-repl   | awk '/xdp_xmit:/{print $2; exit}')
+    B1=$(ip netns exec bridge-repl ethtool -S veth-repl-b | awk '/xdp_xmit:/{print $2; exit}')
+
+    echo di output..
+\end{lstlisting}
+
+L'esito di questa seconda prova, riportato nel listato \ref{code:rim_per}, conferma che il sistema si comporta correttamente a fronte dell'interruzione di un percorso, instradando con successo il traffico sul collegamento superstite.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Output del test in seguito alla rimozione di un percorso},
+    label={code:rim_per}
+    ]
+    percorso A (abbattuto) : 0
+    percorso B             : 10
+\end{lstlisting}
+\subsection{PTP}
+Come discusso in precedenza, la necessità di utilizzare \texttt{ptp4l} in modalità \texttt{free\_running 1} impedisce agli slave di correggere attivamente il proprio clock e, di conseguenza, di convergere allo stato \texttt{s2} (sincronizzato). Tuttavia, è possibile validare il corretto funzionamento del protocollo a livello infrastrutturale dimostrando la corretta elezione del Grandmaster tramite l'algoritmo BMCA (\textit{Best Master Clock Algorithm}).
+\\
+A tal fine, uno dei due bridge è stato configurato intenzionalmente con una priorità maggiore (ossia un valore numerico inferiore). Nel listato \ref{code:ptp4conf} è possibile notare come il file di configurazione del Bridge Replication presenti il parametro \texttt{priority1} impostato a 100, a differenza degli altri nodi della rete che mantengono il valore di default pari a 128.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Configurazione ptp4l-repl.conf (scripts/ptp4l\_conf/ptp4l-repl.conf)},
+    label={code:ptp4conf}
+    ]
+    [global]
+    network_transport       L2
+    time_stamping           software
+    tx_timestamp_timeout    100
+    free_running            1
+    sanity_freq_limit       0
+    logSyncInterval         -3
+    logMinDelayReqInterval  -3
+    priority1               100
+    [mgmt]
+    [ptp-repl0]
+\end{lstlisting}
+
+Avviando il demone \texttt{ptp4l} sui quattro nodi della topologia, si osserva nel listato \ref{code:ptp4out} che l'algoritmo BMCA elegge correttamente il Bridge Replication al ruolo di Grandmaster, rispettando la gerarchia imposta.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Output dell'elezione del Grandmaster sui 4 nodi},
+    label={code:ptp4out}
+    ]
+    bridge-repl : assuming the grand master role
+    bridge-elim : selected best master clock 5e2fe8.fffe.b2a260
+    talker      : selected best master clock 5e2fe8.fffe.b2a260
+    listener    : selected best master clock 5e2fe8.fffe.b2a260
+    # MAC address del bridge-repl: 5e2fe8.fffe.b2a260 
+\end{lstlisting}
+
+Infine, analizzando i log generati dal processo \texttt{ptp4l} sul Listener (listato \ref{code:ptp4-lis-out}), si ha l'ulteriore conferma che lo scambio dei messaggi previsti dal protocollo avviene regolarmente. Il demone identifica il Grandmaster e transita correttamente nello stato \texttt{s0} (\texttt{UNCALIBRATED}); tuttavia, operando in \textit{free running}, non interviene sull'oscillatore di sistema. Di conseguenza, come ampiamente previsto, il loop di controllo non si chiude e parametri come il \textit{master offset}, il \textit{path delay} e la correzione di frequenza (\textit{freq}) fluttuano continuamente senza mai stabilizzarsi.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Output di ptp4l sul nodo Listener},
+    label={code:ptp4-lis-out}
+    ]
+    ptp4l[12851.735]: port 1 (ptp-lis0): assuming the grand master role
+    ptp4l[12852.438]: port 1 (ptp-lis0): new foreign master 32beac.fffe.71c254-2
+    ptp4l[12856.438]: selected best master clock 5e2fe8.fffe.b2a260
+    ptp4l[12856.439]: foreign master not using PTP timescale
+    ptp4l[12856.439]: port 1 (ptp-lis0): MASTER to UNCALIBRATED on RS_SLAVE
+    ptp4l[12858.443]: master offset     -33848 s0 freq   +5160 path delay    120762
+    ptp4l[12860.445]: master offset     -13044 s0 freq   -9157 path delay     81628
+    ptp4l[12862.447]: master offset     -46133 s0 freq   +8083 path delay    130901
+    ptp4l[12864.450]: master offset     -89257 s0 freq  -31222 path delay    111492
+    ptp4l[12866.452]: master offset     -93863 s0 freq    +109 path delay    116316
+    ptp4l[12868.454]: master offset     -76896 s0 freq   +6579 path delay    112521
+    ptp4l[12870.456]: master offset     -29484 s0 freq   +8003 path delay     81130
+    ptp4l[12872.458]: master offset    -100807 s0 freq  -15666 path delay    121086
+    ptp4l[12874.460]: master offset     -31053 s0 freq  +24646 path delay    100665
+    ptp4l[12876.463]: master offset     -43457 s0 freq   +7801 path delay    128689
+    ptp4l[12878.465]: master offset     -16557 s0 freq   +5777 path delay    113356
+    ptp4l[12880.467]: master offset      -6918 s0 freq  +16309 path delay    136375
+    ptp4l[12882.470]: master offset     -37909 s0 freq  -26181 path delay    114919
+    ptp4l[12884.472]: master offset     -26461 s0 freq   -1305 path delay    100858
+    ptp4l[12886.474]: master offset     -62241 s0 freq    -519 path delay    135599
+\end{lstlisting}
+\subsection{TAPRIO}
+Per validare il funzionamento di \texttt{taprio} sono stati sviluppati due script Python: \texttt{tsn\_stream.py} e \texttt{tsn\_monitor.py} (entrambi disponibili nella repository del prototipo, sotto \texttt{test/}). Il primo, riportato nel listato \ref{code:tsn-stream}, viene eseguito sul nodo Talker e genera un flusso di traffico UDP basato sui parametri passati in ingresso al processo (\texttt{<ip> <porta> <priorita> <secondi> <pps>}, dove \texttt{pps} indica i pacchetti al secondo). Lo script costruisce un payload di 64 byte, inserendovi 8 byte per il numero di sequenza, 8 byte per il timestamp di invio e i restanti 48 byte come \textit{padding}.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Script di generazione traffico tsn\_stream.py (test/tsn\_stream.py)},
+    label={code:tsn-stream}
+    ]
+    # uso: tsn_stream.py <ip> <porta> <priorita> <secondi> <pps>   (pps 0 = massima velocita')
+    import socket, struct, sys, time
+
+    ip       = sys.argv[1]
+    porta    = int(sys.argv[2])
+    priorita = int(sys.argv[3])
+    secondi  = float(sys.argv[4])
+    pps      = float(sys.argv[5])
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_PRIORITY, priorita)
+
+    pausa = 1.0 / pps if pps > 0 else 0
+    fine  = time.time() + secondi
+    n = 0
+
+    # 64 byte di payload: 8 di sequenza, 8 di timestamp, 48 di riempimento
+    while time.time() < fine:
+        s.sendto(struct.pack("!QQ", n, time.time_ns()) + b"x" * 48, (ip, porta))
+        n += 1
+        if pausa:
+            time.sleep(pausa)
+
+    print("INVIATI  %d pacchetti con SO_PRIORITY %d  (%.0f pkt/s)" % (n, priorita, n / secondi))
+
+\end{lstlisting}
+
+Il secondo script, \texttt{tsn\_monitor.py} (listato \ref{code:tsn-monitor}), viene eseguito sul nodo Listener e ha il compito di monitorare la ricezione del flusso. Accetta in input la porta di ascolto, la durata totale del monitoraggio in secondi e la \textit{finestra} di campionamento, ovvero l'intervallo temporale su cui calcolare e stampare periodicamente le statistiche. A livello implementativo, lo script si avvale di due strutture dati principali: un array \texttt{lat} per memorizzare le latenze dei pacchetti in ingresso e un array \texttt{seq} per tracciare i numeri di sequenza, parametro fondamentale per rilevare con esattezza l'eventuale perdita di pacchetti (\textit{packet loss}).
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Script di monitoraggio tsn\_monitor.py (test/tsn\_monitor.py)},
+    label={code:tsn-monitor}
+    ]
+    # uso: tsn_monitor.py <porta> <secondi> <finestra>
+    import socket, struct, sys, time
+
+    porta    = int(sys.argv[1])
+    secondi  = float(sys.argv[2])
+    finestra = float(sys.argv[3])
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s.bind(("0.0.0.0", porta))
+    s.settimeout(0.2)
+
+    def stampa(t, lat, seq):
+        if not lat:
+            print("t=%5.1fs   nessun pacchetto" % t)
+            return
+        attesi = max(seq) - min(seq) + 1
+        persi  = attesi - len(seq)
+        print("t=%5.1fs   ricevuti %3d/%3d   persi %3d (%5.1f%%)   min %6.3f  avg %6.3f  max %6.3f  jitter %6.3f  ms"
+            % (t, len(seq), attesi, persi, 100.0 * persi / attesi,
+                min(lat), sum(lat) / len(lat), max(lat), max(lat) - min(lat)))
+
+    inizio   = time.time()
+    fine     = inizio + secondi
+    prossima = inizio + finestra
+    lat, seq = [], []
+    totale   = 0
+    primo    = None
+    ultimo   = None
+
+    while time.time() < fine:
+        try:
+            dati, _ = s.recvfrom(128)
+            n, ts = struct.unpack("!QQ", dati[:16])
+            lat.append((time.time_ns() - ts) / 1e6)
+            seq.append(n)
+            totale += 1
+            primo  = n if primo  is None else min(primo, n)
+            ultimo = n if ultimo is None else max(ultimo, n)
+        except socket.timeout:
+            pass
+        if time.time() >= prossima:
+            stampa(prossima - inizio, lat, seq)
+            lat, seq = [], []
+            prossima += finestra
+
+    if primo is not None:
+        attesi = ultimo - primo + 1
+        persi  = attesi - totale
+        print("TOTALE       ricevuti %d/%d   persi %d (%.1f%%)"
+            % (totale, attesi, persi, 100.0 * persi / attesi))
+\end{lstlisting}
+
+Lo scenario di test, il cui script di automazione è riportato nel listato \ref{code:test-taprio}, prevede l'avvio iniziale di un flusso critico ad alta priorità. Successivamente, per simulare una condizione di forte stress di rete, viene iniettato un secondo flusso \textit{best-effort} (a bassa priorità ma ad altissima frequenza di trasmissione), avente lo scopo di saturare il mezzo trasmissivo. Al fine di ottenere un termine di paragone oggettivo, l'esperimento è stato eseguito in due configurazioni distinte: la prima utilizzando l'algoritmo di schedulazione standard \texttt{pfifo\_fast} (la \textit{queuing discipline} di default applicata dal kernel alle interfacce), e la seconda applicando \texttt{taprio}, precedentemente configurato come mostrato nel listato \ref{code:taprio_qdisc}.
+\\
+È fondamentale precisare che, per rendere i risultati dell'emulazione metricamente significativi, è stato introdotto artificialmente un collo di bottiglia sulla banda del link (tramite l'impiego del qdisc \texttt{netem rate 10mbit}). In assenza di tale limitazione, operando all'interno di un ambiente emulato basato su namespace e interfacce virtuali, il throughput complessivo sarebbe stato vincolato unicamente dalla larghezza di banda della memoria RAM del sistema host; di conseguenza, il traffico interferente non sarebbe mai riuscito a generare una reale congestione delle code di trasmissione.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Avvio dei test con e senza taprio (test/test\_prototipo.sh)},
+    label={code:test-taprio}
+    ]
+    ip netns exec bridge-elim tc qdisc replace dev wlan2 root netem rate 10mbit limit 100
+
+    echo " --- con pfifo_fast ---"
+    ip netns exec bridge-repl tc qdisc replace dev vproxy-repl-in root pfifo_fast
+    sleep 1
+    ip netns exec listener stdbuf -oL python3 tsn_monitor.py 5000 24 4 &
+    MON=$!
+    sleep 1
+    ip netns exec talker python3 tsn_stream.py 10.0.0.20 5000 3 24 20 >/dev/null 2>&1 &
+    CRIT=$!
+    sleep 11
+    echo ">>> parte l'interferenza best effort, a massima velocita'"
+    ip netns exec talker python3 tsn_stream.py 10.0.0.20 5001 0 8 0 >/dev/null 2>&1
+    echo ">>> interferenza terminata"
+    ..
+    ..
+    ..
+    echo "atteso: 80 pacchetti critici per finestra da 4 s"
+    echo "--- con taprio ---"
+    ip netns exec listener stdbuf -oL python3 tsn_monitor.py 5000 24 4 &
+    MON=$!
+    sleep 1
+    ip netns exec talker python3 tsn_stream.py 10.0.0.20 5000 3 24 20 > /tmp/tsn_test/critico.txt 2>&1 &
+    CRIT=$!
+    sleep 11
+    echo ">>> parte l'interferenza best effort, a massima velocita'"
+    ip netns exec talker python3 tsn_stream.py 10.0.0.20 5001 0 8 0 > /tmp/tsn_test/flood.txt 2>&1
+    echo ">>> interferenza terminata"
+\end{lstlisting}
+
+Analizzando l'output riportato nel listato \ref{code:output-test-taprio}, è possibile valutare il comportamento del sistema durante gli 8 secondi in cui viene iniettato il traffico interferente (\textit{background traffic}) a bassa priorità. In entrambi gli scenari si registra fisiologicamente un incremento della latenza e del jitter, ma il confronto diretto evidenzia un paradigma essenziale delle reti TSN: l'importanza cruciale della schedulazione deterministica ai fini dell'affidabilità della comunicazione.
+\\
+Osservando i grafici riportati in Figura \ref{fig:loss_tempo} e \ref{fig:loss_totale}, l'impatto del protocollo \texttt{taprio} risulta evidente e drastico. Con la coda standard \texttt{pfifo\_fast}, il flusso critico subisce immediatamente gli effetti di \textit{starvation} causati dall'enorme mole di pacchetti \textit{best-effort}, arrivando a registrare picchi di \textit{packet loss} superiori al 46\% durante la finestra di congestione, e attestandosi su una perdita complessiva del 15.9\% sull'intero esperimento.
+\\
+Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico, assegnandogli finestre di trasmissione (\textit{time slots}) dedicate ed esclusive. Questo rigoroso meccanismo di \textit{gating} protegge i pacchetti ad alta priorità dalla congestione sottostante, abbattendo il picco di perdita all'1.3\% nel momento di massimo stress e riducendo il \textit{packet loss} totale a un trascurabile 0.2\%.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Output dei test con e senza taprio},
+    label={code:output-test-taprio}
+    ]
+    --- con pfifo_fast ---
+    >>> parte l'interferenza best effort, a massima velocita'
+    >>> interferenza terminata
+    t=  4.0s   ricevuti  61/ 61   persi   0 (  0.0%)   min  0.292  avg  0.574  max  0.793  jitter  0.501  ms
+    t=  8.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.270  avg  0.623  max  1.006  jitter  0.736  ms
+    t= 12.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.278  avg  0.693  max  1.065  jitter  0.787  ms
+    t= 16.0s   ricevuti  43/ 80   persi  37 ( 46.2%)   min  8.500  avg  8.582  max  8.657  jitter  0.157  ms
+    t= 20.0s   ricevuti  44/ 80   persi  36 ( 45.0%)   min  4.562  avg  8.497  max  8.646  jitter  4.084  ms
+    t= 24.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.333  avg  0.679  max  0.846  jitter  0.513  ms
+    TOTALE       ricevuti 385/458   persi 73 (15.9%)
+
+    --- con taprio ---
+    >>> parte l'interferenza best effort, a massima velocita'
+    >>> interferenza terminata
+    t=  4.0s   ricevuti  60/ 60   persi   0 (  0.0%)   min  0.223  avg  0.667  max  0.850  jitter  0.627  ms
+    t=  8.0s   ricevuti  80/ 80   persi   0 (  0.0%)   min  0.267  avg  0.676  max  0.992  jitter  0.725  ms
+    t= 12.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.240  avg  0.770  max  6.476  jitter  6.236  ms
+    t= 16.0s   ricevuti  78/ 79   persi   1 (  1.3%)   min  7.739  avg  8.263  max  9.176  jitter  1.437  ms
+    t= 20.0s   ricevuti  80/ 80   persi   0 (  0.0%)   min  7.732  avg  8.255  max  9.193  jitter  1.461  ms
+    t= 24.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.276  avg  0.676  max  1.043  jitter  0.767  ms
+    TOTALE       ricevuti 456/457   persi 1 (0.2%)
+    INVIATI  477 pacchetti con SO_PRIORITY 3  (20 pkt/s)
+    INVIATI  309660 pacchetti con SO_PRIORITY 0  (38708 pkt/s)
+\end{lstlisting}
+
+% ---------------------------------------------------------
+% FIGURA 1: Andamento nel tempo (Line Chart)
+% ---------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            title={\textbf{Andamento del Packet Loss nel Tempo}},
+            xlabel={Tempo (s)},
+            ylabel={Pacchetti Persi (\%)},
+            xmin=2, xmax=26,
+            ymin=-5, ymax=65, % Aumentato da 55 a 65 per creare spazio in alto
+            xtick={4,8,12,16,20,24},
+            ytick={0,10,20,30,40,50,60},
+            legend pos=north west, % Spostata la legenda in alto a destra
+            ymajorgrids=true,
+            grid style=dashed,
+            width=16cm,
+            height=12cm,
+            legend style={font=\footnotesize},
+            % Configurazione monocromatica (nero e grigio)
+            cycle list={
+                {black, solid, mark=square*, thick},
+                {black!60, dashed, mark=*, thick}
+            }
+        ]
+
+        % Area ombreggiata allungata fino al nuovo ymax (55)
+        \fill [black!10] (axis cs:12,-5) rectangle (axis cs:20,55);
+        \node[anchor=north] at (axis cs:16, 63) {\small \textsf{Finestra di Congestione BE}};
+
+        % Dati TAPRIO
+        \addplot coordinates {
+            (4,0) (8,0) (12,0) (16,1.3) (20,0) (24,0)
+        };
+        \addlegendentry{Con TAPRIO (802.1Qbv)}
+
+        % Dati pfifo_fast
+        \addplot coordinates {
+            (4,0) (8,0) (12,0) (16,46.2) (20,45.0) (24,0)
+        };
+        \addlegendentry{Senza TAPRIO (pfifo\_fast)}
+
+        % Etichette numeriche sui picchi
+        \node[above] at (axis cs:16, 46.2) {\textbf{46.2\%}};
+        \node[above] at (axis cs:20, 45.0) {\textbf{45.0\%}};
+        \node[below,yshift=-2mm] at (axis cs:16, 1.3) {\textbf{1.3\%}};
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Confronto del packet loss nel tempo tra TAPRIO e coda standard (pfifo\_fast) durante un'iniezione di traffico \textit{best-effort}.}
+    \label{fig:loss_tempo}
+\end{figure}
+
+% ---------------------------------------------------------
+% FIGURA 2: Totale pacchetti persi (Bar Chart)
+% ---------------------------------------------------------
+% ---------------------------------------------------------
+% FIGURA 2: Totale pacchetti persi (Bar Chart)
+% ---------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            ybar,
+            title={\textbf{Totale Pacchetti Persi (Intero Esperimento)}},
+            ylabel={Pacchetti Persi (\%)},
+            % Usiamo coordinate numeriche 1 e 2 e forziamo le label testuali
+            xtick={1,2},
+            xticklabels={TAPRIO (802.1Qbv), pfifo\_fast},
+            ymin=0, ymax=20,
+            % Aggiunge il valore in percentuale direttamente sopra le barre
+            nodes near coords={\pgfmathprintnumber\pgfplotspointmeta\%},
+            nodes near coords align={vertical},
+            nodes near coords style={font=\bfseries},
+            ymajorgrids=true,
+            grid style=dashed,
+            width=12cm,
+            height=10cm,
+            bar width=40pt,
+            enlarge x limits=0.5,
+        ]
+        
+        % Barra TAPRIO (grigio scuro) in posizione x=1
+        \addplot[fill=black!80, draw=black, thick] coordinates {(1,0.2)};
+        
+        % Barra pfifo_fast (grigio chiaro) in posizione x=2
+        \addplot[fill=black!20, draw=black, thick] coordinates {(2,15.9)};
+        
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Percentuale complessiva di pacchetti critici persi sull'intero periodo di test.}
+    \label{fig:loss_totale}
+\end{figure}
+\subsection{Conclusioni}
+In conclusione, l'esito positivo dei test condotti permette di validare l'architettura del prototipo nella sua interezza. Nonostante le molteplici sfide implementative derivanti dai vincoli dell'ambiente virtualizzato --- quali l'assenza di code di trasmissione multiple nell'emulatore \texttt{mac80211\_hwsim}, l'impossibilità di sfruttare l'\textit{hardware timestamping} per la convergenza del protocollo PTP e la necessità di ricorrere a complessi incapsulamenti logici per far coesistere l'elaborazione eBPF/XDP con il \textit{Traffic Control} --- i risultati dimostrano la concreta fattibilità dell'estensione dei meccanismi TSN su collegamenti Wi-Fi 7.
+\\
+È ragionevole affermare che la trasposizione di questo \textit{proof of concept} su dispositivi di rete fisici, dotati di supporto nativo alle specifiche Wi-Fi 7 e TSN, farebbe decadere la quasi totalità dei \textit{workaround} architetturali resisi necessari in questa sede. L'impiego di NIC (\textit{Network Interface Card}) reali, provviste di \textit{Physical Hardware Clock} indipendenti, code multiple fisiche e implementazioni hardware del sottolivello MAC per la \textit{frame preemption}, non solo snellirebbe drasticamente la configurazione dello stack di rete, ma permetterebbe al sistema di esprimere appieno il proprio potenziale deterministico, confermando la solidità della convergenza IT/OT per gli scenari industriali di nuova generazione.
+
 \chapter*{Riferimenti bibliografici}
 \addcontentsline{toc}{chapter}{Riferimenti bibliografici}
 \printbibliography[heading=none]
@@ -1015,8 +1783,53 @@ Si noti che i valori precedentemente definiti nel file di configurazione \texttt
     breakatwhitespace=true, 
     basicstyle=\ttfamily\scriptsize % Riduce la dimensione del font se necessario
 ]{file/script.sh}
+\chapter{Macchina Host e Ambiente}
+\label{Appendice:host-ambiente}
+Per favorire la replicabilità e la portabilità del prototipo, si è scelto di implementare l'intero sistema all'interno di una macchina virtuale gestita tramite Vagrant, configurata attraverso il file \texttt{Vagrantfile} e inizializzata mediante lo script \texttt{provision.sh}.
+\\
+La natura innovativa dei protocolli utilizzati nel prototipo ha richiesto l'impiego di un ambiente di sviluppo di ultima generazione e, nello specifico, di un kernel Linux \textit{bleeding edge} nella versione 7.1.4, rilasciata il 18 luglio 2026, in grado di supportare lo standard Wi-Fi 7. Nello script sono presenti le istruzioni per l'installazione di diversi tool, tra cui la \textit{toolchain} eBPF/XDP.
 
+\chapter{Configurazione strumenti wireless}
+\label{Appendice:config-wifi}
+La versione di \texttt{hostapd} e \texttt{wpa\_supplicant} che è possibile ottenere tramite \textit{package manager} come APT si ferma alla 2.10; pertanto, per avere un supporto preliminare alle principali \textit{features} del protocollo 802.11be, è stato necessario scaricare i sorgenti ufficiali, configurandoli e compilandoli manualmente, come mostrato nel Listato \ref{code:config_hostap}.
 
+\lstinputlisting[
+    language=bash,
+    breaklines=true,      % Spezza le righe lunghe
+    breakatwhitespace=true,
+    basicstyle=\ttfamily\scriptsize, % Riduce la dimensione del font se necessario
+    caption={./scripts/hostap.sh},
+    label={code:config_hostap}
+]{file/hostap.sh}
+\chapter{Tool Linux per il networking}
+\label{Appendice:tool_networking}
+
+\section{veth}
+\label{subsec:veth}
+Le \textit{virtual Ethernet} (\texttt{veth}) sono interfacce di rete virtuali fornite dal kernel Linux, create sempre in coppia e collegate tra loro come un cavo di rete punto-punto: ogni pacchetto trasmesso su uno dei due endpoint viene ricevuto dall'altro. Sono comunemente utilizzate per collegare tra loro due network namespace distinti, oppure per collegare un namespace allo stack di rete predefinito (\textit{root namespace}). Una coppia \texttt{veth} viene creata tramite il comando:
+
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+ip link add <veth-a> type veth peer name <veth-b>
+\end{lstlisting}
+
+È inoltre possibile specificare, in fase di creazione, il numero di code di trasmissione e ricezione (\texttt{numtxqueues}/\texttt{numrxqueues}), caratteristica sfruttata nel prototipo per emulare il supporto a code multiple non disponibile sulle interfacce radio emulate. Le interfacce \texttt{veth} supportano inoltre l'offloading di programmi eBPF/XDP e possono essere utilizzate in combinazione con il sottosistema \texttt{tc} per redirigere e manipolare il traffico tra namespace differenti.
+
+\section{network namespace}
+\label{subsec:namespaces}
+I \textit{network namespace} sono un meccanismo di isolamento offerto dal kernel Linux che permette di replicare uno stack di rete indipendente all'interno dello stesso sistema operativo: ogni namespace dispone di un proprio set di interfacce di rete, tabelle di routing, regole di firewall e socket, isolati da quelli degli altri namespace. Un nuovo namespace può essere creato ed elencato tramite i comandi:
+
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+ip netns add <nome>
+ip netns list
+\end{lstlisting}
+
+Per eseguire un comando all'interno di un namespace specifico si utilizza:
+
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+ip netns exec <nome> <comando>
+\end{lstlisting}
+
+Un'interfaccia di rete può essere spostata da un namespace all'altro tramite il comando \texttt{ip link set <interfaccia> netns <nome>}, operazione utilizzata ad esempio per assegnare uno dei due endpoint di una coppia \texttt{veth} (si veda \ref{subsec:veth}) al namespace di destinazione. Nel prototipo sviluppato, i network namespace sono stati impiegati per emulare in un'unica macchina host i diversi nodi della topologia di rete (\texttt{talker}, \texttt{listener} e i due bridge), condividendo però lo stesso kernel e lo stesso dominio di clock, con le conseguenze discusse in \ref{sec:emulazione_prezzo_da_pagare}.
 
 \end{appendices}
 

@@ -330,6 +330,20 @@
       \endverb
       \keyw{IEEE Standards;Local area networks;Metropolitan area networks;Bridge circuits;Media Access Protocol;Bridged Network;IEEE 802.1Q;LAN;local area network;MAC Bridge;metropolitan area network;MSTP;Multiple Spanning Tree Protocol;Rapid Spanning Tree Protocol;RSTP;PBN;Provider Bridged Network;Shortest Path Bridging Protocol;SPB Protocol;Time-Sensitive Networking;TSN;Virtual Bridged Network;virtual LAN;VLAN Bridge}
     \endentry
+    \entry{IEEE802_3br2016}{standard}{}
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{organization}{1}{%
+        {{IEEE} Computer Society}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-5044-2336-6}
+      \field{title}{{IEEE} Std 802.3br-2016: {IEEE} Standard for Ethernet -- Amendment 5: Specification and Management Parameters for Interspersing Express Traffic}
+      \field{year}{2016}
+    \endentry
     \entry{tsn_qdiscs}{misc}{}
       \name{author}{1}{}{%
         {{hash=ff97a9fdede09eaf6e1c8ec9f6a61dd5}{%
