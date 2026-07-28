@@ -51,11 +51,13 @@
     keywordstyle=\color{code_keyword}\bfseries,
     stringstyle=\color{code_string},
     basicstyle=\ttfamily\small\color{black!85}, % Testo quasi nero, meno aggressivo
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=none,       
+    breakatwhitespace=false,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    showstringspaces=false,
+    captionpos=b,
+    keepspaces=true,
+    numbers=none,
     tabsize=4,
     frame=single,                    % Box completo
     rulecolor=\color{code_frame},    % Colore del bordo discreto
@@ -90,6 +92,7 @@
 \addbibresource{refs.bib}  
 
 \newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\newcommand{\hwsim}{\mbox{\texttt{mac80211\_hwsim}}}
 
 \usepackage{pdfpages}
 
@@ -543,13 +546,13 @@ I principali moduli kernel che implementano queste funzionalità sono:
     In un'architettura SoftMAC il dispositivo fisico si occupa solamente del livello fisico, mentre la gestione del protocollo è demandata al processore tramite appunto il modulo kernel \texttt{mac80211}
     \\
     Invece in un'architettura FullMAC, i dispositivi integrano la logica MLME direttamente nel firmware del dispositvo. La scheda di rete appare al sistema operativo come un'entità autonoma che gestisce internamente la complessità del protocollo 802.11.
-    \item \textbf{mac80211\_hwsim}: Nel contesto dello stack wireless Linux, \texttt{mac80211\_hwsim} è un modulo del kernel che consente di emulare una o più radio IEEE 802.11 interamente mediante software, senza richiedere hardware fisico dedicato.
+    \item \textbf{mac80211\_hwsim}: Nel contesto dello stack wireless Linux, \hwsim è un modulo del kernel che consente di emulare una o più radio IEEE 802.11 interamente mediante software, senza richiedere hardware fisico dedicato.
     \\ 
-    Dal punto di vista architetturale, \texttt{mac80211\_hwsim} sostituisce il livello radio fisico con un meccanismo software che simula la trasmissione dei frame tra interfacce virtuali, mantenendo invariati i livelli superiori dello stack, in particolare \texttt{mac80211}, \texttt{cfg80211} e \texttt{nl80211}. 
+    Dal punto di vista architetturale, \hwsim sostituisce il livello radio fisico con un meccanismo software che simula la trasmissione dei frame tra interfacce virtuali, mantenendo invariati i livelli superiori dello stack, in particolare \texttt{mac80211}, \texttt{cfg80211} e \texttt{nl80211}. 
     \\
     Di conseguenza, applicazioni come \texttt{iw}, \texttt{wpa\_supplicant} e \texttt{hostapd} possono essere impiegate senza modifiche anche in ambienti emulati, poiché l'interazione con il sottosistema wireless del kernel avviene secondo le stesse primitive previste per l'hardware reale. 
     \\
-    Questa proprietà rende \texttt{mac80211\_hwsim} particolarmente utile in attività di sviluppo, testing e ricerca, dove è importante disporre di scenari wireless controllati, riproducibili e facilmente osservabili. 
+    Questa proprietà rende \hwsim particolarmente utile in attività di sviluppo, testing e ricerca, dove è importante disporre di scenari wireless controllati, riproducibili e facilmente osservabili. 
 \end{itemize}
 
 \section{Mappare servizi TSN in Linux}
@@ -1050,7 +1053,7 @@ Per un approfondimento sulla macchina host e l'ambiente utilizzato per lo svilup
 \section{Obiettivi e assunzioni}
 Il prototipo presentato in questo capitolo si pone come obiettivo quello di mostrare come sia possibile far coesistere le caratteristiche principali del TSN e protocolli di gestione del livello fisico e MAC di ultima generazione come 802.11be.
 \\
-Gli obiettivi del TSN a cui il prototipo vuole andare in contro sono:
+Gli obiettivi del TSN a cui il prototipo intende rispondere:
 \begin{itemize}
     \item Sincronizzazione temporale
     \item Affidabilità
@@ -1064,28 +1067,28 @@ In figura \ref{fig:componenti} è possibile osservare un diagramma in cui sono p
     \caption{Diagramma dei componenti prototipo}
     \label{fig:componenti}
 \end{figure}
-L'implementazione del prototipo si base su un insieme di assunzioni:
+L'implementazione del prototipo si basa su un insieme di assunzioni:
 \begin{itemize}
     \item Gli endpoint della comunicazione sono un \texttt{talker} ed un \texttt{listener}, ci interessa garantire determinate caratteristiche di qualità ed affidabilità in maniera unidirezionale
-    \item Il prototipo sfrutta emulazione di hardware Wi-Fi 7 tramite \texttt{mac80211\_hwsim}, modulo kernel citato nella sezione \ref{sec: stack80211}. 
+    \item Il prototipo sfrutta emulazione di hardware Wi-Fi 7 tramite \hwsim, modulo kernel citato nella sezione \ref{sec: stack80211}. 
     \\
-    Questo approccio permette di dimostrare la fattibilità a livello infrastrutturale, mostrando che i vari protocolli possono lavorare insieme, ha però richiesto di accettare dei compromessi in termini di prestazioni e funzionalità
+    Questo approccio permette di dimostrare la fattibilità a livello infrastrutturale, mostrando che i vari protocolli possono lavorare insieme; ha però richiesto di accettare dei compromessi in termini di prestazioni e funzionalità
     \item Le tecniche di isolazione della rete utilizzate vincolano l'intera infrastruttura ad avere un unico kernel ed un unico dominio di clock
 \end{itemize}
 
 Per un'analisi più dettagliata delle conseguenze causate dall'emulazione hardware e dalla presenza di un unico kernel si veda la sezione \ref{sec:emulazione_prezzo_da_pagare}.
 \section{Struttura}
-Il modello utilizzato per il prototipo, in maniera coerente con l'obiettivo principale di voler dimostrare la fattibilità dell'infrastruttura stessa,non prevede entità centrali come CNC o CUC visti in \ref{subsec:modello_rete_centralizzata} o \ref{subsec:modello_completamente_centralizzato}, nè meccanismi di configurazione distribuiti visti in \ref{subsec:modello_completamento_distribuito}.
+Il modello utilizzato per il prototipo, in maniera coerente con l'obiettivo principale di voler dimostrare la fattibilità dell'infrastruttura stessa, non prevede entità centrali come CNC o CUC visti nelle sezioni \ref{subsec:modello_rete_centralizzata} e \ref{subsec:modello_completamente_centralizzato}, né meccanismi di configurazione distribuiti visti in \ref{subsec:modello_completamento_distribuito}.
 \\
 Nello specifico verranno implementati i protocolli:
 \begin{itemize}
     \item PTP mediante \texttt{ptp4l}
     \item TAS mediante il comando \texttt{tc} e la \textit{queueing discipline} \texttt{taprio}
-    \item FRER mediante l'implementazione sperimantale XDP FRER \cite{xdp}
+    \item FRER mediante l'implementazione sperimentale XDP FRER \cite{xdp}
 \end{itemize}
 La topologia di rete del prototipo, mostrata in figura \ref{fig:topologia_prototipo},  prevede che i collegamenti mediante Wi-Fi 7 siano quelli tra il \texttt{talker} e \texttt{bridge-repl}, ed il \texttt{listener} ed il \texttt{bridge-elim}, i due bridge sono connessi tra loro tramite un \texttt{veth} \ref{subsec:veth}.
 
-Le interfacce di rete Wi-Fi 7 sono emulate tramite il modulo \texttt{mac80211\_hwsim} e iniettate nei diversi \textit{network namespaces} \ref{subsec:namespaces}, sulla quale verrano utilizzati i tool \texttt{wpa\_supplicant} e \texttt{hostapd} per gesire rispettivamente stazioni client - STA e access point - AP. Per un approfondimento sulla configurazione dei due tool si veda l'appendice \ref{Appendice:config-wifi}.
+Le interfacce di rete Wi-Fi 7 sono emulate tramite il modulo \hwsim e iniettate nei diversi \textit{network namespaces} \ref{subsec:namespaces}, sulla quale verranno utilizzati i tool \texttt{wpa\_supplicant} e \texttt{hostapd} per gestire rispettivamente stazioni client - STA e access point - AP. Per un approfondimento sulla configurazione dei due tool si veda l'appendice \ref{Appendice:config-wifi}.
 
 
 \begin{center}
@@ -1104,14 +1107,14 @@ I network namespace forniscono uno spazio dei nomi isolato per interfacce di ret
 \\
 Infine, è importante sottolineare i vincoli intrinseci nati dall'emulazione dell'hardware Wi-Fi 7: una NIC Wi-Fi 7 fisica può esporre diverse code hardware sulle quali il kernel andrà a depositare i pacchetti, e sarà poi la NIC stessa a implementare le funzioni del livello MAC e del livello fisico, come ad esempio la \textit{frame preemption}. La presenza di code multiple, come discusso nel capitolo \ref{chap:cap1}, è fondamentale per le tecniche di schedulazione del traffico, poiché permette di suddividerlo in diverse classi gestite secondo logiche deterministiche.
 \\
-Andando ad emulare un dispositivo Wi-Fi 7, nello specifico utilizzando \texttt{mac80211\_hwsim}, non si ha a disposizione un hardware virtuale dotato di code multiple, rendendo di fatto impossibile, \textit{senza ricorrere ad accorgimenti ad-hoc}, l'utilizzo di protocolli basati sul \textit{Traffic Control} come \texttt{taprio}.
+Andando ad emulare un dispositivo Wi-Fi 7, nello specifico utilizzando \hwsim, non si ha a disposizione un hardware virtuale dotato di code multiple, rendendo di fatto impossibile, \textit{senza ricorrere ad accorgimenti ad-hoc}, l'utilizzo di \textit{qdisic} come \texttt{taprio}.
 \\
 Inoltre, non sarà possibile implementare le tecniche di \textit{frame preemption} viste in \ref{subsec:frame_prempt}, in quanto il dispositivo emulato utilizza dei loopback virtuali per comunicare e non possiede un livello MAC effettivo (non sono disponibili i sottolivelli MAC Merge Layer, pMAC ed eMAC).
 \\
 Nelle sezioni successive verranno presentate, per ogni protocollo implementato, le problematiche riscontrate in fase di progettazione e le rispettive soluzioni architetturali, evidenziando come alcune di queste operino in sinergia.
 
 \subsection{FRER}
-In figura \ref{fig:topologia_prototipo} è possibile notare che i bridge sono collegati tra loro tramite diverse \texttt{veth}, e non tramite un collegamento radio come avviene invece tra bridge ed endpoint. La necessità di utilizzare un collegamento ethernet, virtuale o meno (rappresentato in figura dalle coppie \texttt{veth-repl-0:veth-elim0}, \texttt{veth-repl-1:veth-elim1}, ... , \texttt{veth-repl-N:veth-elimN}), nasce dall'utilizzo di un'implementazione sperimentale del protocollo FRER (analizzata in \ref{sec:frer_impl}) che attualmente non supporta la duplicazione e rimozione dei pacchetti mediante collegamenti radio.  
+In figura \ref{fig:topologia_prototipo} è possibile notare che i bridge sono collegati tra loro tramite diverse \texttt{veth}, e non tramite un collegamento radio come avviene invece tra bridge ed endpoint. La necessità di utilizzare un collegamento ethernet, virtuale o meno (rappresentato in figura dalle coppie \texttt{veth-repl0:veth-elim0}, \texttt{veth-repl1:veth-elim1}, ... , \texttt{veth-replN:veth-elimN}), nasce dall'utilizzo di un'implementazione sperimentale del protocollo FRER (analizzata in \ref{sec:frer_impl}) che attualmente non supporta la duplicazione e rimozione dei pacchetti mediante collegamenti radio.  
 \\
 In aggiunta, il programma XDP FRER non può elaborare direttamente i pacchetti in ingresso dalle interfacce radio a causa della natura del framework \texttt{mac80211}: quest'ultimo non implementa gli hook \texttt{ndo\_bpf} e \texttt{ndo\_xdp\_xmit}, i quali sono requisiti fondamentali per poter eseguire XDP in modalità \texttt{XDP\_MODE\_NATIVE}. I pacchetti provenienti dalle interfacce radio costringono quindi all'utilizzo di XDP in modalità \texttt{XDP\_MODE\_SKB}. 
 Come è possibile osservare nel listato \ref{code:xdp},
@@ -1174,12 +1177,12 @@ Si noti che in \ref{code:wrap_tc} è presente anche l'azione \texttt{skbedit pri
     caption={Comando per lanciare programma di replicazione XDP (scripts/launch\_frer.sh)},
     label={code:xdp_launch}
     ]
-    ip netns exec bridge-repl stdbuf -oL -eL xdpfrer -m repl -i vproxy-repl-out:10 -e veth-repl:55 -e veth-repl-b:56 >/tmp/frer_repl.log 2>&1 &
+    ip netns exec bridge-repl stdbuf -oL -eL xdpfrer -m repl -i vproxy-repl-out:10 -e veth-repl0:55 -e veth-repl1:56 >/tmp/frer_repl.log 2>&1 &
 \end{lstlisting}
 
 \subsection{TAPRIO}
 \label{subsec:taprio}
-È stato precedentemente sottolineato come, su un dispositivo emulato tramite \texttt{mac80211\_hwsim}, non sia possibile applicare direttamente la \textit{queuing discipline} \texttt{taprio}, a causa della presenza di una singola coda di trasmissione. 
+È stato precedentemente sottolineato come, su un dispositivo emulato tramite \hwsim, non sia possibile applicare direttamente la \textit{queuing discipline} \texttt{taprio}, a causa della presenza di una singola coda di trasmissione. 
 \\
 Tuttavia, durante la creazione di una \texttt{veth}, il kernel permette di specificare arbitrariamente il numero di code da allocare. La soluzione a questo limite si sovrappone elegantemente a quella adottata per il protocollo FRER: è sufficiente riutilizzare la medesima interfaccia virtuale \texttt{vproxy-repl-in:vproxy-repl-out} introdotta per linearizzare gli \texttt{sk\_buff}, assicurandosi di dichiarare il numero di code necessarie in fase di istanziazione, come evidenziato nel listato \ref{code:create_vproxy}.
 
@@ -1196,7 +1199,7 @@ Tuttavia, durante la creazione di una \texttt{veth}, il kernel permette di speci
     ip netns exec bridge-repl ip link add vproxy-repl-in numtxqueues 3 numrxqueues 3 type veth peer name vproxy-repl-out numtxqueues 3 numrxqueues 3
 \end{lstlisting}
 
-Una volta ridiretti i pacchetti in ingresso da \texttt{wlan1} verso \texttt{vproxy-repl-in} (tramite \texttt{tc redirect}), subentra la necessità dell'azione \texttt{skbedit priority 5}, anticipata nel listato \ref{code:taprio_vproxy}.
+Una volta ridiretti i pacchetti in ingresso da \texttt{wlan1} verso \texttt{vproxy-repl-in} (tramite \texttt{tc redirect}), subentra la necessità dell'azione \texttt{skbedit priority 5}, anticipata nel listato \ref{code:wrap_tc}.
 
 \begin{lstlisting}[
     language=bash,
@@ -1212,7 +1215,29 @@ Una volta ridiretti i pacchetti in ingresso da \texttt{wlan1} verso \texttt{vpro
 \end{lstlisting}
 
 Tramite l'azione \texttt{skbedit}, si va a modificare esplicitamente il campo \texttt{priority} della struttura \texttt{sk\_buff} del kernel, impostandolo a 5. Questa operazione manuale è imprescindibile: il qdisc \texttt{taprio} si basa esclusivamente su questo parametro interno (\texttt{skb->priority}) per assegnare i pacchetti alle corrette \textit{Traffic Class} (TC). Effettuando una ridirezione diretta (tramite l'azione \texttt{mirred}), il pacchetto scavalca i normali percorsi di elaborazione dello stack di rete. In assenza di questo intervento mirato, il valore PCP presente nel tag VLAN originale non verrebbe propagato o mappato automaticamente, privando di fatto \texttt{taprio} delle informazioni necessarie per la schedulazione.
-\\ 
+\\
+La priorità applicativa deve essere trasportata nel campo PCP del tag 802.1Q per
+poter essere riconosciuta dai filtri \texttt{flower} configurati sui Bridge.
+Sul nodo Talker l'interfaccia VLAN \texttt{wlan0.10} viene configurata con una
+\textit{egress QoS map} esplicita, come mostrato nel listato
+\ref{code:talker_egress_qos}. In questo modo la priorità associata al socket
+dall'applicazione (tramite l'opzione \texttt{SO\_PRIORITY}) viene riportata nel
+tag prima dell'invio sul collegamento radio, rendendola così visibile agli altri nodi.
+
+\begin{lstlisting}[
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black!85},
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{code_comment},
+    numbersep=8pt,
+    caption={Mappatura skb->priority verso il campo PCP in uscita dal Talker (scripts/wrapper\_tc.sh)},
+    label={code:talker_egress_qos}
+    ]
+# skb->priority -> PCP nel tag, in uscita dal talker
+ip netns exec talker ip link set dev wlan0.10 type vlan
+    egress-qos-map 3:3 5:5
+\end{lstlisting}
 Infine, attraverso il comando riportato nel listato \ref{code:taprio_qdisc}, si associano le 3 classi di traffico alle rispettive code e si configurano le finestre temporali (Gate Control List) per la trasmissione deterministica.
 
 \begin{lstlisting}[
@@ -1237,9 +1262,9 @@ Infine, attraverso il comando riportato nel listato \ref{code:taprio_qdisc}, si 
 \end{lstlisting}
 
 \subsection{PTP}
-In assenza di hardware dotato di \textit{Physical Hardware Clock} - PHC e capacità di \textit{hardware timestamping}, l'utilizzo di \texttt{ptp4l} richiede che l'interfaccia di rete sia dotata delle \textit{capabilities} \texttt{software-receive} e \texttt{software-transmit}.
+In assenza di hardware dotato di \textit{PTP Hardware Clock} - PHC e capacità di \textit{hardware timestamping}, l'utilizzo di \texttt{ptp4l} richiede che l'interfaccia di rete sia dotata delle \textit{capabilities} \texttt{software-receive} e \texttt{software-transmit}.
 \\
-I dispositivi creati mediante \texttt{mac80211\_hwsim} dispongono unicamente della \textit{capability} \texttt{software-receive}. Tuttavia, come nei casi precedenti, le interfacce \texttt{veth} possiedono entrambe le \textit{capabilities}: risulta quindi sufficiente incapsulare l'interfaccia radio all'interno di una \texttt{veth} per consentirle di comunicare correttamente con il processo \texttt{ptp4l}.
+I dispositivi creati mediante \hwsim dispongono unicamente della \textit{capability} \texttt{software-receive}. Tuttavia, come nei casi precedenti, le interfacce \texttt{veth} possiedono entrambe le \textit{capabilities}: risulta quindi sufficiente incapsulare l'interfaccia radio all'interno di una \texttt{veth} per consentirle di comunicare correttamente con il processo \texttt{ptp4l}.
 \\
 Nella figura \ref{fig:ptp_wrap} è possibile osservare lo schema dell'incapsulamento all'interno del Talker. In modo analogo ai casi precedenti, l'unica differenza risiede nella bidirezionalità della comunicazione: se prima il traffico procedeva dal Talker verso il Listener tramite il percorso FRER e tornava indietro su un percorso dedicato, in questo caso il traffico deve poter viaggiare dal processo \texttt{ptp4l} all'interfaccia \texttt{wlan0} e viceversa.
 
@@ -1311,7 +1336,7 @@ Per validare il corretto funzionamento dell'applicazione XDP FRER sono stati con
     \item Il secondo verifica che, nel caso in cui un collegamento venga meno, l'infrastruttura di comunicazione sia preservata, garantendo l'alta disponibilità del servizio.
 \end{enumerate}
 
-Per il primo test, si faccia riferimento al listato \ref{code:repl-elim}. Una prima fase di inizializzazione registra il valore di partenza del contatore \texttt{xdp\_xmit} sulle due interfacce \texttt{veth-repl} e \texttt{veth-repl-b} (che rappresenta il numero di pacchetti instradati verso le rispettive interfacce dal layer XDP). Successivamente, viene rilevato il valore iniziale dei contatori \textit{Passed} e \textit{Dropped} forniti dal programma XDP.
+Per il primo test, si faccia riferimento al listato \ref{code:repl-elim}. Una prima fase di inizializzazione registra il valore di partenza del contatore \texttt{xdp\_xmit} sulle due interfacce \texttt{veth-repl0} e \texttt{veth-repl1} (che rappresenta il numero di pacchetti instradati verso le rispettive interfacce dal layer XDP). Successivamente, viene rilevato il valore iniziale dei contatori \textit{Passed} e \textit{Dropped} forniti dal programma XDP.
 \\ 
 In seguito, viene effettuata la trasmissione di 10 pacchetti ICMP dal Talker verso il Listener tramite il comando \texttt{ping}, al termine della quale vengono nuovamente campionati i valori dei contatori al fine di poterne effettuare il confronto.
 
@@ -1325,17 +1350,17 @@ In seguito, viene effettuata la trasmissione di 10 pacchetti ICMP dal Talker ver
     caption={Test di replicazione ed eliminazione XDP FRER (test/test\_prototipo.sh)},
     label={code:repl-elim}
     ]
-    A0=$(ip netns exec bridge-repl ethtool -S veth-repl   | awk '/xdp_xmit:/{print $2; exit}')
-    B0=$(ip netns exec bridge-repl ethtool -S veth-repl-b | awk '/xdp_xmit:/{print $2; exit}')
+    A0=$(ip netns exec bridge-repl ethtool -S veth-repl0 | awk '/xdp_xmit:/{print $2; exit}')
+    B0=$(ip netns exec bridge-repl ethtool -S veth-repl1 | awk '/xdp_xmit:/{print $2; exit}')
     P0=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $2}' | tr -dc 0-9) # contatore passed
     D0=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $4}' | tr -dc 0-9) # contatore dropped
     ip netns exec talker ping -c 10 -i 0.3 -W 1 10.0.0.20 | tail -2
     sleep 2
-    A1=$(ip netns exec bridge-repl ethtool -S veth-repl   | awk '/xdp_xmit:/{print $2; exit}')
-    B1=$(ip netns exec bridge-repl ethtool -S veth-repl-b | awk '/xdp_xmit:/{print $2; exit}')
+    A1=$(ip netns exec bridge-repl ethtool -S veth-repl0 | awk '/xdp_xmit:/{print $2; exit}')
+    B1=$(ip netns exec bridge-repl ethtool -S veth-repl1 | awk '/xdp_xmit:/{print $2; exit}')
     P1=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $2}' | tr -dc 0-9) # contatore passed
     D1=$(grep -a 'Passed:' /tmp/frer_elim.log | tail -1 | awk '{print $4}' | tr -dc 0-9) # contatore dropped
-    echo di output..
+    [...]
 \end{lstlisting}
 
 È possibile osservare l'esito di questo test nel listato \ref{code:out-repl-elim}:
@@ -1350,8 +1375,8 @@ In seguito, viene effettuata la trasmissione di 10 pacchetti ICMP dal Talker ver
     caption={Output del test di replicazione ed eliminazione XDP FRER},
     label={code:out-repl-elim}
     ]
-    replicazione  percorso A (veth-repl)   : 10
-    replicazione  percorso B (veth-repl-b) : 10
+    replicazione  percorso A (veth-repl0) : 10
+    replicazione  percorso B (veth-repl1) : 10
     eliminazione  passati al listener      : 10
     eliminazione  duplicati scartati       : 10
 \end{lstlisting}
@@ -1370,13 +1395,13 @@ Nel listato \ref{code:test-rimozione} è presentato lo script che simula la cadu
     caption={Script per il test di rimozione di un percorso XDP FRER (test/test\_prototipo.sh)},
     label={code:test-rimozione}
     ]
-    ip netns exec bridge-repl ip link set veth-repl down
+    ip netns exec bridge-repl ip link set veth-repl0 down
     sleep 1
     A0=$A1; B0=$B1
     ip netns exec talker ping -c 10 -i 0.3 -W 1 10.0.0.20 | tail -2
     sleep 2
-    A1=$(ip netns exec bridge-repl ethtool -S veth-repl   | awk '/xdp_xmit:/{print $2; exit}')
-    B1=$(ip netns exec bridge-repl ethtool -S veth-repl-b | awk '/xdp_xmit:/{print $2; exit}')
+    A1=$(ip netns exec bridge-repl ethtool -S veth-repl0 | awk '/xdp_xmit:/{print $2; exit}')
+    B1=$(ip netns exec bridge-repl ethtool -S veth-repl1 | awk '/xdp_xmit:/{print $2; exit}')
 
     echo di output..
 \end{lstlisting}
@@ -1440,7 +1465,7 @@ Avviando il demone \texttt{ptp4l} sui quattro nodi della topologia, si osserva n
     bridge-elim : selected best master clock 5e2fe8.fffe.b2a260
     talker      : selected best master clock 5e2fe8.fffe.b2a260
     listener    : selected best master clock 5e2fe8.fffe.b2a260
-    # MAC address del bridge-repl: 5e2fe8.fffe.b2a260 
+    # clockIdentity EUI-64 derivata dal MAC: 5e2fe8.fffe.b2a260 
 \end{lstlisting}
 
 Infine, analizzando i log generati dal processo \texttt{ptp4l} sul Listener (listato \ref{code:ptp4-lis-out}), si ha l'ulteriore conferma che lo scambio dei messaggi previsti dal protocollo avviene regolarmente. Il demone identifica il Grandmaster e transita correttamente nello stato \texttt{s0} (\texttt{UNCALIBRATED}); tuttavia, operando in \textit{free running}, non interviene sull'oscillatore di sistema. Di conseguenza, come ampiamente previsto, il loop di controllo non si chiude e parametri come il \textit{master offset}, il \textit{path delay} e la correzione di frequenza (\textit{freq}) fluttuano continuamente senza mai stabilizzarsi.
@@ -1609,9 +1634,7 @@ Lo scenario di test, il cui script di automazione è riportato nel listato \ref{
     echo ">>> parte l'interferenza best effort, a massima velocita'"
     ip netns exec talker python3 tsn_stream.py 10.0.0.20 5001 0 8 0 >/dev/null 2>&1
     echo ">>> interferenza terminata"
-    ..
-    ..
-    ..
+    # [...] attesa del termine dei flussi e arresto dei processi MON/CRIT
     echo "atteso: 80 pacchetti critici per finestra da 4 s"
     echo "--- con taprio ---"
     ip netns exec listener stdbuf -oL python3 tsn_monitor.py 5000 24 4 &
@@ -1627,9 +1650,9 @@ Lo scenario di test, il cui script di automazione è riportato nel listato \ref{
 
 Analizzando l'output riportato nel listato \ref{code:output-test-taprio}, è possibile valutare il comportamento del sistema durante gli 8 secondi in cui viene iniettato il traffico interferente (\textit{background traffic}) a bassa priorità. In entrambi gli scenari si registra fisiologicamente un incremento della latenza e del jitter, ma il confronto diretto evidenzia un paradigma essenziale delle reti TSN: l'importanza cruciale della schedulazione deterministica ai fini dell'affidabilità della comunicazione.
 \\
-Osservando i grafici riportati in Figura \ref{fig:loss_tempo} e \ref{fig:loss_totale}, l'impatto del protocollo \texttt{taprio} risulta evidente e drastico. Con la coda standard \texttt{pfifo\_fast}, il flusso critico subisce immediatamente gli effetti di \textit{starvation} causati dall'enorme mole di pacchetti \textit{best-effort}, arrivando a registrare picchi di \textit{packet loss} superiori al 46\% durante la finestra di congestione, e attestandosi su una perdita complessiva del 15.9\% sull'intero esperimento.
+Osservando i grafici riportati in Figura \ref{fig:loss_tempo} e \ref{fig:loss_totale}, l'impatto del protocollo \texttt{taprio} risulta evidente e drastico. Con la coda standard \texttt{pfifo\_fast}, il flusso critico subisce immediatamente gli effetti di \textit{starvation} causati dall'enorme mole di pacchetti \textit{best-effort}, arrivando a registrare picchi di \textit{packet loss} superiori al 46\% durante la finestra di congestione, e attestandosi su una perdita complessiva del 15,9\% sull'intero esperimento.
 \\
-Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico, assegnandogli finestre di trasmissione (\textit{time slots}) dedicate ed esclusive. Questo rigoroso meccanismo di \textit{gating} protegge i pacchetti ad alta priorità dalla congestione sottostante, abbattendo il picco di perdita all'1.3\% nel momento di massimo stress e riducendo il \textit{packet loss} totale a un trascurabile 0.2\%.
+Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico, assegnandogli finestre di trasmissione (\textit{time slots}) dedicate ed esclusive. Questo rigoroso meccanismo di \textit{gating} protegge i pacchetti ad alta priorità dalla congestione sottostante, abbattendo il picco di perdita all'1,3\% nel momento di massimo stress e riducendo il \textit{packet loss} totale a un trascurabile 0,2\%.
 
 \begin{lstlisting}[
     language=bash,
@@ -1710,9 +1733,9 @@ Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico
         \addlegendentry{Senza TAPRIO (pfifo\_fast)}
 
         % Etichette numeriche sui picchi
-        \node[above] at (axis cs:16, 46.2) {\textbf{46.2\%}};
-        \node[above] at (axis cs:20, 45.0) {\textbf{45.0\%}};
-        \node[below,yshift=-2mm] at (axis cs:16, 1.3) {\textbf{1.3\%}};
+        \node[above] at (axis cs:16, 46.2) {\textbf{46,2\%}};
+        \node[above] at (axis cs:20, 45.0) {\textbf{45,0\%}};
+        \node[below,yshift=-2mm] at (axis cs:16, 1.3) {\textbf{1,3\%}};
 
         \end{axis}
     \end{tikzpicture}
@@ -1738,7 +1761,7 @@ Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico
             xticklabels={TAPRIO (802.1Qbv), pfifo\_fast},
             ymin=0, ymax=20,
             % Aggiunge il valore in percentuale direttamente sopra le barre
-            nodes near coords={\pgfmathprintnumber\pgfplotspointmeta\%},
+            nodes near coords={\pgfmathprintnumber[dec sep={,}]\pgfplotspointmeta\%},
             nodes near coords align={vertical},
             nodes near coords style={font=\bfseries},
             ymajorgrids=true,
@@ -1761,9 +1784,11 @@ Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico
     \label{fig:loss_totale}
 \end{figure}
 \subsection{Conclusioni}
-In conclusione, l'esito positivo dei test condotti permette di validare l'architettura del prototipo nella sua interezza. Nonostante le molteplici sfide implementative derivanti dai vincoli dell'ambiente virtualizzato --- quali l'assenza di code di trasmissione multiple nell'emulatore \texttt{mac80211\_hwsim}, l'impossibilità di sfruttare l'\textit{hardware timestamping} per la convergenza del protocollo PTP e la necessità di ricorrere a complessi incapsulamenti logici per far coesistere l'elaborazione eBPF/XDP con il \textit{Traffic Control} --- i risultati dimostrano la concreta fattibilità dell'estensione dei meccanismi TSN su collegamenti Wi-Fi 7.
+In conclusione, l'esito positivo dei test condotti permette di validare l'architettura del prototipo a livello infrastrutturale. Nonostante le molteplici sfide implementative derivanti dai vincoli dell'ambiente virtualizzato --- quali l'assenza di code di trasmissione multiple nell'emulatore \hwsim, l'obbligo di utilizzare la modalità \textit{free running}, la quale non permette la convergenza del protocollo PTP e la necessità di ricorrere a complessi incapsulamenti logici per far coesistere l'elaborazione eBPF/XDP con il \textit{Traffic Control} --- i risultati dimostrano la concreta fattibilità dell'estensione dei meccanismi TSN su collegamenti Wi-Fi 7.
 \\
-È ragionevole affermare che la trasposizione di questo \textit{proof of concept} su dispositivi di rete fisici, dotati di supporto nativo alle specifiche Wi-Fi 7 e TSN, farebbe decadere la quasi totalità dei \textit{workaround} architetturali resisi necessari in questa sede. L'impiego di NIC (\textit{Network Interface Card}) reali, provviste di \textit{Physical Hardware Clock} indipendenti, code multiple fisiche e implementazioni hardware del sottolivello MAC per la \textit{frame preemption}, non solo snellirebbe drasticamente la configurazione dello stack di rete, ma permetterebbe al sistema di esprimere appieno il proprio potenziale deterministico, confermando la solidità della convergenza IT/OT per gli scenari industriali di nuova generazione.
+È ragionevole affermare che la trasposizione di questo \textit{proof of concept} su dispositivi di rete fisici, dotati di supporto nativo alle specifiche Wi-Fi 7 e TSN, farebbe decadere la quasi totalità dei \textit{workaround} architetturali resisi necessari in questa sede. L'impiego di NIC (\textit{Network Interface Card}) reali, provviste di \textit{PTP Hardware Clock} indipendenti e code multiple fisiche, snellirebbe drasticamente la configurazione dello stack di rete, permettendo al sistema di esprimere appieno il proprio potenziale deterministico e confermando la solidità della convergenza IT/OT per gli scenari industriali di nuova generazione.
+\\
+Va tuttavia osservato che l'assenza di \textit{frame preemption} non è una limitazione dell'emulatore \hwsim, bensì un vincolo intrinseco delle interfacce radio in generale.
 
 \chapter*{Riferimenti bibliografici}
 \addcontentsline{toc}{chapter}{Riferimenti bibliografici}
@@ -1812,7 +1837,7 @@ Le \textit{virtual Ethernet} (\texttt{veth}) sono interfacce di rete virtuali fo
 ip link add <veth-a> type veth peer name <veth-b>
 \end{lstlisting}
 
-È inoltre possibile specificare, in fase di creazione, il numero di code di trasmissione e ricezione (\texttt{numtxqueues}/\texttt{numrxqueues}), caratteristica sfruttata nel prototipo per emulare il supporto a code multiple non disponibile sulle interfacce radio emulate. Le interfacce \texttt{veth} supportano inoltre l'offloading di programmi eBPF/XDP e possono essere utilizzate in combinazione con il sottosistema \texttt{tc} per redirigere e manipolare il traffico tra namespace differenti.
+È inoltre possibile specificare, in fase di creazione, il numero di code di trasmissione e ricezione (\texttt{numtxqueues}/\texttt{numrxqueues}), caratteristica sfruttata nel prototipo per emulare il supporto a code multiple non disponibile sulle interfacce radio emulate. Le interfacce \texttt{veth} supportano in maniera nativa programmi eBPF/XDP e possono essere utilizzate in combinazione con il sottosistema \texttt{tc} per redirigere e manipolare il traffico tra namespace differenti.
 
 \section{network namespace}
 \label{subsec:namespaces}

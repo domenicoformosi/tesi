@@ -1,19 +1,18 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'tesi.blg'
-[42] biber-darwin:340> INFO - === Fri Jul 24, 2026, 12:50:01
+[41] biber-darwin:340> INFO - === Tue Jul 28, 2026, 08:10:37
 [51] Biber.pm:419> INFO - Reading 'tesi.bcf'
-[99] Biber.pm:979> INFO - Found 28 citekeys in bib section 0
-[106] Biber.pm:4419> INFO - Processing section 0
-[112] Biber.pm:4610> INFO - Looking for bibtex file 'refs.bib' for section 0
-[113] bibtex.pm:1713> INFO - LaTeX decoding ...
-[126] bibtex.pm:1519> INFO - Found BibTeX data source 'refs.bib'
-[235] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
-[235] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[235] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'it-IT'
-[235] Biber.pm:4245> INFO - No sort tailoring available for locale 'it-IT'
-[255] bbl.pm:660> INFO - Writing 'tesi.bbl' with encoding 'UTF-8'
-[264] bbl.pm:763> INFO - Output to tesi.bbl
-[264] Biber.pm:131> WARN - Possible typo (case mismatch) between datasource keys: 'vlan_tagging' and 'VLAN_tagging' in file 'refs.bib'
-[264] Biber.pm:131> WARN - Duplicate entry key: 'ats_performance' in file 'refs.bib', skipping ...
-[264] Biber.pm:131> WARN - BibTeX subsystem: /var/folders/70/hbqsn4vx1d393vfqgnhj74s00000gn/T/biber_tmp_RScE/8fe4c9854184545302f21ebf0d47516c_32135.utf8, line 214, warning: 1 characters of junk seen at toplevel
-[264] Biber.pm:133> INFO - WARNINGS: 3
+[101] Biber.pm:979> INFO - Found 28 citekeys in bib section 0
+[110] Biber.pm:4419> INFO - Processing section 0
+[115] Biber.pm:4610> INFO - Looking for bibtex file 'refs.bib' for section 0
+[117] bibtex.pm:1713> INFO - LaTeX decoding ...
+[134] bibtex.pm:1519> INFO - Found BibTeX data source 'refs.bib'
+[257] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
+[257] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[257] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'it-IT'
+[257] Biber.pm:4245> INFO - No sort tailoring available for locale 'it-IT'
+[288] bbl.pm:660> INFO - Writing 'tesi.bbl' with encoding 'UTF-8'
+[304] bbl.pm:763> INFO - Output to tesi.bbl
+[304] Biber.pm:131> WARN - Possible typo (case mismatch) between datasource keys: 'vlan_tagging' and 'VLAN_tagging' in file 'refs.bib'
+[304] Biber.pm:131> WARN - Duplicate entry key: 'ats_performance' in file 'refs.bib', skipping ...
+[305] Biber.pm:133> INFO - WARNINGS: 2
