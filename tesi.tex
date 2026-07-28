@@ -92,7 +92,8 @@
 \addbibresource{refs.bib}  
 
 \newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
-\newcommand{\hwsim}{\mbox{\texttt{mac80211\_hwsim}}}
+\usepackage{xspace}
+\newcommand{\hwsim}{\mbox{\texttt{mac80211\_hwsim}}\xspace}
 
 \usepackage{pdfpages}
 
@@ -1073,7 +1074,7 @@ L'implementazione del prototipo si basa su un insieme di assunzioni:
     \item Il prototipo sfrutta emulazione di hardware Wi-Fi 7 tramite \hwsim, modulo kernel citato nella sezione \ref{sec: stack80211}. 
     \\
     Questo approccio permette di dimostrare la fattibilità a livello infrastrutturale, mostrando che i vari protocolli possono lavorare insieme; ha però richiesto di accettare dei compromessi in termini di prestazioni e funzionalità
-    \item Le tecniche di isolazione della rete utilizzate vincolano l'intera infrastruttura ad avere un unico kernel ed un unico dominio di clock
+    \item Le tecniche di isolamento della rete utilizzate vincolano l'intera infrastruttura ad avere un unico kernel ed un unico dominio di clock
 \end{itemize}
 
 Per un'analisi più dettagliata delle conseguenze causate dall'emulazione hardware e dalla presenza di un unico kernel si veda la sezione \ref{sec:emulazione_prezzo_da_pagare}.
@@ -1086,9 +1087,9 @@ Nello specifico verranno implementati i protocolli:
     \item TAS mediante il comando \texttt{tc} e la \textit{queueing discipline} \texttt{taprio}
     \item FRER mediante l'implementazione sperimentale XDP FRER \cite{xdp}
 \end{itemize}
-La topologia di rete del prototipo, mostrata in figura \ref{fig:topologia_prototipo},  prevede che i collegamenti mediante Wi-Fi 7 siano quelli tra il \texttt{talker} e \texttt{bridge-repl}, ed il \texttt{listener} ed il \texttt{bridge-elim}, i due bridge sono connessi tra loro tramite un \texttt{veth} \ref{subsec:veth}.
+La topologia di rete del prototipo, mostrata in figura \ref{fig:topologia_prototipo},  prevede che i collegamenti mediante Wi-Fi 7 siano quelli tra il \texttt{talker} e \texttt{bridge-repl}, ed il \texttt{listener} ed il \texttt{bridge-elim}, i due bridge sono connessi tra loro tramite una \texttt{veth} (per approfondimenti su questa tecnologia si veda l'appendice \ref{subsec:veth}).
 
-Le interfacce di rete Wi-Fi 7 sono emulate tramite il modulo \hwsim e iniettate nei diversi \textit{network namespaces} \ref{subsec:namespaces}, sulla quale verranno utilizzati i tool \texttt{wpa\_supplicant} e \texttt{hostapd} per gestire rispettivamente stazioni client - STA e access point - AP. Per un approfondimento sulla configurazione dei due tool si veda l'appendice \ref{Appendice:config-wifi}.
+Le interfacce di rete Wi-Fi 7 sono emulate tramite il modulo \hwsim e iniettate nei diversi \textit{network namespaces} (per approfondimenti su questa tecnologia si veda l'appendice \ref{subsec:namespaces}), sulla quale verranno utilizzati i tool \texttt{wpa\_supplicant} e \texttt{hostapd} per gestire rispettivamente stazioni client - STA e access point - AP. Per un approfondimento sulla configurazione dei due tool si veda l'appendice \ref{Appendice:config-wifi}.
 
 
 \begin{center}
@@ -1105,11 +1106,13 @@ Le motivazioni dietro questa scelta risiedono nel livello di astrazione introdot
 \\ 
 I network namespace forniscono uno spazio dei nomi isolato per interfacce di rete, socket e tabelle di routing, permettendo di lavorare in maniera più granulare sullo stack di rete. In entrambi i casi (namespace e container), tutte le entità condividono lo stesso kernel e lo stesso dominio di clock; ciò comporta che la sincronizzazione temporale non sarà valutabile dal punto di vista dell'accuratezza dei risultati, ma assumerà una valenza puramente infrastrutturale per il prototipo. Lo stesso limite concettuale si applica alle tecniche di schedulazione del traffico.
 \\
-Infine, è importante sottolineare i vincoli intrinseci nati dall'emulazione dell'hardware Wi-Fi 7: una NIC Wi-Fi 7 fisica può esporre diverse code hardware sulle quali il kernel andrà a depositare i pacchetti, e sarà poi la NIC stessa a implementare le funzioni del livello MAC e del livello fisico, come ad esempio la \textit{frame preemption}. La presenza di code multiple, come discusso nel capitolo \ref{chap:cap1}, è fondamentale per le tecniche di schedulazione del traffico, poiché permette di suddividerlo in diverse classi gestite secondo logiche deterministiche.
+Infine, è importante sottolineare i vincoli intrinseci nati dall'emulazione dell'hardware Wi-Fi 7: una NIC Wi-Fi 7 fisica può esporre diverse code hardware sulle quali il kernel andrà a depositare i pacchetti, e sarà poi la NIC stessa a implementare le funzioni del livello MAC e del livello fisico.
 \\
-Andando ad emulare un dispositivo Wi-Fi 7, nello specifico utilizzando \hwsim, non si ha a disposizione un hardware virtuale dotato di code multiple, rendendo di fatto impossibile, \textit{senza ricorrere ad accorgimenti ad-hoc}, l'utilizzo di \textit{qdisic} come \texttt{taprio}.
+La presenza di code multiple, come discusso nel capitolo \ref{chap:cap1}, è fondamentale per le tecniche di schedulazione del traffico, poiché permette di suddividerlo in diverse classi gestite secondo logiche deterministiche.
+
+Andando ad emulare un dispositivo Wi-Fi 7, nello specifico utilizzando \hwsim, non si ha a disposizione un hardware virtuale dotato di code multiple, rendendo di fatto impossibile, \textit{senza ricorrere ad accorgimenti ad-hoc}, l'utilizzo di \textit{qdisc} come \texttt{taprio}.
 \\
-Inoltre, non sarà possibile implementare le tecniche di \textit{frame preemption} viste in \ref{subsec:frame_prempt}, in quanto il dispositivo emulato utilizza dei loopback virtuali per comunicare e non possiede un livello MAC effettivo (non sono disponibili i sottolivelli MAC Merge Layer, pMAC ed eMAC).
+Inoltre, non sarà possibile implementare le tecniche di \textit{frame preemption} viste in \ref{subsec:frame_prempt}, in quanto il dispositivo emulato utilizza dei loopback virtuali per comunicare e non possiede un livello MAC effettivo (non sono disponibili i sottolivelli MAC Merge Layer, pMAC ed eMAC), va tuttavia osservato che l'assenza di \textit{frame preemption} non è una solamente una limitazione dell'emulatore \hwsim, bensì un vincolo intrinseco delle interfacce radio in generale.
 \\
 Nelle sezioni successive verranno presentate, per ogni protocollo implementato, le problematiche riscontrate in fase di progettazione e le rispettive soluzioni architetturali, evidenziando come alcune di queste operino in sinergia.
 
@@ -1143,7 +1146,7 @@ Come è possibile osservare nel listato \ref{code:xdp},
     }
 \end{lstlisting}
 
-se il programma XDP riceve un \texttt{sk\_buff}\footnote{La struttura dati principale utilizzata nel kernel Linux per rappresentare un pacchetto di rete.} non lineare, tenta di ripristinarlo richiamando il metodo \texttt{netif\_skb\_check\_for\_xdp(pskb, xdp\_prog)}; in caso di fallimento, il pacchetto subisce un \texttt{drop}.
+se il programma XDP, in modalità \texttt{XDP\_MODE\_SKB}, riceve un \texttt{sk\_buff}\footnote{La struttura dati principale utilizzata nel kernel Linux per rappresentare un pacchetto di rete.} non lineare, tenta di ripristinarlo richiamando il metodo \texttt{netif\_skb\_check\_for\_xdp(pskb, xdp\_prog)}; in caso di fallimento, il pacchetto subisce un \texttt{drop}.
 \\
 I dispositivi Wi-Fi, specialmente quelli in grado di aggregare molti MPDU in un unico frame, utilizzano un approccio di accesso alla memoria di tipo \textit{Scatter/Gather}, il quale dà vita nativamente a \texttt{sk\_buff} non lineari. Durante i test effettuati, si è dimostrato empiricamente che la procedura di ripristino o linearizzazione di questi \texttt{sk\_buff} fallisce sistematicamente.
 \\
@@ -1318,7 +1321,7 @@ La necessità di utilizzare una \texttt{veth} dedicata esclusivamente allo scamb
 \\
 Infine, il fatto che tutte le entità emulate condividano il medesimo dominio di clock (quello del sistema host) solleva una problematica fondamentale: \texttt{ptp4l} non può e non deve assolvere alla sua funzione primaria, ovvero \textbf{correggere} l'orologio locale. 
 \\
-Sebbene il processo possa tecnicamente applicare tali correzioni (come dimostrabile in scenari di test isolati), in una topologia complessa gli interventi effettuati da un nodo andrebbero ad alterare l'orologio letto contemporaneamente dagli altri. Questo fenomeno di interferenza (\textit{clock fighting}) rende instabile il loop di controllo interno al protocollo, che faticherebbe a convergere e rischierebbe di rimanere bloccato in uno stato \texttt{UNCALIBRATED}. 
+Sebbene il processo possa tecnicamente applicare tali correzioni (come osservato nello scenario isolato presentato in sezione \ref{section:esempio_ptp}), in una topologia complessa gli interventi effettuati da un nodo andrebbero ad alterare l'orologio letto contemporaneamente dagli altri. Questo fenomeno di interferenza (\textit{clock fighting}) rende instabile il loop di controllo interno al protocollo, che faticherebbe a convergere e rischierebbe di rimanere bloccato in uno stato \texttt{UNCALIBRATED}. 
 \\
 Per garantire la stabilità dell'emulazione, la soluzione architetturale adottata è configurare \texttt{ptp4l} in modalità \texttt{free\_running 1}: in questo modo il demone disabilita le correzioni attive del clock, ma il protocollo continua a operare normalmente, scambiando regolarmente i messaggi ed eleggendo il Grandmaster tramite l'algoritmo BMCA.
 \subsection{Unidirezionalità}
@@ -1620,6 +1623,7 @@ Lo scenario di test, il cui script di automazione è riportato nel listato \ref{
     caption={Avvio dei test con e senza taprio (test/test\_prototipo.sh)},
     label={code:test-taprio}
     ]
+    # collo di bottiglia
     ip netns exec bridge-elim tc qdisc replace dev wlan2 root netem rate 10mbit limit 100
 
     echo " --- con pfifo_fast ---"
@@ -1787,8 +1791,7 @@ Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico
 In conclusione, l'esito positivo dei test condotti permette di validare l'architettura del prototipo a livello infrastrutturale. Nonostante le molteplici sfide implementative derivanti dai vincoli dell'ambiente virtualizzato --- quali l'assenza di code di trasmissione multiple nell'emulatore \hwsim, l'obbligo di utilizzare la modalità \textit{free running}, la quale non permette la convergenza del protocollo PTP e la necessità di ricorrere a complessi incapsulamenti logici per far coesistere l'elaborazione eBPF/XDP con il \textit{Traffic Control} --- i risultati dimostrano la concreta fattibilità dell'estensione dei meccanismi TSN su collegamenti Wi-Fi 7.
 \\
 È ragionevole affermare che la trasposizione di questo \textit{proof of concept} su dispositivi di rete fisici, dotati di supporto nativo alle specifiche Wi-Fi 7 e TSN, farebbe decadere la quasi totalità dei \textit{workaround} architetturali resisi necessari in questa sede. L'impiego di NIC (\textit{Network Interface Card}) reali, provviste di \textit{PTP Hardware Clock} indipendenti e code multiple fisiche, snellirebbe drasticamente la configurazione dello stack di rete, permettendo al sistema di esprimere appieno il proprio potenziale deterministico e confermando la solidità della convergenza IT/OT per gli scenari industriali di nuova generazione.
-\\
-Va tuttavia osservato che l'assenza di \textit{frame preemption} non è una limitazione dell'emulatore \hwsim, bensì un vincolo intrinseco delle interfacce radio in generale.
+
 
 \chapter*{Riferimenti bibliografici}
 \addcontentsline{toc}{chapter}{Riferimenti bibliografici}
