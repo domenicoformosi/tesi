@@ -1630,6 +1630,9 @@ Lo scenario di test, il cui script di automazione è riportato nel listato \ref{
     ip netns exec bridge-elim tc qdisc replace dev wlan2 root netem rate 10mbit limit 100
 
     echo " --- con pfifo_fast ---"
+    # Lancia il monitoraggio per indicatori sulle code 
+    bash ./monitor_code.sh > /tmp/tsn_test/qdisc_pfifo.log &
+    QMON_PFIFO=$!
     ip netns exec bridge-repl tc qdisc replace dev vproxy-repl-in root pfifo_fast
     sleep 1
     ip netns exec listener stdbuf -oL python3 tsn_monitor.py 5000 24 4 &
@@ -1644,6 +1647,9 @@ Lo scenario di test, il cui script di automazione è riportato nel listato \ref{
     # [...] attesa del termine dei flussi e arresto dei processi MON/CRIT
     echo "atteso: 80 pacchetti critici per finestra da 4 s"
     echo "--- con taprio ---"
+    # Lancia il monitoraggio per indicatori sulle code 
+    bash ./monitor_code.sh > /tmp/tsn_test/qdisc_taprio.log &
+    QMON=$!
     ip netns exec listener stdbuf -oL python3 tsn_monitor.py 5000 24 4 &
     MON=$!
     sleep 1
@@ -1728,7 +1734,7 @@ TOTALE       ricevuti 385/458   persi 73 (15.9%)
         ]
 
         % Area ombreggiata allungata fino al nuovo ymax (55)
-        \fill [black!10] (axis cs:12,-5) rectangle (axis cs:20,55);
+        \fill [black!10] (axis cs:12,-5) rectangle (axis cs:20,65);
         \node[anchor=north] at (axis cs:16, 63) {\small \textsf{Finestra di Congestione BE}};
 
         % Dati TAPRIO
@@ -1901,6 +1907,223 @@ TOTALE       ricevuti 385/458   persi 73 (15.9%)
     \label{fig:jitter}
 \end{figure}
 
+Per poter apprezzare i vantaggi di un algoritmo come \texttt{taprio} si è deciso di analizzare indicatori più specifici riguardo le code, nello specifico:
+\begin{itemize}
+\item \textbf{Queue Depth}: Indica istantaneamente quanti byte e quanti pacchetti sono fisicamente accodati nella memoria buffer del dispositivo di rete in attesa di poter essere trasmessi o processati dal gate.
+\item \textbf{Packet Drop Rate}: Rappresenta la percentuale o la quantità di pacchetti deliberatamente scartati dal kernel in seguito al raggiungimento della capacità massima della coda (\textit{buffer overflow}), fornendo un riscontro inequivocabile di una condizione di congestione non altrimenti gestibile.
+\item \textbf{Throughput}: Calcolato dinamicamente in bit al secondo.
+\end{itemize}
+
+Nei listati \ref{code:qdisc_taprio} e \ref{code:qdisc_pfifo} è possibile osservare l'output dello script \texttt{test/monitor\_code.sh}.
+
+\begin{lstlisting}[
+language=bash,
+basicstyle=\ttfamily\footnotesize\color{black!85},
+breakatwhitespace=true,
+numbers=left,
+numberstyle=\tiny\color{code_comment},
+numbersep=8pt,
+caption={Output delle metriche di coda con TAPRIO},
+label={code:qdisc_taprio}
+]
+Avvio monitoraggio su vproxy-repl-in (netns: bridge-repl)
+Tempo      | Queue Depth   | Drops | Throughput (bps)
+
+18:21:20   | 0b 0p         | 0     | 0
+18:21:21   | 0b 0p         | 0     | 560
+18:21:22   | 0b 0p         | 0     | 17808
+18:21:23   | 0b 0p         | 0     | 16960
+18:21:24   | 0b 0p         | 0     | 17808
+18:21:25   | 0b 0p         | 0     | 16960
+18:21:26   | 0b 0p         | 0     | 17808
+18:21:27   | 0b 0p         | 0     | 16960
+18:21:28   | 0b 0p         | 0     | 16960
+18:21:29   | 0b 0p         | 0     | 17808
+18:21:31   | 0b 0p         | 0     | 8480
+18:21:32   | 0b 0p         | 0     | 17808
+18:21:33   | 2968b 28p     | 0     | 8340080
+18:21:34   | 2120b 20p     | 0     | 27449248
+18:21:35   | 318b 3p       | 0     | 30936224
+18:21:36   | 1166b 11p     | 0     | 27750288
+18:21:37   | 0b 0p         | 0     | 21657408
+18:21:38   | 1590b 15p     | 0     | 5138368
+18:21:39   | 2862b 27p     | 0     | 30147248
+18:21:40   | 2968b 28p     | 0     | 28353728
+18:21:41   | 0b 0p         | 0     | 14381232
+18:21:42   | 0b 0p         | 0     | 16960
+18:21:43   | 0b 0p         | 0     | 16960
+18:21:44   | 0b 0p         | 0     | 17808
+18:21:45   | 0b 0p         | 0     | 16960
+\end{lstlisting}
+
+\begin{lstlisting}[
+language=bash,
+basicstyle=\ttfamily\footnotesize\color{black!85},
+breakatwhitespace=true,
+numbers=left,
+numberstyle=\tiny\color{code_comment},
+numbersep=8pt,
+caption={Output delle metriche di coda con pfifo\_fast},
+label={code:qdisc_pfifo}
+]
+Avvio monitoraggio su vproxy-repl-in (netns: bridge-repl)
+Tempo      | Queue Depth   | Drops | Throughput (bps)
+
+18:21:46   | 0b 0p         | 0     | 0
+18:21:47   | 0b 0p         | 0     | 0
+18:21:48   | 0b 0p         | 0     | 17808
+18:21:49   | 0b 0p         | 0     | 17808
+18:21:50   | 0b 0p         | 0     | 17296
+18:21:51   | 0b 0p         | 0     | 17808
+18:21:52   | 0b 0p         | 0     | 16960
+18:21:54   | 0b 0p         | 0     | 8480
+18:21:55   | 0b 0p         | 0     | 17808
+18:21:56   | 0b 0p         | 0     | 16960
+18:21:57   | 0b 0p         | 0     | 16960
+18:21:58   | 0b 0p         | 0     | 17808
+18:21:59   | 0b 0p         | 0     | 4240000
+18:22:00   | 0b 0p         | 0     | 12209504
+18:22:01   | 0b 0p         | 0     | 13849536
+18:22:02   | 0b 0p         | 0     | 13459456
+18:22:03   | 0b 0p         | 0     | 10789104
+18:22:04   | 0b 0p         | 0     | 14879856
+18:22:05   | 0b 0p         | 0     | 12800048
+18:22:06   | 0b 0p         | 0     | 12325680
+18:22:07   | 0b 0p         | 0     | 5356816
+18:22:08   | 0b 0p         | 0     | 17808
+18:22:09   | 0b 0p         | 0     | 17808
+18:22:10   | 0b 0p         | 0     | 16960
+18:22:11   | 0b 0p         | 0     | 17808
+\end{lstlisting}
+ % ---------------------------------------------------------
+% FIGURA 5: Queue Depth e Throughput nel tempo (Scenario TAPRIO)
+% ---------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            %= AXIS 1: Queue Depth (Asse Y Sinistro) =
+            title={\textbf{Metriche di Coda: Queue Depth e Throughput (TAPRIO)}},
+            xlabel={Tempo di test (s)},
+            ylabel={Queue Depth (Pacchetti)},
+            xmin=0, xmax=26,
+            ymin=-2, ymax=35,
+            xtick={0,4,8,12,16,20,24},
+            ytick={0,5,10,15,20,25,28},
+            axis y line*=left,
+            ymajorgrids=true,
+            grid style=dashed,
+            width=15cm,
+            height=9cm,
+            legend style={at={(0.03,0.95)}, anchor=north west, font=\footnotesize}
+        ]
+
+        % Area di congestione BE
+        \fill [black!10] (axis cs:12,-2) rectangle (axis cs:20,35);
+        \node[anchor=north, font=\small] at (axis cs:16, 33) {\textsf{Finestra di Congestione BE}};
+
+        % Dati Queue Depth (in pacchetti)
+        \addplot[black, thick, mark=*] coordinates {
+            (1,0) (2,0) (3,0) (4,0) (5,0) (6,0) (7,0) (8,0) (9,0) (10,0) 
+            (11,0) (12,0) (13,28) (14,20) (15,3) (16,11) (17,0) (18,15) (19,27) (20,28) 
+            (21,0) (22,0) (23,0) (24,0) (25,0)
+        };
+        \addlegendentry{Queue Depth (p)}
+
+        \end{axis}
+
+        \begin{axis}[
+            %= AXIS 2: Throughput in Mbps (Asse Y Destro) =
+            xlabel={},
+            ylabel={Throughput Aggregato (Mbps)},
+            xmin=0, xmax=26,
+            ymin=0, ymax=35,
+            ytick={0,5,10,15,20,25,30},
+            axis y line*=right,
+            axis x line=none,
+            width=15cm,
+            height=9cm,
+            legend style={at={(0.03,0.78)}, anchor=north west, font=\footnotesize}
+        ]
+
+        % Dati Throughput convertiti in Mbps (divisi per 1e6 per leggibilità)
+        \addplot[black!60, dashed, thick, mark=square*] coordinates {
+            (1,0) (2,0.0005) (3,0.017) (4,0.017) (5,0.017) (6,0.017) (7,0.017) (8,0.017) (9,0.017) (10,0.017) 
+            (11,0.008) (12,0.017) (13,8.34) (14,27.45) (15,30.94) (16,27.75) (17,21.66) (18,5.14) (19,30.15) (20,28.35) 
+            (21,14.38) (22,0.017) (23,0.017) (24,0.018) (25,0.017)
+        };
+        \addlegendentry{Throughput (Mbps)}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Andamento simultaneo della profondità di coda (\textit{Queue Depth}) e del \textit{Throughput} aggregato nello scenario con TAPRIO, evidenziando l'accumulo nei buffer durante la finestra di congestione.}
+    \label{fig:queue_throughput}
+\end{figure}
+% ---------------------------------------------------------
+% FIGURA 6 : Queue Depth e Throughput nel tempo (Scenario pfifo_fast)
+% ---------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            %= AXIS 1: Queue Depth (Asse Y Sinistro) =
+            title={\textbf{Metriche di Coda: Queue Depth e Throughput (pfifo\_fast)}},
+            xlabel={Tempo di test (s)},
+            ylabel={Queue Depth (Pacchetti)},
+            xmin=0, xmax=26,
+            ymin=-2, ymax=35,
+            xtick={0,4,8,12,16,20,24},
+            ytick={0,5,10,15,20,25,28},
+            axis y line*=left,
+            ymajorgrids=true,
+            grid style=dashed,
+            width=15cm,
+            height=9cm,
+            legend style={at={(0.03,0.95)}, anchor=north west, font=\footnotesize}
+        ]
+
+        % Area di congestione BE
+        \fill [black!10] (axis cs:12,-2) rectangle (axis cs:20,35);
+        \node[anchor=north, font=\small] at (axis cs:16, 33) {\textsf{Finestra di Congestione BE}};
+
+        % Dati Queue Depth (sempre a 0 per pfifo_fast)
+        \addplot[black, thick, mark=*] coordinates {
+            (1,0) (2,0) (3,0) (4,0) (5,0) (6,0) (7,0) (8,0) (9,0) (10,0) 
+            (11,0) (12,0) (13,0) (14,0) (15,0) (16,0) (17,0) (18,0) (19,0) (20,0) 
+            (21,0) (22,0) (23,0) (24,0) (25,0)
+        };
+        \addlegendentry{Queue Depth (p)}
+
+        \end{axis}
+
+        \begin{axis}[
+            %= AXIS 2: Throughput in Mbps (Asse Y Destro) =
+            xlabel={},
+            ylabel={Throughput Aggregato (Mbps)},
+            xmin=0, xmax=26,
+            ymin=0, ymax=35,
+            ytick={0,5,10,15,20,25,30},
+            axis y line*=right,
+            axis x line=none,
+            width=15cm,
+            height=9cm,
+            legend style={at={(0.03,0.78)}, anchor=north west, font=\footnotesize}
+        ]
+
+        % Dati Throughput convertiti in Mbps per pfifo_fast
+        \addplot[black!60, dashed, thick, mark=square*] coordinates {
+            (1,0) (2,0) (3,0.017) (4,0.017) (5,0.017) (6,0.017) (7,0.017) (8,0.017) (9,0.017) (10,0.017) 
+            (11,0.008) (12,0.017) (13,4.24) (14,12.21) (15,13.85) (16,13.46) (17,10.79) (18,14.88) (19,12.80) (20,12.33) 
+            (21,5.36) (22,0.017) (23,0.017) (24,0.017) (25,0.017)
+        };
+        \addlegendentry{Throughput (Mbps)}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Andamento simultaneo della profondità di coda (\textit{Queue Depth}) e del \textit{Throughput} nello scenario con coda standard (\textit{pfifo\_fast}), evidenziando l'assenza di accumulo nei buffer locali a causa della mancata schedulazione a monte.}
+    \label{fig:queue_throughput_pfifo}
+\end{figure}
+Dai listati \ref{code:qdisc_taprio} e \ref{code:qdisc_pfifo} e i grafici \ref{fig:queue_throughput} e \ref{fig:queue_throughput_pfifo} sono evidenti i vantaggi apportati da un algoritmo di schedulazione temporale come \texttt{taprio}. L'analisi comparativa dei dati mette in luce come, in presenza dello scheduler basato su finestre temporali (Listato \ref{code:qdisc_taprio}), il sistema gestisca attivamente il traffico in transito: durante la fase di congestione si osserva una variazione controllata della profondità di coda (\textit{Queue Depth}), la quale accumula temporaneamente i pacchetti nei momenti di chiusura del gate producendo picchi di \textit{throughput} aggregato superiori a 30 Mbps. Tali picchi sono direttamente riconducibili ai \textit{burst} di traffico generati nell'istante in cui le porte si aprono ciclicamente nello slot temporale dedicato, rilasciando massicciamente i pacchetti trattenuti in precedenza nel buffer; sebbene i fenomeni di raffica siano generalmente indesiderati, in questo contesto il \textit{burst} risulta del tutto fisiologico, poiché costituisce la conseguenza diretta e voluta del filtraggio temporale imposto dallo scheduler. Al contrario, adoperando la coda standard \textit{First-In, First-Out} (\texttt{pfifo\_fast}, Listato \ref{code:qdisc_pfifo}), l'assenza di un isolamento temporale e di sbarramenti a monte fa sì che il \textit{throughput} rimanga costante e privo di picchi impulsivi, come è possibile apprezzare nel grafico \ref{fig:queue_throughput_pfifo}, poiché i flussi si mescolano senza alcuna forma di regolazione preventiva; ciò mantiene la coda locale costantemente a zero ma trasferisce l'intero onere della congestione sui nodi successivi, con conseguenze critiche in termini di perdita di pacchetti.
 \subsection{Conclusioni}
 In conclusione, l'esito positivo dei test condotti permette di validare l'architettura del prototipo a livello infrastrutturale. Nonostante le molteplici sfide implementative derivanti dai vincoli dell'ambiente virtualizzato --- quali l'assenza di code di trasmissione multiple nell'emulatore \hwsim, l'obbligo di utilizzare la modalità \textit{free running}, la quale non permette la convergenza del protocollo PTP e la necessità di ricorrere a complessi incapsulamenti logici per far coesistere l'elaborazione eBPF/XDP con il \textit{Traffic Control} --- i risultati dimostrano la concreta fattibilità dell'estensione dei meccanismi TSN su collegamenti Wi-Fi 7.
 \\

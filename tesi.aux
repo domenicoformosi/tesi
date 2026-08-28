@@ -313,7 +313,7 @@
 \newlabel{code:test-taprio@cref}{{[listing][19][3]3.19}{[1][54][]54}{}{}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.19}{\ignorespaces Avvio dei test con e senza taprio (test/test\_prototipo.sh)}}{54}{lstlisting.3.19}\protected@file@percent }
 \newlabel{code:output-test-taprio}{{3.20}{56}{Output dei test con e senza taprio}{lstlisting.3.20}{}}
-\newlabel{code:output-test-taprio@cref}{{[listing][20][3]3.20}{[1][55][]56}{}{}{}}
+\newlabel{code:output-test-taprio@cref}{{[listing][20][3]3.20}{[1][56][]56}{}{}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {3.20}{\ignorespaces Output dei test con e senza taprio}}{56}{lstlisting.3.20}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Confronto del packet loss nel tempo tra TAPRIO e coda standard (pfifo\_fast) durante un'iniezione di traffico \textit  {best-effort}.}}{57}{figure.caption.31}\protected@file@percent }
 \newlabel{fig:loss_tempo}{{3.5}{57}{Confronto del packet loss nel tempo tra TAPRIO e coda standard (pfifo\_fast) durante un'iniezione di traffico \textit {best-effort}}{figure.caption.31}{}}
@@ -327,9 +327,21 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Confronto del jitter nel tempo tra TAPRIO e coda standard (pfifo\_fast) durante un'iniezione di traffico \textit  {best-effort}.}}{60}{figure.caption.34}\protected@file@percent }
 \newlabel{fig:jitter}{{3.8}{60}{Confronto del jitter nel tempo tra TAPRIO e coda standard (pfifo\_fast) durante un'iniezione di traffico \textit {best-effort}}{figure.caption.34}{}}
 \newlabel{fig:jitter@cref}{{[figure][8][3]3.8}{[1][59][]60}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Conclusioni}{60}{subsection.3.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{Riferimenti bibliografici}{63}{chapter*.35}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{Appendici}{}{section*.36}\protected@file@percent }
+\newlabel{code:qdisc_taprio}{{3.21}{61}{Output delle metriche di coda con TAPRIO}{lstlisting.3.21}{}}
+\newlabel{code:qdisc_taprio@cref}{{[listing][21][3]3.21}{[1][61][]61}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.21}{\ignorespaces Output delle metriche di coda con TAPRIO}}{61}{lstlisting.3.21}\protected@file@percent }
+\newlabel{code:qdisc_pfifo}{{3.22}{61}{Output delle metriche di coda con pfifo\_fast}{lstlisting.3.22}{}}
+\newlabel{code:qdisc_pfifo@cref}{{[listing][22][3]3.22}{[1][61][]61}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.22}{\ignorespaces Output delle metriche di coda con pfifo\_fast}}{61}{lstlisting.3.22}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Andamento simultaneo della profondità di coda (\textit  {Queue Depth}) e del \textit  {Throughput} aggregato nello scenario con TAPRIO, evidenziando l'accumulo nei buffer durante la finestra di congestione.}}{62}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:queue_throughput}{{3.9}{62}{Andamento simultaneo della profondità di coda (\textit {Queue Depth}) e del \textit {Throughput} aggregato nello scenario con TAPRIO, evidenziando l'accumulo nei buffer durante la finestra di congestione}{figure.caption.35}{}}
+\newlabel{fig:queue_throughput@cref}{{[figure][9][3]3.9}{[1][62][]62}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Andamento simultaneo della profondità di coda (\textit  {Queue Depth}) e del \textit  {Throughput} nello scenario con coda standard (\textit  {pfifo\_fast}), evidenziando l'assenza di accumulo nei buffer locali a causa della mancata schedulazione a monte.}}{63}{figure.caption.36}\protected@file@percent }
+\newlabel{fig:queue_throughput_pfifo}{{3.10}{63}{Andamento simultaneo della profondità di coda (\textit {Queue Depth}) e del \textit {Throughput} nello scenario con coda standard (\textit {pfifo\_fast}), evidenziando l'assenza di accumulo nei buffer locali a causa della mancata schedulazione a monte}{figure.caption.36}{}}
+\newlabel{fig:queue_throughput_pfifo@cref}{{[figure][10][3]3.10}{[1][62][]63}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Conclusioni}{64}{subsection.3.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Riferimenti bibliografici}{65}{chapter*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Appendici}{}{section*.38}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{Appendice \numberline {A}Ambiente docker per test Linux PTP}{}{appendix.1.Alph1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -389,4 +401,4 @@
 \abx@aux@defaultrefcontext{0}{80211overview}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{TSN_group}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{ats}{nyt/global//global/global/global}
-\gdef \@abspage@last{90}
+\gdef \@abspage@last{92}

@@ -49,9 +49,9 @@
 \contentsline {subsection}{\numberline {3.4.1}FRER}{48}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}PTP}{49}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}TAPRIO}{51}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Conclusioni}{60}{subsection.3.4.4}%
-\contentsline {chapter}{Riferimenti bibliografici}{63}{chapter*.35}%
-\contentsline {chapter}{Appendici}{}{section*.36}%
+\contentsline {subsection}{\numberline {3.4.4}Conclusioni}{64}{subsection.3.4.4}%
+\contentsline {chapter}{Riferimenti bibliografici}{65}{chapter*.37}%
+\contentsline {chapter}{Appendici}{}{section*.38}%
 \contentsline {chapter}{Appendice \numberline {A}Ambiente docker per test Linux PTP}{}{appendix.1.Alph1}%
 \contentsline {chapter}{Appendice \numberline {B}Macchina Host e Ambiente}{}{appendix.1.Alph2}%
 \contentsline {chapter}{Appendice \numberline {C}Configurazione strumenti wireless}{}{appendix.1.Alph3}%

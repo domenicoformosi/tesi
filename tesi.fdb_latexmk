@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber tesi"] 1787930730.77297 "tesi.bcf" "tesi.bbl" "tesi" 1787931305.24143 0
+["biber tesi"] 0 "tesi.bcf" "tesi.bbl" "tesi" 1787936774.0801 -1
   "refs.bib" 1787928500.82073 13956 8fa2aae2b4cc58f3d45f192bd4a82494 ""
-  "tesi.bcf" 1787931304.91221 110698 6244eae20d6585eca8b33b78579a6de2 "pdflatex"
+  "tesi.bcf" 1787936773.84839 110698 6244eae20d6585eca8b33b78579a6de2 "pdflatex"
   (generated)
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1787931292.6654 "/home/doddo/Desktop/tesi/latex/tesi/tesi.tex" "tesi.pdf" "tesi" 1787931305.24214 0
+["pdflatex"] 1787936765.04088 "/home/doddo/Desktop/tesi/latex/tesi/tesi.tex" "tesi.pdf" "tesi" 1787936774.08049 0
   "/etc/texmf/web2c/texmf.cnf" 1771408948.30674 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/doddo/Desktop/tesi/latex/tesi/tesi.tex" 1787931280.32754 131971 89ad807481dd1987a76476bb3578e27e ""
+  "/home/doddo/Desktop/tesi/latex/tesi/tesi.tex" 1787936764.77562 143357 1dd4b01506fb58bcdded809a844aca51 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/newpx/px-lms.enc" 1699652218 3877 2ca811886181a05a861d20a35de75e06 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/newpx/zpl_TOsF.enc" 1694207779 2688 c4453cc5ea1d5eadb4ed2ca5fa23d7e7 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc" 1698694482 3136 bbe665bd0bb471a2da1e8fd326cff9fa ""
@@ -321,12 +321,12 @@
   "img/ptp_talker_wrap.png" 1787928500.81628 53805 40b6b0832b23fdbe77628c3484b529f1 ""
   "img/topologia_prototipo.png" 1787928500.81882 482826 64f38522abaf466f64839d8d1d4290d7 ""
   "img/tsn_obiettivi.png" 1787928500.82047 276690 7a4fb5b744655d75ee1162b884e910c1 ""
-  "tesi.aux" 1787931304.89221 37244 d2ccfa2ba9c57c9c5f4599475552650a "pdflatex"
+  "tesi.aux" 1787936773.83539 39409 5a7d38acb29bb63298c788363d5bc1e1 "pdflatex"
   "tesi.bbl" 1787930732.09189 48458 72841204497bfd658ad838a91b5abfa2 "biber tesi"
-  "tesi.out" 1787931304.90321 8338 dd73f818022e89318fb52a4a072f5206 "pdflatex"
-  "tesi.run.xml" 1787931304.91521 2299 710b29bae0eb523c6d22c5fa23de2508 "pdflatex"
-  "tesi.tex" 1787931280.32754 131971 89ad807481dd1987a76476bb3578e27e ""
-  "tesi.toc" 1787931304.91521 5085 9699501f1c20b8199008782e7f212955 "pdflatex"
+  "tesi.out" 1787936773.84439 8338 33045303b8c28edd7335a3ceadb7e853 "pdflatex"
+  "tesi.run.xml" 1787936773.85107 2299 710b29bae0eb523c6d22c5fa23de2508 "pdflatex"
+  "tesi.tex" 1787936764.77562 143357 1dd4b01506fb58bcdded809a844aca51 ""
+  "tesi.toc" 1787936773.85107 5085 c092f364749bdfb4431646f4a3326c64 "pdflatex"
   (generated)
   "tesi.aux"
   "tesi.bcf"
