@@ -1574,9 +1574,11 @@ Il secondo script, \texttt{tsn\_monitor.py} (listato \ref{code:tsn-monitor}), vi
             return
         attesi = max(seq) - min(seq) + 1
         persi  = attesi - len(seq)
+
+        jitter = sum(abs(lat[i] - lat[i-1]) for i in range(1, len(lat))) / (len(lat) - 1) if len(lat) > 1 else 0.0
         print("t=%5.1fs   ricevuti %3d/%3d   persi %3d (%5.1f%%)   min %6.3f  avg %6.3f  max %6.3f  jitter %6.3f  ms"
             % (t, len(seq), attesi, persi, 100.0 * persi / attesi,
-                min(lat), sum(lat) / len(lat), max(lat), max(lat) - min(lat)))
+                min(lat), sum(lat) / len(lat), max(lat), jitter))
 
     inizio   = time.time()
     fine     = inizio + secondi
@@ -1607,6 +1609,7 @@ Il secondo script, \texttt{tsn\_monitor.py} (listato \ref{code:tsn-monitor}), vi
         persi  = attesi - totale
         print("TOTALE       ricevuti %d/%d   persi %d (%.1f%%)"
             % (totale, attesi, persi, 100.0 * persi / attesi))
+
 \end{lstlisting}
 
 Lo scenario di test, il cui script di automazione è riportato nel listato \ref{code:test-taprio}, prevede l'avvio iniziale di un flusso critico ad alta priorità. Successivamente, per simulare una condizione di forte stress di rete, viene iniettato un secondo flusso \textit{best-effort} (a bassa priorità ma ad altissima frequenza di trasmissione), avente lo scopo di saturare il mezzo trasmissivo. Al fine di ottenere un termine di paragone oggettivo, l'esperimento è stato eseguito in due configurazioni distinte: la prima utilizzando l'algoritmo di schedulazione standard \texttt{pfifo\_fast} (la \textit{queuing discipline} di default applicata dal kernel alle interfacce), e la seconda applicando \texttt{taprio}, precedentemente configurato come mostrato nel listato \ref{code:taprio_qdisc}.
@@ -1657,6 +1660,11 @@ Analizzando l'output riportato nel listato \ref{code:output-test-taprio}, è pos
 Osservando i grafici riportati in Figura \ref{fig:loss_tempo} e \ref{fig:loss_totale}, l'impatto del protocollo \texttt{taprio} risulta evidente e drastico. Con la coda standard \texttt{pfifo\_fast}, il flusso critico subisce immediatamente gli effetti di \textit{starvation} causati dall'enorme mole di pacchetti \textit{best-effort}, arrivando a registrare picchi di \textit{packet loss} superiori al 46\% durante la finestra di congestione, e attestandosi su una perdita complessiva del 15,9\% sull'intero esperimento.
 \\
 Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico, assegnandogli finestre di trasmissione (\textit{time slots}) dedicate ed esclusive. Questo rigoroso meccanismo di \textit{gating} protegge i pacchetti ad alta priorità dalla congestione sottostante, abbattendo il picco di perdita all'1,3\% nel momento di massimo stress e riducendo il \textit{packet loss} totale a un trascurabile 0,2\%.
+\\
+Osservando invece i grafici \ref{fig:avg_lat} e \ref{fig:jitter}, relativi rispettivamente alla latenza media e al jitter, non si riscontra un miglioramento significativo a seguito dell'introduzione dello scheduler \texttt{taprio}; al contrario, dal grafico \ref{fig:jitter} emerge persino un lieve peggioramento delle prestazioni.
+\\
+La causa di tali risultati è da ricercarsi, ancora una volta, nei limiti intrinseci dell'ambiente di emulazione puramente software. In un sistema operativo \textit{general-purpose}, quando si esaurisce il quanto di tempo (\textit{time slice}) assegnato al processo incaricato di inviare o ricevere i pacchetti, lo \textit{scheduler} della CPU esegue un \textit{context switch} a favore di un altro processo. Questa sospensione forzata dell'elaborazione di rete introduce ritardi variabili e imprevedibili, che incrementano artificialmente sia la latenza che il jitter misurati.
+
 
 \begin{lstlisting}[
     language=bash,
@@ -1668,29 +1676,28 @@ Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico
     caption={Output dei test con e senza taprio},
     label={code:output-test-taprio}
     ]
-    --- con pfifo_fast ---
-    >>> parte l'interferenza best effort, a massima velocita'
-    >>> interferenza terminata
-    t=  4.0s   ricevuti  61/ 61   persi   0 (  0.0%)   min  0.292  avg  0.574  max  0.793  jitter  0.501  ms
-    t=  8.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.270  avg  0.623  max  1.006  jitter  0.736  ms
-    t= 12.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.278  avg  0.693  max  1.065  jitter  0.787  ms
-    t= 16.0s   ricevuti  43/ 80   persi  37 ( 46.2%)   min  8.500  avg  8.582  max  8.657  jitter  0.157  ms
-    t= 20.0s   ricevuti  44/ 80   persi  36 ( 45.0%)   min  4.562  avg  8.497  max  8.646  jitter  4.084  ms
-    t= 24.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.333  avg  0.679  max  0.846  jitter  0.513  ms
-    TOTALE       ricevuti 385/458   persi 73 (15.9%)
-
     --- con taprio ---
+    t=  4.0s   ricevuti  60/ 60   persi   0 (  0.0%)   min  0.355  avg  0.540  max  0.766  jitter  0.080  ms
+    t=  8.0s   ricevuti  80/ 80   persi   0 (  0.0%)   min  0.388  avg  0.501  max  0.725  jitter  0.070  ms
     >>> parte l'interferenza best effort, a massima velocita'
+    t= 12.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.261  avg  0.517  max  0.772  jitter  0.073  ms
+    t= 16.0s   ricevuti  78/ 79   persi   1 (  1.3%)   min  7.761  avg  8.242  max  8.747  jitter  0.278  ms
+    t= 20.0s   ricevuti  80/ 80   persi   0 (  0.0%)   min  7.902  avg  8.262  max  8.736  jitter  0.258  ms
     >>> interferenza terminata
-    t=  4.0s   ricevuti  60/ 60   persi   0 (  0.0%)   min  0.223  avg  0.667  max  0.850  jitter  0.627  ms
-    t=  8.0s   ricevuti  80/ 80   persi   0 (  0.0%)   min  0.267  avg  0.676  max  0.992  jitter  0.725  ms
-    t= 12.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.240  avg  0.770  max  6.476  jitter  6.236  ms
-    t= 16.0s   ricevuti  78/ 79   persi   1 (  1.3%)   min  7.739  avg  8.263  max  9.176  jitter  1.437  ms
-    t= 20.0s   ricevuti  80/ 80   persi   0 (  0.0%)   min  7.732  avg  8.255  max  9.193  jitter  1.461  ms
-    t= 24.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.276  avg  0.676  max  1.043  jitter  0.767  ms
+    t= 24.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.361  avg  0.483  max  0.645  jitter  0.074  ms
     TOTALE       ricevuti 456/457   persi 1 (0.2%)
-    INVIATI  477 pacchetti con SO_PRIORITY 3  (20 pkt/s)
-    INVIATI  309660 pacchetti con SO_PRIORITY 0  (38708 pkt/s)
+
+
+    --- controllo: stesso test senza taprio (pfifo_fast) ---
+    t=  4.0s   ricevuti  61/ 61   persi   0 (  0.0%)   min  0.261  avg  0.647  max  0.903  jitter  0.076  ms
+    t=  8.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.451  avg  0.691  max  0.845  jitter  0.056  ms
+    >>> parte l'interferenza best effort, a massima velocita'
+    t= 12.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.273  avg  0.784  max  8.610  jitter  0.157  ms
+    t= 16.0s   ricevuti  43/ 80   persi  37 ( 46.2%)   min  8.537  avg  8.598  max  8.629  jitter  0.021  ms
+    t= 20.0s   ricevuti  44/ 80   persi  36 ( 45.0%)   min  8.543  avg  8.599  max  8.654  jitter  0.026  ms
+    >>> interferenza terminata
+    t= 24.0s   ricevuti  79/ 79   persi   0 (  0.0%)   min  0.224  avg  0.365  max  8.597  jitter  0.129  ms
+TOTALE       ricevuti 385/458   persi 73 (15.9%)
 \end{lstlisting}
 
 % ---------------------------------------------------------
@@ -1750,9 +1757,6 @@ Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico
 % ---------------------------------------------------------
 % FIGURA 2: Totale pacchetti persi (Bar Chart)
 % ---------------------------------------------------------
-% ---------------------------------------------------------
-% FIGURA 2: Totale pacchetti persi (Bar Chart)
-% ---------------------------------------------------------
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
@@ -1787,6 +1791,116 @@ Al contrario, l'impiego di \texttt{taprio} isola temporalmente il flusso critico
     \caption{Percentuale complessiva di pacchetti critici persi sull'intero periodo di test.}
     \label{fig:loss_totale}
 \end{figure}
+
+% ---------------------------------------------------------
+% FIGURA 3: Andamento della Latenza Media nel tempo
+% ---------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            title={\textbf{Andamento della Latenza Media nel Tempo}},
+            xlabel={Tempo (s)},
+            ylabel={Latenza Media (ms)},
+            xmin=2, xmax=26,
+            ymin=0, ymax=10.5, % Adattato per i picchi di latenza (~8.6 ms)
+            xtick={4,8,12,16,20,24},
+            ytick={0,2,4,6,8,10},
+            legend pos=north west, 
+            ymajorgrids=true,
+            grid style=dashed,
+            width=16cm,
+            height=12cm,
+            legend style={font=\footnotesize},
+            % Configurazione monocromatica (nero e grigio)
+            cycle list={
+                {black, solid, mark=square*, thick},
+                {black!60, dashed, mark=*, thick}
+            }
+        ]
+
+        % Area ombreggiata allungata fino al nuovo ymax (10.5)
+        \fill [black!10] (axis cs:12,0) rectangle (axis cs:20,10.5);
+        \node[anchor=north] at (axis cs:16, 10.3) {\small \textsf{Finestra di Congestione BE}};
+
+        % Dati TAPRIO (Valori 'avg')
+        \addplot coordinates {
+            (4,0.540) (8,0.501) (12,0.517) (16,8.242) (20,8.262) (24,0.483)
+        };
+        \addlegendentry{Con TAPRIO (802.1Qbv)}
+
+        % Dati pfifo_fast (Valori 'avg')
+        \addplot coordinates {
+            (4,0.647) (8,0.691) (12,0.784) (16,8.598) (20,8.599) (24,0.365)
+        };
+        \addlegendentry{Senza TAPRIO (pfifo\_fast)}
+
+        % Etichette numeriche sui picchi (formattate con la virgola)
+        \node[above] at (axis cs:16, 8.598) {\textbf{8,60 ms}};
+        \node[above] at (axis cs:20, 8.599) {\textbf{8,60 ms}};
+        \node[below,yshift=-2mm] at (axis cs:16, 8.242) {\textbf{8,24 ms}};
+        \node[below,yshift=-2mm] at (axis cs:20, 8.262) {\textbf{8,26 ms}};
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Confronto della latenza media nel tempo tra TAPRIO e coda standard (pfifo\_fast) durante un'iniezione di traffico \textit{best-effort}.}
+    \label{fig:avg_lat}
+\end{figure}
+
+% ---------------------------------------------------------
+% FIGURA 4: Andamento del Jitter nel tempo
+% ---------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            title={\textbf{Andamento del Jitter nel Tempo}},
+            xlabel={Tempo (s)},
+            ylabel={Jitter (ms)},
+            xmin=2, xmax=26,
+            ymin=0, ymax=0.35, % Adattato ai valori del jitter (massimo ~0.28 ms)
+            xtick={4,8,12,16,20,24},
+            ytick={0, 0.1, 0.2, 0.3},
+            legend pos=north west, 
+            ymajorgrids=true,
+            grid style=dashed,
+            width=16cm,
+            height=12cm,
+            legend style={font=\footnotesize},
+            % Configurazione monocromatica (nero e grigio)
+            cycle list={
+                {black, solid, mark=square*, thick},
+                {black!60, dashed, mark=*, thick}
+            }
+        ]
+
+        % Area ombreggiata allungata fino al nuovo ymax (0.35)
+        \fill [black!10] (axis cs:12,0) rectangle (axis cs:20,0.35);
+        \node[anchor=north] at (axis cs:16, 0.34) {\small \textsf{Finestra di Congestione BE}};
+
+        % Dati TAPRIO (Valori 'jitter')
+        \addplot coordinates {
+            (4,0.080) (8,0.070) (12,0.073) (16,0.278) (20,0.258) (24,0.074)
+        };
+        \addlegendentry{Con TAPRIO (802.1Qbv)}
+
+        % Dati pfifo_fast (Valori 'jitter')
+        \addplot coordinates {
+            (4,0.076) (8,0.056) (12,0.157) (16,0.021) (20,0.026) (24,0.129)
+        };
+        \addlegendentry{Senza TAPRIO (pfifo\_fast)}
+
+        % Etichette numeriche sui picchi (formattate con la virgola)
+        \node[above] at (axis cs:16, 0.278) {\textbf{0,28 ms}};
+        \node[above] at (axis cs:20, 0.258) {\textbf{0,26 ms}};
+        \node[above] at (axis cs:12, 0.157) {\textbf{0,16 ms}};
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Confronto del jitter nel tempo tra TAPRIO e coda standard (pfifo\_fast) durante un'iniezione di traffico \textit{best-effort}.}
+    \label{fig:jitter}
+\end{figure}
+
 \subsection{Conclusioni}
 In conclusione, l'esito positivo dei test condotti permette di validare l'architettura del prototipo a livello infrastrutturale. Nonostante le molteplici sfide implementative derivanti dai vincoli dell'ambiente virtualizzato --- quali l'assenza di code di trasmissione multiple nell'emulatore \hwsim, l'obbligo di utilizzare la modalità \textit{free running}, la quale non permette la convergenza del protocollo PTP e la necessità di ricorrere a complessi incapsulamenti logici per far coesistere l'elaborazione eBPF/XDP con il \textit{Traffic Control} --- i risultati dimostrano la concreta fattibilità dell'estensione dei meccanismi TSN su collegamenti Wi-Fi 7.
 \\
