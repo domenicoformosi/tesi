@@ -482,11 +482,6 @@ INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newpx/zpl-Italic-tlf-t1.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newpx/zpl-Italic-tlf-t1.tfm
-INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newpx/zplTLF-Regular-ts1.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/newpx/zpl_TOsF.enc
 INPUT ./tesi.toc
 INPUT ./tesi.toc
 INPUT tesi.toc
@@ -534,6 +529,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy7.tfm
 OUTPUT tesi.toc
+INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newpx/zplTLF-Regular-ts1.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/newpx/zpl_TOsF.enc
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/t1npxtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/t1npxtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newpx/t1npxtt.fd

@@ -195,27 +195,33 @@
 \end{flushright}
 \newpage~\newpage
 \pagenumbering{gobble}
-\chapter*{Abstract}
+\vspace*{-8cm} 
+
+\begin{center}
+    {\Huge\bfseries Abstract\par}
+\end{center}
+
+\enlargethispage{3\baselineskip}
+\vspace*{2cm} 
+\begingroup
 \itshape
-La letteratura economica moderna, in particolare i modelli di crescita endogena, suggerisce che lo sviluppo di lungo periodo di un sistema dipende soprattutto dalla capacità di generare e diffondere innovazione. In questo contesto, le infrastrutture di comunicazione non sono più semplici canali passivi, ma diventano attori centrali nel processo di crescita. \\
-In campi come Industria 4.0 (ma anche automotive,audio/video, sanità ecc..) riscontriamo la necessità di migliorare l'accesso alle informazioni, dato che ciò porta a:
-\begin{itemize}
-    \item Abbassare i costi
-    \item Aumentare l'efficienza
-    \item Garantire sicurezza
-\end{itemize}
 
-Questi sono gli obiettivi principali dei processi di convergenza IT/OT a cui stiamo assistendo oggi, che puntano ad un cambio di paradigma, passando da gerarchia rigide (si veda ISA 95) a modelli “piatti” che favoriscono l'interoperabilità e l'interazione diretta tra i diversi livelli della piramide industriale, e ci permettono di pensare alle informazioni come ad un flusso unico e continuo.
-\\
-Per supportare questa convergenza è necessario far convivere le caratteristiche intrinseche dei due mondi, e gestire aspetti come:
-\begin{itemize}
-    \item La presenza di più flussi di informazioni, ognuno con il proprio grado di “criticità”
-    \item Comunicazione deterministica, e cosa ciò comporta nel “mondo” IT, ricordando che la semantica di comunicazione che prevale nelle reti è di tipo \textit{best-effort}
-\end{itemize}
+L'ultimo decennio è stato caratterizzato dall'avvento della quarta rivoluzione industriale, anche nota come Industria 4.0. Al centro di questo processo innovativo risiede la necessità di integrare il mondo fisico con quello digitale, operando sia in ottica verticale, dai sensori di campo fino ai sistemi gestionali e di pianificazione aziendale, sia in ottica orizzontale, coinvolgendo l'intera catena del valore, dai fornitori alla logistica. 
 
-Nei prossimi capitoli verranno presentate alcune delle tecnologie fondamentali per supportare questa transizione, e come queste possono essere usate in situazioni reali.
+In tale contesto, assume un ruolo da protagonista il concetto di Cyber-Physical System (CPS): le macchine e gli impianti industriali acquisiscono avanzate capacità computazionali e si dotano di una controparte virtuale, il cosiddetto Digital Twin. Questa convergenza consente di sfruttare modelli digitali complessi per simulare, monitorare e ottimizzare i processi produttivi in tempo reale, rendendo le fabbriche intelligenti, flessibili e altamente interconnesse.
+
+Affinché questa visione possa concretizzarsi, la semantica best-effort che ha storicamente caratterizzato le reti di telecomunicazione tradizionali risulta del tutto inadeguata. I moderni scenari industriali impongono requisiti rigorosi in termini di determinismo, comunicazioni real-time (sia hard che soft), elevata affidabilità e sicurezza. 
+
+Attualmente, le tecnologie abilitanti che costituiscono lo standard di riferimento per soddisfare tali vincoli sono il Time-Sensitive Networking (TSN) a livello di infrastruttura di rete e l'OPC UA come modello informativo. Parallelamente, il protocollo 802.11 (Wi-Fi) ha beneficiato di fondamentali aggiornamenti nella sua più recente iterazione, l'802.11be (Wi-Fi 7), nata specificamente per supportare le basse latenze e l'affidabilità richieste dall'Industria 4.0. Tuttavia, le infrastrutture di rete capaci di fondere organicamente i meccanismi deterministici del TSN con la flessibilità del Wi-Fi 7 non rappresentano ancora una realtà consolidata in ambito produttivo. Il presente lavoro di tesi si pone dunque l'obiettivo di colmare questa lacuna nella letteratura scientifica e applicata, dimostrando la fattibilità ingegneristica di un'infrastruttura di rete basata sugli standard TSN operante su protocollo MAC 802.11be. L'intento è di evidenziare le potenzialità di questa convergenza per la creazione di ambienti di produzione resilienti e privi di cablaggi vincolanti, mettendone al contempo in luce gli attuali limiti tecnologici e offrendo una solida base per la ricerca futura.
+
+La fase iniziale del lavoro è stata dedicata a una profonda revisione della letteratura scientifica atta a delineare lo stato dell'arte riguardante l'ecosistema TSN (in particolare gli standard di temporizzazione, schedulazione e ridondanza) e le nuove funzionalità introdotte dal Wi-Fi 7. Acquisite le specifiche teoriche, l'attività si è spostata sulla ricerca e sulla validazione delle tecnologie abilitanti necessarie allo sviluppo di un prototipo funzionante. In questa fase esplorativa sono stati condotti test isolati per verificare il comportamento dei singoli protocolli all'interno di un ambiente di simulazione basato sul kernel Linux. 
+\newpage
+La fase di implementazione vera e propria ha richiesto la definizione architetturale di una topologia di rete complessa, realizzata avvalendosi di namespace di rete per l'isolamento logico dei nodi. Lo sviluppo del prototipo ha comportato il superamento di diversi vincoli, legati principalmente ai limiti intrinseci degli strumenti di emulazione software, come l'assenza di orologi hardware dedicati e la presenza di singole code di trasmissione sulle interfacce wireless virtuali. Per aggirare tali limitazioni, si è ricorso a tecniche di manipolazione dello stack di rete: sono state impiegate interfacce virtuali per allocare code di trasmissione multiple e supportare la schedulazione temporale, mentre la duplicazione e l'eliminazione dei pacchetti previste dagli standard di affidabilità sono state implementate utilizzando logiche custom a basso livello tramite programmazione eBPF/XDP. Infine, il prototipo è stato sottoposto a un'approfondita fase di validazione, iniettando traffico interferente per validare la robustezza dell'isolamento temporale e la stabilità dei percorsi ridondati, analizzando nel dettaglio metriche di accodamento, perdita di pacchetti e latenza.
+
+L'elaborato è strutturato in tre capitoli principali. Nel primo capitolo viene fornito il background teorico necessario e viene illustrato lo stato dell'arte relativo agli standard trattati. Nel secondo capitolo vengono presentate approfonditamente le tecnologie abilitanti utilizzate per l'emulazione, corredate da esempi pratici di funzionamento e studi di fattibilità. Nel terzo e ultimo capitolo viene descritta nel dettaglio l'architettura del prototipo software sviluppato, concludendo con l'esposizione, l'analisi critica e la discussione dei risultati ottenuti durante i test di validazione.
+
+\endgroup
 \normalfont
-
 
 \topmargin=-1cm
 \tableofcontents

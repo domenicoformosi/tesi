@@ -1,15 +1,15 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {chapter}{Introduzione}{1}{chapter*.3}%
+\contentsline {chapter}{Introduzione}{1}{chapter*.2}%
 \contentsline {chapter}{\numberline {1}Caratteristiche e obiettivi di TSN \& Wi-Fi 7}{3}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Sincronizzazione temporale}{3}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Latenza Limitata e 0 perdite causate da congestione}{4}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Algoritmi di accodamento}{5}{subsection.1.2.1}%
-\contentsline {subsubsection}{TAS - Time Aware Shaper}{6}{section*.7}%
-\contentsline {subsubsection}{CBS - Credit Base Shaper}{6}{section*.8}%
-\contentsline {subsubsection}{CQF - Cyclic Queuing Forwarding}{6}{section*.9}%
-\contentsline {subsubsection}{Frame Preemption}{6}{section*.10}%
-\contentsline {subsubsection}{ATS - Asynchronous Traffic Shaping}{8}{section*.13}%
+\contentsline {subsubsection}{TAS - Time Aware Shaper}{6}{section*.6}%
+\contentsline {subsubsection}{CBS - Credit Base Shaper}{6}{section*.7}%
+\contentsline {subsubsection}{CQF - Cyclic Queuing Forwarding}{6}{section*.8}%
+\contentsline {subsubsection}{Frame Preemption}{6}{section*.9}%
+\contentsline {subsubsection}{ATS - Asynchronous Traffic Shaping}{8}{section*.12}%
 \contentsline {section}{\numberline {1.3}Affidabilità}{9}{section.1.3}%
 \contentsline {subsection}{\numberline {1.3.1}FRER - Frame Replication and Elimination for Reliability }{9}{subsection.1.3.1}%
 \contentsline {subsection}{\numberline {1.3.2}PCR - Path Control and Reservation}{10}{subsection.1.3.2}%
@@ -25,18 +25,18 @@
 \contentsline {section}{\numberline {2.1}Stack 802.11}{19}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Mappare servizi TSN in Linux}{22}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Sincronizzazione temporale: Linux PTP}{22}{subsection.2.2.1}%
-\contentsline {subsubsection}{Gerarchie}{22}{section*.22}%
-\contentsline {subsubsection}{Modalità PTP e Scambio di messaggi}{22}{section*.23}%
-\contentsline {subsubsection}{Esempio di configurazione e utilizzo Linux PTP}{24}{section*.25}%
+\contentsline {subsubsection}{Gerarchie}{22}{section*.21}%
+\contentsline {subsubsection}{Modalità PTP e Scambio di messaggi}{22}{section*.22}%
+\contentsline {subsubsection}{Esempio di configurazione e utilizzo Linux PTP}{24}{section*.24}%
 \contentsline {section}{\numberline {2.3}Latenza Limitata e 802.1Q: VLAN, TAPRIO, Frame Preemption}{28}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}tc}{28}{subsection.2.3.1}%
-\contentsline {subsubsection}{Esempio di configurazione taprio tramite tc}{29}{section*.26}%
+\contentsline {subsubsection}{Esempio di configurazione taprio tramite tc}{29}{section*.25}%
 \contentsline {subsection}{\numberline {2.3.2}Frame Preemption}{30}{subsection.2.3.2}%
-\contentsline {subsubsection}{Esempio di configurazione frame preemption tramite tc}{30}{section*.27}%
+\contentsline {subsubsection}{Esempio di configurazione frame preemption tramite tc}{30}{section*.26}%
 \contentsline {section}{\numberline {2.4}Affidabilità: FRER}{31}{section.2.4}%
-\contentsline {subsubsection}{Esempio utilizzo XDP FRER}{32}{section*.28}%
+\contentsline {subsubsection}{Esempio utilizzo XDP FRER}{32}{section*.27}%
 \contentsline {section}{\numberline {2.5}Gestione delle risorse}{34}{section.2.5}%
-\contentsline {subsubsection}{Esempio di utilizzo RESTCONF e modello YAML per configurazione PTP}{35}{section*.29}%
+\contentsline {subsubsection}{Esempio di utilizzo RESTCONF e modello YAML per configurazione PTP}{35}{section*.28}%
 \contentsline {chapter}{\numberline {3}Prototipo}{37}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Obiettivi e assunzioni}{37}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Struttura}{39}{section.3.2}%
@@ -50,8 +50,8 @@
 \contentsline {subsection}{\numberline {3.4.2}PTP}{49}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}TAPRIO}{51}{subsection.3.4.3}%
 \contentsline {subsection}{\numberline {3.4.4}Conclusioni}{64}{subsection.3.4.4}%
-\contentsline {chapter}{Riferimenti bibliografici}{65}{chapter*.37}%
-\contentsline {chapter}{Appendici}{}{section*.38}%
+\contentsline {chapter}{Riferimenti bibliografici}{65}{chapter*.36}%
+\contentsline {chapter}{Appendici}{}{section*.37}%
 \contentsline {chapter}{Appendice \numberline {A}Ambiente docker per test Linux PTP}{}{appendix.1.Alph1}%
 \contentsline {chapter}{Appendice \numberline {B}Macchina Host e Ambiente}{}{appendix.1.Alph2}%
 \contentsline {chapter}{Appendice \numberline {C}Configurazione strumenti wireless}{}{appendix.1.Alph3}%
