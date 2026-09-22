@@ -50,7 +50,11 @@
       \field{eprintclass}{cs.NI}
       \field{eprinttype}{arXiv}
       \field{title}{Time-Sensitive Networking in IEEE 802.11be: On the Way to Low-latency WiFi 7}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{2020}
+      \field{urldateera}{ce}
       \verb{eprint}
       \verb 1912.06086
       \endverb
@@ -196,7 +200,16 @@
       \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Engineering and Technology (IJET)}
+      \field{number}{1}
       \field{title}{Software Defined Networking for Organizations Network Automation}
+      \field{volume}{11}
+      \field{year}{2019}
+      \field{pages}{110\bibrangedash 113}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.21817/ijet/2019/v11i1/191101023
+      \endverb
     \endentry
     \entry{xdp}{misc}{}
       \name{author}{4}{}{%
@@ -308,7 +321,11 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Experimental Study of a Low-Delay Ethernet Switch for Real Time Networks}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{2015}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://api.semanticscholar.org/CorpusID:204791926
       \endverb
@@ -362,6 +379,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Configuring TSN Qdiscs}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://tsn.readthedocs.io/qdiscs.html
       \endverb
@@ -387,6 +408,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Configuring VLAN Interfaces}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://tsn.readthedocs.io/vlan.html
       \endverb
@@ -426,7 +451,7 @@
       \field{pages}{314\bibrangedash 329}
       \range{pages}{16}
     \endentry
-    \entry{8021Qci}{article}{}
+    \entry{8021Qci}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=ebd7fd91e29f13f47941c3f0d4c92975}{%
            family={Mahamid},
@@ -444,17 +469,55 @@
            given={Kilian},
            giveni={K\bibinitperiod}}}%
       }
+      \name{editor}{3}{}{%
+        {{hash=8d4a470562f976d64486a25768467b84}{%
+           family={Carle},
+           familyi={C\bibinitperiod},
+           given={Georg},
+           giveni={G\bibinitperiod}}}%
+        {{hash=7e4b7964c876a60c132ebe3758aa4081}{%
+           family={Günther},
+           familyi={G\bibinitperiod},
+           given={Stephan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ace9adbb9f062063f995c28ba9c4bca3}{%
+           family={Jaeger},
+           familyi={J\bibinitperiod},
+           given={Benedikt},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{organization}{2}{%
+        {Chair of Network Architectures}%
+        {Services, Department of Computer Science, Technical University of Munich}%
+      }
       \strng{namehash}{ffa8dc6b5b65d339824c22de79dbd75f}
       \strng{fullhash}{dd614641ecdcf709df1d6224273845ea}
       \strng{bibnamehash}{dd614641ecdcf709df1d6224273845ea}
       \strng{authorbibnamehash}{dd614641ecdcf709df1d6224273845ea}
       \strng{authornamehash}{ffa8dc6b5b65d339824c22de79dbd75f}
       \strng{authorfullhash}{dd614641ecdcf709df1d6224273845ea}
+      \strng{editorbibnamehash}{307eaaaab3c4671b8a5cb9e45c422e5a}
+      \strng{editornamehash}{2e406040b17bdb4be1dd204ec37ef1e5}
+      \strng{editorfullhash}{307eaaaab3c4671b8a5cb9e45c422e5a}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Seminar Innovative Internet Technologies and Mobile Communications (IITM), Winter Semester 2020/2021}
       \field{title}{Time Sensitive Networking - 802.1Qci}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{19\bibrangedash 22}
+      \range{pages}{4}
+      \verb{urlraw}
+      \verb https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2021-05-1/NET-2021-05-1_03.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2021-05-1/NET-2021-05-1_03.pdf
+      \endverb
     \endentry
     \entry{frer_algs}{inproceedings}{}
       \name{author}{4}{}{%
@@ -599,6 +662,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Why and How to Use Netlink Socket}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://github.com/mwarning/netlink-examples/blob/master/articles/Why_and_How_to_Use_Netlink_Socket.md
       \endverb
@@ -681,6 +748,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{VLAN Tagging}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://www.computernetworkingnotes.com
       \endverb
@@ -707,6 +778,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Time Synchronization with Linux Precision Time Protocol}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://free5gc.org/blog/20250709/20250709/
       \endverb
@@ -732,17 +807,55 @@
            given={Christoph},
            giveni={C\bibinitperiod}}}%
       }
+      \name{editor}{3}{}{%
+        {{hash=8d4a470562f976d64486a25768467b84}{%
+           family={Carle},
+           familyi={C\bibinitperiod},
+           given={Georg},
+           giveni={G\bibinitperiod}}}%
+        {{hash=7e4b7964c876a60c132ebe3758aa4081}{%
+           family={Günther},
+           familyi={G\bibinitperiod},
+           given={Stephan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ace9adbb9f062063f995c28ba9c4bca3}{%
+           family={Jaeger},
+           familyi={J\bibinitperiod},
+           given={Benedikt},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{organization}{2}{%
+        {Chair of Network Architectures}%
+        {Services, Department of Computer Science, Technical University of Munich}%
+      }
       \strng{namehash}{98cd924c7c4107f5a0bdba7b39fdb62a}
       \strng{fullhash}{a8df64a32e7ac89f3a92898d6620a2d1}
       \strng{bibnamehash}{a8df64a32e7ac89f3a92898d6620a2d1}
       \strng{authorbibnamehash}{a8df64a32e7ac89f3a92898d6620a2d1}
       \strng{authornamehash}{98cd924c7c4107f5a0bdba7b39fdb62a}
       \strng{authorfullhash}{a8df64a32e7ac89f3a92898d6620a2d1}
+      \strng{editorbibnamehash}{307eaaaab3c4671b8a5cb9e45c422e5a}
+      \strng{editornamehash}{2e406040b17bdb4be1dd204ec37ef1e5}
+      \strng{editorfullhash}{307eaaaab3c4671b8a5cb9e45c422e5a}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{IEEE 802.1Qcr Asynchronous Trafﬁc Shaping with Linux Trafﬁc Control}
+      \field{booktitle}{Proceedings of the Seminar Innovative Internet Technologies and Mobile Communications (IITM), Summer Semester 2021}
+      \field{title}{IEEE 802.1Qcr Asynchronous Traffic Shaping with Linux Traffic Control}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \field{pages}{21\bibrangedash 24}
+      \range{pages}{4}
+      \verb{urlraw}
+      \verb https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2022-01-1/NET-2022-01-1_03.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2022-01-1/NET-2022-01-1_03.pdf
+      \endverb
     \endentry
     \entry{architetture}{article}{}
       \name{author}{4}{}{%
@@ -833,9 +946,6 @@
            given={Barry},
            giveni={B\bibinitperiod}}}%
       }
-      \list{location}{1}{%
-        {E-mail: workshop@bgp4all.com}%
-      }
       \strng{namehash}{59a712f2dfcbdb7da657ca5642ad171e}
       \strng{fullhash}{59a712f2dfcbdb7da657ca5642ad171e}
       \strng{bibnamehash}{59a712f2dfcbdb7da657ca5642ad171e}
@@ -846,9 +956,20 @@
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{Workshop Presentation}
-      \field{note}{Licensed under CC BY-NC 4.0. Available at \url{http://www.bgp4all.com}}
+      \field{howpublished}{ISP Workshops, workshop presentation}
+      \field{note}{Licensed under CC BY-NC 4.0}
       \field{title}{Introduction to IS-IS}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.bgp4all.com/pfs/_media/workshops/04-isis-introduction.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.bgp4all.com/pfs/_media/workshops/04-isis-introduction.pdf
+      \endverb
     \endentry
     \entry{vlan_linux_setup_iproute2}{misc}{}
       \name{author}{1}{}{%
@@ -869,6 +990,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Setting Up a VLAN on Linux Using iproute2}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://wafaicloud.com/blog/setting-up-a-vlan-on-linux-using-iproute2/
       \endverb
@@ -893,6 +1018,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Wi-Fi: Overview of the 802.11 Physical Layer}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://download.tek.com/document/37W-29447-2_LR.pdf
       \endverb
@@ -917,6 +1046,10 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Time-Sensitive Networking}
+      \field{urlday}{28}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://1.ieee802.org/tsn/
       \endverb

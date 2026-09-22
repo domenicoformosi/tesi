@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.3 $
+% $ biblatex bbl format version 3.2 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,8 +18,8 @@
 
 
 \refsection{0}
-  \datalist[entry]{nyt/global//global/global/global}
-    \entry{wifi7tsn}{misc}{}{}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{wifi7tsn}{misc}{}
       \name{author}{3}{}{%
         {{hash=25486d63e8db66d82dc8d75c51ccc342}{%
            family={Adame},
@@ -39,12 +39,10 @@
       }
       \strng{namehash}{0e257c7e274907c644b2380bfd1f67e4}
       \strng{fullhash}{abef63b39ca4a1aeca89172fb991f8d1}
-      \strng{fullhashraw}{abef63b39ca4a1aeca89172fb991f8d1}
       \strng{bibnamehash}{abef63b39ca4a1aeca89172fb991f8d1}
       \strng{authorbibnamehash}{abef63b39ca4a1aeca89172fb991f8d1}
       \strng{authornamehash}{0e257c7e274907c644b2380bfd1f67e4}
       \strng{authorfullhash}{abef63b39ca4a1aeca89172fb991f8d1}
-      \strng{authorfullhashraw}{abef63b39ca4a1aeca89172fb991f8d1}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{labelnamesource}{author}
@@ -67,7 +65,7 @@
       \verb https://arxiv.org/abs/1912.06086
       \endverb
     \endentry
-    \entry{str_emlsr}{misc}{}{}
+    \entry{str_emlsr}{misc}{}
       \name{author}{3}{}{%
         {{hash=de5b5a4ff7f001dd7344127a03a12c50}{%
            family={Choorakuzhiyil},
@@ -87,12 +85,10 @@
       }
       \strng{namehash}{2dc40415eda6f93494e5fb82a9e74aee}
       \strng{fullhash}{9740e1548079bba6aaa35127e90ffefa}
-      \strng{fullhashraw}{9740e1548079bba6aaa35127e90ffefa}
       \strng{bibnamehash}{9740e1548079bba6aaa35127e90ffefa}
       \strng{authorbibnamehash}{9740e1548079bba6aaa35127e90ffefa}
       \strng{authornamehash}{2dc40415eda6f93494e5fb82a9e74aee}
       \strng{authorfullhash}{9740e1548079bba6aaa35127e90ffefa}
-      \strng{authorfullhashraw}{9740e1548079bba6aaa35127e90ffefa}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
@@ -105,7 +101,7 @@
       \verb 2501.04149
       \endverb
     \endentry
-    \entry{wifi7_punc}{article}{}{}
+    \entry{wifi7_punc}{article}{}
       \name{author}{8}{}{%
         {{hash=24a2ca4374efd1b3df95fde099b78ed8}{%
            family={Deng},
@@ -150,12 +146,10 @@
       }
       \strng{namehash}{d8a9cded26f62d0c2eabee6a8effd03e}
       \strng{fullhash}{1164b32e98ad578e962799b94c7a746b}
-      \strng{fullhashraw}{1164b32e98ad578e962799b94c7a746b}
       \strng{bibnamehash}{1164b32e98ad578e962799b94c7a746b}
       \strng{authorbibnamehash}{1164b32e98ad578e962799b94c7a746b}
       \strng{authornamehash}{d8a9cded26f62d0c2eabee6a8effd03e}
       \strng{authorfullhash}{1164b32e98ad578e962799b94c7a746b}
-      \strng{authorfullhashraw}{1164b32e98ad578e962799b94c7a746b}
       \field{sortinit}{D}
       \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
       \field{labelnamesource}{author}
@@ -168,7 +162,7 @@
       \field{pages}{2136\bibrangedash 2166}
       \range{pages}{31}
     \endentry
-    \entry{Software_Defined_Networking_for_Organizations_Network_Automation}{article}{}{}
+    \entry{Software_Defined_Networking_for_Organizations_Network_Automation}{article}{}
       \name{author}{5}{}{%
         {{hash=7fa6f2e2deff5b6a1a8ecd731bcb8237}{%
            family={Diaz-Martinez},
@@ -198,12 +192,10 @@
       }
       \strng{namehash}{dd8f8d47da09f7f54f519a4c3b942083}
       \strng{fullhash}{60daa73cbed629327b2a6d89c6575ec1}
-      \strng{fullhashraw}{60daa73cbed629327b2a6d89c6575ec1}
       \strng{bibnamehash}{60daa73cbed629327b2a6d89c6575ec1}
       \strng{authorbibnamehash}{60daa73cbed629327b2a6d89c6575ec1}
       \strng{authornamehash}{dd8f8d47da09f7f54f519a4c3b942083}
       \strng{authorfullhash}{60daa73cbed629327b2a6d89c6575ec1}
-      \strng{authorfullhashraw}{60daa73cbed629327b2a6d89c6575ec1}
       \field{sortinit}{D}
       \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
       \field{labelnamesource}{author}
@@ -219,7 +211,7 @@
       \verb 10.21817/ijet/2019/v11i1/191101023
       \endverb
     \endentry
-    \entry{xdp}{misc}{}{}
+    \entry{xdp}{misc}{}
       \name{author}{4}{}{%
         {{hash=04953427520a9b7b5f377581295d1df6}{%
            family={Fejes},
@@ -244,12 +236,10 @@
       }
       \strng{namehash}{d690ef6254c3d90e839648f5258e63c8}
       \strng{fullhash}{99ba1388bf538eda6cd6a763a69b9c2b}
-      \strng{fullhashraw}{99ba1388bf538eda6cd6a763a69b9c2b}
       \strng{bibnamehash}{99ba1388bf538eda6cd6a763a69b9c2b}
       \strng{authorbibnamehash}{99ba1388bf538eda6cd6a763a69b9c2b}
       \strng{authornamehash}{d690ef6254c3d90e839648f5258e63c8}
       \strng{authorfullhash}{99ba1388bf538eda6cd6a763a69b9c2b}
-      \strng{authorfullhashraw}{99ba1388bf538eda6cd6a763a69b9c2b}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
       \field{labelnamesource}{author}
@@ -262,7 +252,7 @@
       \verb 2312.07152
       \endverb
     \endentry
-    \entry{intro_to_TSN}{article}{}{}
+    \entry{intro_to_TSN}{article}{}
       \name{author}{1}{}{%
         {{hash=9194a85fcddbb15d960602d6a226cba5}{%
            family={Finn},
@@ -272,12 +262,10 @@
       }
       \strng{namehash}{9194a85fcddbb15d960602d6a226cba5}
       \strng{fullhash}{9194a85fcddbb15d960602d6a226cba5}
-      \strng{fullhashraw}{9194a85fcddbb15d960602d6a226cba5}
       \strng{bibnamehash}{9194a85fcddbb15d960602d6a226cba5}
       \strng{authorbibnamehash}{9194a85fcddbb15d960602d6a226cba5}
       \strng{authornamehash}{9194a85fcddbb15d960602d6a226cba5}
       \strng{authorfullhash}{9194a85fcddbb15d960602d6a226cba5}
-      \strng{authorfullhashraw}{9194a85fcddbb15d960602d6a226cba5}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
       \field{labelnamesource}{author}
@@ -294,7 +282,7 @@
       \endverb
       \keyw{Timing;Wireless communication;Upper bound;Standards organizations;Packet loss;Ethernet;Sensitivity analysis}
     \endentry
-    \entry{tsn_exp}{inproceedings}{}{}
+    \entry{tsn_exp}{inproceedings}{}
       \name{author}{5}{}{%
         {{hash=d20762e2d8383c82913d0eb5617b9860}{%
            family={Hotta},
@@ -324,12 +312,10 @@
       }
       \strng{namehash}{4ae5c7c08ebe7aa772f3fb0a01e555b6}
       \strng{fullhash}{20e70e24fc96ca8b4c79aa4a7f85449f}
-      \strng{fullhashraw}{20e70e24fc96ca8b4c79aa4a7f85449f}
       \strng{bibnamehash}{20e70e24fc96ca8b4c79aa4a7f85449f}
       \strng{authorbibnamehash}{20e70e24fc96ca8b4c79aa4a7f85449f}
       \strng{authornamehash}{4ae5c7c08ebe7aa772f3fb0a01e555b6}
       \strng{authorfullhash}{20e70e24fc96ca8b4c79aa4a7f85449f}
-      \strng{authorfullhashraw}{20e70e24fc96ca8b4c79aa4a7f85449f}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
@@ -347,7 +333,7 @@
       \verb https://api.semanticscholar.org/CorpusID:204791926
       \endverb
     \endentry
-    \entry{vlan_tagging}{article}{}{}
+    \entry{vlan_tagging}{article}{}
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
       \field{labeltitlesource}{title}
@@ -361,7 +347,7 @@
       \endverb
       \keyw{IEEE Standards;Local area networks;Metropolitan area networks;Bridge circuits;Media Access Protocol;Bridged Network;IEEE 802.1Q;LAN;local area network;MAC Bridge;metropolitan area network;MSTP;Multiple Spanning Tree Protocol;Rapid Spanning Tree Protocol;RSTP;PBN;Provider Bridged Network;Shortest Path Bridging Protocol;SPB Protocol;Time-Sensitive Networking;TSN;Virtual Bridged Network;virtual LAN;VLAN Bridge}
     \endentry
-    \entry{IEEE802_3br2016}{standard}{}{}
+    \entry{IEEE802_3br2016}{standard}{}
       \list{location}{1}{%
         {New York, NY, USA}%
       }
@@ -375,7 +361,7 @@
       \field{title}{{IEEE} Std 802.3br-2016: {IEEE} Standard for Ethernet -- Amendment 5: Specification and Management Parameters for Interspersing Express Traffic}
       \field{year}{2016}
     \endentry
-    \entry{tsn_qdiscs}{misc}{}{}
+    \entry{tsn_qdiscs}{misc}{}
       \name{author}{1}{}{%
         {{hash=ff97a9fdede09eaf6e1c8ec9f6a61dd5}{%
            family={Intel},
@@ -383,12 +369,10 @@
       }
       \strng{namehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{fullhash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
-      \strng{fullhashraw}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{bibnamehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{authorbibnamehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{authornamehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{authorfullhash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
-      \strng{authorfullhashraw}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \field{extraname}{1}
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
@@ -406,7 +390,7 @@
       \verb https://tsn.readthedocs.io/qdiscs.html
       \endverb
     \endentry
-    \entry{vlan_linux}{misc}{}{}
+    \entry{vlan_linux}{misc}{}
       \name{author}{1}{}{%
         {{hash=ff97a9fdede09eaf6e1c8ec9f6a61dd5}{%
            family={Intel},
@@ -414,12 +398,10 @@
       }
       \strng{namehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{fullhash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
-      \strng{fullhashraw}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{bibnamehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{authorbibnamehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{authornamehash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \strng{authorfullhash}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
-      \strng{authorfullhashraw}{ff97a9fdede09eaf6e1c8ec9f6a61dd5}
       \field{extraname}{2}
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
@@ -437,7 +419,7 @@
       \verb https://tsn.readthedocs.io/vlan.html
       \endverb
     \endentry
-    \entry{congestion_avoidance_and_control}{inproceedings}{}{}
+    \entry{congestion_avoidance_and_control}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=a25d21ec614ebedb82800ec385049ac1}{%
            family={Jacobson},
@@ -453,12 +435,10 @@
       }
       \strng{namehash}{a25d21ec614ebedb82800ec385049ac1}
       \strng{fullhash}{a25d21ec614ebedb82800ec385049ac1}
-      \strng{fullhashraw}{a25d21ec614ebedb82800ec385049ac1}
       \strng{bibnamehash}{a25d21ec614ebedb82800ec385049ac1}
       \strng{authorbibnamehash}{a25d21ec614ebedb82800ec385049ac1}
       \strng{authornamehash}{a25d21ec614ebedb82800ec385049ac1}
       \strng{authorfullhash}{a25d21ec614ebedb82800ec385049ac1}
-      \strng{authorfullhashraw}{a25d21ec614ebedb82800ec385049ac1}
       \field{sortinit}{J}
       \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
       \field{labelnamesource}{author}
@@ -471,7 +451,7 @@
       \field{pages}{314\bibrangedash 329}
       \range{pages}{16}
     \endentry
-    \entry{8021Qci}{inproceedings}{}{}
+    \entry{8021Qci}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=ebd7fd91e29f13f47941c3f0d4c92975}{%
            family={Mahamid},
@@ -512,16 +492,13 @@
       }
       \strng{namehash}{ffa8dc6b5b65d339824c22de79dbd75f}
       \strng{fullhash}{dd614641ecdcf709df1d6224273845ea}
-      \strng{fullhashraw}{dd614641ecdcf709df1d6224273845ea}
       \strng{bibnamehash}{dd614641ecdcf709df1d6224273845ea}
       \strng{authorbibnamehash}{dd614641ecdcf709df1d6224273845ea}
       \strng{authornamehash}{ffa8dc6b5b65d339824c22de79dbd75f}
       \strng{authorfullhash}{dd614641ecdcf709df1d6224273845ea}
-      \strng{authorfullhashraw}{dd614641ecdcf709df1d6224273845ea}
       \strng{editorbibnamehash}{307eaaaab3c4671b8a5cb9e45c422e5a}
       \strng{editornamehash}{2e406040b17bdb4be1dd204ec37ef1e5}
       \strng{editorfullhash}{307eaaaab3c4671b8a5cb9e45c422e5a}
-      \strng{editorfullhashraw}{307eaaaab3c4671b8a5cb9e45c422e5a}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
@@ -542,7 +519,7 @@
       \verb https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2021-05-1/NET-2021-05-1_03.pdf
       \endverb
     \endentry
-    \entry{frer_algs}{inproceedings}{}{}
+    \entry{frer_algs}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=7ca71dda688a610c2fdd2174adc6f974}{%
            family={Maile},
@@ -567,12 +544,10 @@
       }
       \strng{namehash}{f1ad942045b2374e271d29ebd5d16830}
       \strng{fullhash}{89af9bf47bfc52d51bf3223fd3581b92}
-      \strng{fullhashraw}{89af9bf47bfc52d51bf3223fd3581b92}
       \strng{bibnamehash}{89af9bf47bfc52d51bf3223fd3581b92}
       \strng{authorbibnamehash}{89af9bf47bfc52d51bf3223fd3581b92}
       \strng{authornamehash}{f1ad942045b2374e271d29ebd5d16830}
       \strng{authorfullhash}{89af9bf47bfc52d51bf3223fd3581b92}
-      \strng{authorfullhashraw}{89af9bf47bfc52d51bf3223fd3581b92}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
@@ -584,7 +559,7 @@
       \range{pages}{7}
       \keyw{Predictive models;Reliability engineering;Real-time systems;Delays;Safety;Reliability;History;real-time systems;time-sensitive networking;TSN;network reliability;redundancy}
     \endentry
-    \entry{TSN_FTM}{inproceedings}{}{}
+    \entry{TSN_FTM}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=afe0d643f52b5299537b7301ba8a9988}{%
            family={Mohan},
@@ -599,12 +574,10 @@
       }
       \strng{namehash}{dab456d1b4ca98c23a3e4fc4644df5e4}
       \strng{fullhash}{dab456d1b4ca98c23a3e4fc4644df5e4}
-      \strng{fullhashraw}{dab456d1b4ca98c23a3e4fc4644df5e4}
       \strng{bibnamehash}{dab456d1b4ca98c23a3e4fc4644df5e4}
       \strng{authorbibnamehash}{dab456d1b4ca98c23a3e4fc4644df5e4}
       \strng{authornamehash}{dab456d1b4ca98c23a3e4fc4644df5e4}
       \strng{authorfullhash}{dab456d1b4ca98c23a3e4fc4644df5e4}
-      \strng{authorfullhashraw}{dab456d1b4ca98c23a3e4fc4644df5e4}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
@@ -619,7 +592,7 @@
       \endverb
       \keyw{Wireless sensor networks;Protocols;Wireless networks;Time measurement;Production facilities;Synchronization;Multimedia communication}
     \endentry
-    \entry{rtwt}{inproceedings}{}{}
+    \entry{rtwt}{inproceedings}{}
       \name{author}{6}{}{%
         {{hash=6ff1e023ef79a453f58df033e7c92834}{%
            family={Mozaffariahrar},
@@ -654,12 +627,10 @@
       }
       \strng{namehash}{59ee8cb19600bbc902616f40d481908a}
       \strng{fullhash}{00579edf4f1ec2800a192101afab890e}
-      \strng{fullhashraw}{00579edf4f1ec2800a192101afab890e}
       \strng{bibnamehash}{00579edf4f1ec2800a192101afab890e}
       \strng{authorbibnamehash}{00579edf4f1ec2800a192101afab890e}
       \strng{authornamehash}{59ee8cb19600bbc902616f40d481908a}
       \strng{authorfullhash}{00579edf4f1ec2800a192101afab890e}
-      \strng{authorfullhashraw}{00579edf4f1ec2800a192101afab890e}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
@@ -674,7 +645,7 @@
       \endverb
       \keyw{Performance evaluation;Wireless sensor networks;Job shop scheduling;Scalability;Wireless networks;Quality of service;Throughput;Energy efficiency;Internet of Things;Wireless fidelity;R-TWT;Wi-Fi 7;latency;reliability;energy}
     \endentry
-    \entry{netlink}{misc}{}{}
+    \entry{netlink}{misc}{}
       \name{author}{1}{}{%
         {{hash=6e032daa1cfefe54131e4177a92c9a1d}{%
            family={mwarning},
@@ -682,12 +653,10 @@
       }
       \strng{namehash}{6e032daa1cfefe54131e4177a92c9a1d}
       \strng{fullhash}{6e032daa1cfefe54131e4177a92c9a1d}
-      \strng{fullhashraw}{6e032daa1cfefe54131e4177a92c9a1d}
       \strng{bibnamehash}{6e032daa1cfefe54131e4177a92c9a1d}
       \strng{authorbibnamehash}{6e032daa1cfefe54131e4177a92c9a1d}
       \strng{authornamehash}{6e032daa1cfefe54131e4177a92c9a1d}
       \strng{authorfullhash}{6e032daa1cfefe54131e4177a92c9a1d}
-      \strng{authorfullhashraw}{6e032daa1cfefe54131e4177a92c9a1d}
       \field{sortinit}{m}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
@@ -704,7 +673,7 @@
       \verb https://github.com/mwarning/netlink-examples/blob/master/articles/Why_and_How_to_Use_Netlink_Socket.md
       \endverb
     \endentry
-    \entry{ats_performance}{article}{}{}
+    \entry{ats_performance}{article}{}
       \name{author}{7}{}{%
         {{hash=9d9073d789605e510d4e620aecb73f82}{%
            family={Nasrallah},
@@ -744,12 +713,10 @@
       }
       \strng{namehash}{b98e9e47ebd368719ada18f0fe0d6fd8}
       \strng{fullhash}{02847c2d56a7601b47f12beb29c3b8c1}
-      \strng{fullhashraw}{02847c2d56a7601b47f12beb29c3b8c1}
       \strng{bibnamehash}{02847c2d56a7601b47f12beb29c3b8c1}
       \strng{authorbibnamehash}{02847c2d56a7601b47f12beb29c3b8c1}
       \strng{authornamehash}{b98e9e47ebd368719ada18f0fe0d6fd8}
       \strng{authorfullhash}{02847c2d56a7601b47f12beb29c3b8c1}
-      \strng{authorfullhashraw}{02847c2d56a7601b47f12beb29c3b8c1}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
@@ -762,7 +729,7 @@
       \field{pages}{1\bibrangedash 1}
       \range{pages}{1}
     \endentry
-    \entry{VLAN_tagging}{misc}{}{}
+    \entry{VLAN_tagging}{misc}{}
       \name{author}{1}{}{%
         {{hash=3dbfca17e2edc82e6cf23a0ca2be62ec}{%
            family={Notes},
@@ -772,12 +739,10 @@
       }
       \strng{namehash}{3dbfca17e2edc82e6cf23a0ca2be62ec}
       \strng{fullhash}{3dbfca17e2edc82e6cf23a0ca2be62ec}
-      \strng{fullhashraw}{3dbfca17e2edc82e6cf23a0ca2be62ec}
       \strng{bibnamehash}{3dbfca17e2edc82e6cf23a0ca2be62ec}
       \strng{authorbibnamehash}{3dbfca17e2edc82e6cf23a0ca2be62ec}
       \strng{authornamehash}{3dbfca17e2edc82e6cf23a0ca2be62ec}
       \strng{authorfullhash}{3dbfca17e2edc82e6cf23a0ca2be62ec}
-      \strng{authorfullhashraw}{3dbfca17e2edc82e6cf23a0ca2be62ec}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
@@ -794,7 +759,7 @@
       \verb https://www.computernetworkingnotes.com
       \endverb
     \endentry
-    \entry{linux_ptp}{misc}{}{}
+    \entry{linux_ptp}{misc}{}
       \name{author}{1}{}{%
         {{hash=e571e574ae9ec41bb83d9155a336b4ec}{%
            family={Pei-Chi},
@@ -804,12 +769,10 @@
       }
       \strng{namehash}{e571e574ae9ec41bb83d9155a336b4ec}
       \strng{fullhash}{e571e574ae9ec41bb83d9155a336b4ec}
-      \strng{fullhashraw}{e571e574ae9ec41bb83d9155a336b4ec}
       \strng{bibnamehash}{e571e574ae9ec41bb83d9155a336b4ec}
       \strng{authorbibnamehash}{e571e574ae9ec41bb83d9155a336b4ec}
       \strng{authornamehash}{e571e574ae9ec41bb83d9155a336b4ec}
       \strng{authorfullhash}{e571e574ae9ec41bb83d9155a336b4ec}
-      \strng{authorfullhashraw}{e571e574ae9ec41bb83d9155a336b4ec}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{labelnamesource}{author}
@@ -826,7 +789,7 @@
       \verb https://free5gc.org/blog/20250709/20250709/
       \endverb
     \endentry
-    \entry{ats_linux_tc}{inproceedings}{}{}
+    \entry{ats_linux_tc}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=6aa1e9722e062e5e8e69f90771f1b9d8}{%
            family={Pfefferle},
@@ -867,16 +830,13 @@
       }
       \strng{namehash}{98cd924c7c4107f5a0bdba7b39fdb62a}
       \strng{fullhash}{a8df64a32e7ac89f3a92898d6620a2d1}
-      \strng{fullhashraw}{a8df64a32e7ac89f3a92898d6620a2d1}
       \strng{bibnamehash}{a8df64a32e7ac89f3a92898d6620a2d1}
       \strng{authorbibnamehash}{a8df64a32e7ac89f3a92898d6620a2d1}
       \strng{authornamehash}{98cd924c7c4107f5a0bdba7b39fdb62a}
       \strng{authorfullhash}{a8df64a32e7ac89f3a92898d6620a2d1}
-      \strng{authorfullhashraw}{a8df64a32e7ac89f3a92898d6620a2d1}
       \strng{editorbibnamehash}{307eaaaab3c4671b8a5cb9e45c422e5a}
       \strng{editornamehash}{2e406040b17bdb4be1dd204ec37ef1e5}
       \strng{editorfullhash}{307eaaaab3c4671b8a5cb9e45c422e5a}
-      \strng{editorfullhashraw}{307eaaaab3c4671b8a5cb9e45c422e5a}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{labelnamesource}{author}
@@ -897,7 +857,7 @@
       \verb https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2022-01-1/NET-2022-01-1_03.pdf
       \endverb
     \endentry
-    \entry{architetture}{article}{}{}
+    \entry{architetture}{article}{}
       \name{author}{4}{}{%
         {{hash=226a0181db1b8f64cc64fda8f435aad9}{%
            family={Shi},
@@ -922,12 +882,10 @@
       }
       \strng{namehash}{903cadb725558c2e611b8d85dd1b7ba1}
       \strng{fullhash}{38091110d813e03fc4b8dafe97d2da8f}
-      \strng{fullhashraw}{38091110d813e03fc4b8dafe97d2da8f}
       \strng{bibnamehash}{38091110d813e03fc4b8dafe97d2da8f}
       \strng{authorbibnamehash}{38091110d813e03fc4b8dafe97d2da8f}
       \strng{authornamehash}{903cadb725558c2e611b8d85dd1b7ba1}
       \strng{authorfullhash}{38091110d813e03fc4b8dafe97d2da8f}
-      \strng{authorfullhashraw}{38091110d813e03fc4b8dafe97d2da8f}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
@@ -939,7 +897,7 @@
       \field{volume}{12}
       \field{year}{2023}
     \endentry
-    \entry{tsn_sdn}{inproceedings}{}{}
+    \entry{tsn_sdn}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=6cfcba68ee5ff5f6b858faa29fe23d9f}{%
            family={Silva},
@@ -964,12 +922,10 @@
       }
       \strng{namehash}{1906e787ac7ed0861b47dfd2cb539944}
       \strng{fullhash}{255c69a5892a4dfbc666c7756cbfe076}
-      \strng{fullhashraw}{255c69a5892a4dfbc666c7756cbfe076}
       \strng{bibnamehash}{255c69a5892a4dfbc666c7756cbfe076}
       \strng{authorbibnamehash}{255c69a5892a4dfbc666c7756cbfe076}
       \strng{authornamehash}{1906e787ac7ed0861b47dfd2cb539944}
       \strng{authorfullhash}{255c69a5892a4dfbc666c7756cbfe076}
-      \strng{authorfullhashraw}{255c69a5892a4dfbc666c7756cbfe076}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
@@ -977,7 +933,7 @@
       \field{booktitle}{2019 IEEE 22nd International Symposium on Real-Time Distributed Computing (ISORC)}
       \field{title}{On the adequacy of SDN and TSN for Industry 4.0}
     \endentry
-    \entry{isis}{misc}{}{}
+    \entry{isis}{misc}{}
       \name{author}{2}{}{%
         {{hash=e991b67145e464231da48208ba0c50db}{%
            family={Smith},
@@ -992,12 +948,10 @@
       }
       \strng{namehash}{59a712f2dfcbdb7da657ca5642ad171e}
       \strng{fullhash}{59a712f2dfcbdb7da657ca5642ad171e}
-      \strng{fullhashraw}{59a712f2dfcbdb7da657ca5642ad171e}
       \strng{bibnamehash}{59a712f2dfcbdb7da657ca5642ad171e}
       \strng{authorbibnamehash}{59a712f2dfcbdb7da657ca5642ad171e}
       \strng{authornamehash}{59a712f2dfcbdb7da657ca5642ad171e}
       \strng{authorfullhash}{59a712f2dfcbdb7da657ca5642ad171e}
-      \strng{authorfullhashraw}{59a712f2dfcbdb7da657ca5642ad171e}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
@@ -1017,7 +971,7 @@
       \verb https://www.bgp4all.com/pfs/_media/workshops/04-isis-introduction.pdf
       \endverb
     \endentry
-    \entry{vlan_linux_setup_iproute2}{misc}{}{}
+    \entry{vlan_linux_setup_iproute2}{misc}{}
       \name{author}{1}{}{%
         {{hash=f1c3927e3d245932dade653518b182ca}{%
            family={Team},
@@ -1027,12 +981,10 @@
       }
       \strng{namehash}{f1c3927e3d245932dade653518b182ca}
       \strng{fullhash}{f1c3927e3d245932dade653518b182ca}
-      \strng{fullhashraw}{f1c3927e3d245932dade653518b182ca}
       \strng{bibnamehash}{f1c3927e3d245932dade653518b182ca}
       \strng{authorbibnamehash}{f1c3927e3d245932dade653518b182ca}
       \strng{authornamehash}{f1c3927e3d245932dade653518b182ca}
       \strng{authorfullhash}{f1c3927e3d245932dade653518b182ca}
-      \strng{authorfullhashraw}{f1c3927e3d245932dade653518b182ca}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -1049,7 +1001,7 @@
       \verb https://wafaicloud.com/blog/setting-up-a-vlan-on-linux-using-iproute2/
       \endverb
     \endentry
-    \entry{80211overview}{misc}{}{}
+    \entry{80211overview}{misc}{}
       \name{author}{1}{}{%
         {{hash=5b7cebd92f48f197e31d10ea605e9ba4}{%
            family={Tektronix},
@@ -1057,12 +1009,10 @@
       }
       \strng{namehash}{5b7cebd92f48f197e31d10ea605e9ba4}
       \strng{fullhash}{5b7cebd92f48f197e31d10ea605e9ba4}
-      \strng{fullhashraw}{5b7cebd92f48f197e31d10ea605e9ba4}
       \strng{bibnamehash}{5b7cebd92f48f197e31d10ea605e9ba4}
       \strng{authorbibnamehash}{5b7cebd92f48f197e31d10ea605e9ba4}
       \strng{authornamehash}{5b7cebd92f48f197e31d10ea605e9ba4}
       \strng{authorfullhash}{5b7cebd92f48f197e31d10ea605e9ba4}
-      \strng{authorfullhashraw}{5b7cebd92f48f197e31d10ea605e9ba4}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -1079,7 +1029,7 @@
       \verb https://download.tek.com/document/37W-29447-2_LR.pdf
       \endverb
     \endentry
-    \entry{TSN_group}{misc}{}{}
+    \entry{TSN_group}{misc}{}
       \name{author}{1}{}{%
         {{hash=55f18f646d5792d047c73e243bc8c3f3}{%
            family={TSN},
@@ -1087,12 +1037,10 @@
       }
       \strng{namehash}{55f18f646d5792d047c73e243bc8c3f3}
       \strng{fullhash}{55f18f646d5792d047c73e243bc8c3f3}
-      \strng{fullhashraw}{55f18f646d5792d047c73e243bc8c3f3}
       \strng{bibnamehash}{55f18f646d5792d047c73e243bc8c3f3}
       \strng{authorbibnamehash}{55f18f646d5792d047c73e243bc8c3f3}
       \strng{authornamehash}{55f18f646d5792d047c73e243bc8c3f3}
       \strng{authorfullhash}{55f18f646d5792d047c73e243bc8c3f3}
-      \strng{authorfullhashraw}{55f18f646d5792d047c73e243bc8c3f3}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -1109,7 +1057,7 @@
       \verb https://1.ieee802.org/tsn/
       \endverb
     \endentry
-    \entry{ats}{misc}{}{}
+    \entry{ats}{misc}{}
       \name{author}{6}{}{%
         {{hash=c5c81a18ed49fb9cd2015b013d103222}{%
            family={Zhang},
@@ -1144,12 +1092,10 @@
       }
       \strng{namehash}{001f072fc9f30d04210891b9ec7d4684}
       \strng{fullhash}{012557be8c2e740f3889dc4b4403ef92}
-      \strng{fullhashraw}{012557be8c2e740f3889dc4b4403ef92}
       \strng{bibnamehash}{012557be8c2e740f3889dc4b4403ef92}
       \strng{authorbibnamehash}{012557be8c2e740f3889dc4b4403ef92}
       \strng{authornamehash}{001f072fc9f30d04210891b9ec7d4684}
       \strng{authorfullhash}{012557be8c2e740f3889dc4b4403ef92}
-      \strng{authorfullhashraw}{012557be8c2e740f3889dc4b4403ef92}
       \field{sortinit}{Z}
       \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
       \field{labelnamesource}{author}

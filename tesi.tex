@@ -28,10 +28,15 @@
 \usepackage[capitalize,noabbrev]{cleveref}
 \usepackage{soul}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage{setspace}
 
 \usepackage{multirow}
 \usepackage{hyphenat}
 \usepackage{multicol}
+
+% aumentare leggermente l'interlinea SOLO per il corpo dei capitoli
+\usepackage{setspace}
+\usepackage{etoolbox}
 
 
 %start roba script
@@ -98,6 +103,10 @@
 \usepackage{pdfpages}
 
 \begin{document}
+
+
+% (chapter-specific spacing hooks removed due to fragility; `setspace` is loaded above)
+
 % Per spostare i vari elementi più su o più giù gioca con i valori di vspace che ci sono tra uno e l'altro
 \pagestyle{empty}
 \newgeometry{
@@ -117,82 +126,49 @@
 \vspace{10mm}
 
 % \large is 12pt
-{\large{\bf{Dipartimento di }}} 
+{\large{\bf{Dipartimento di Informatica - Scienza e Ingegneria}}} 
 
 \vspace{5mm}
 
 % \Large is 14.4pt
-{\Large{\bf{Corso di Laurea in }}}
+{\Large{\bf{Corso di Laurea in Ingegneria Informatica}}}
 
 \vspace{15mm}
 
-{\Huge{\bf Titolo della tesi }}\\
-\vspace{3mm}
-{\Huge{\bf anche su più}}\\
-\vspace{3mm}
-{\Huge{\bf righe }}\\
-\vspace{3mm}
+{\Huge{\bf TSN over WiFi 7 }}\\
+
 
 \end{center}
 
 \vspace{10mm}
 
 \begin{minipage}[t]{0.40\textwidth}
-{\Large{\bf Relatore: \\ Chiar.mo Prof.\\ Nome Cognome}}
+{\Large{\bf Relatore: Chiar.mo Prof.\\ Paolo Bellavista}}
 
 \vspace{3mm}
 
-{\Large{\bf Correlatore: \\ Chiar.mo Prof.\\ Nome Cognome}}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.40\textwidth}\raggedleft
-{\Large{\bf Presentata da: \\ Nome Cognome}}
+
 \end{minipage}
 
-\vspace{30mm}
+\vspace{100mm}
 
 \rule[0.5cm]{15.8cm}{0.6mm}
 
 \begin{center}
-{\large{\bf Sessione mese anno \\}}
-{\large{\bf Anno Accademico 20xx/20xx\\}}
+{\large{\bf Sessione di ottobre 2026 \\}}
+{\large{\bf Anno Accademico 2025/2026\\}}
 \end{center}
 
 \end{titlepage}
 
 \restoregeometry
-\newpage
-\begin{center}
-    (DA FARE ALLA FINE)\\
-    5 parole chiave per caratterizzare il contenuto della dissertazione:\\ (se non ti piacciono così sparse puoi anche semplicemente scriverle su una riga sola)
-\end{center}
-
-% https://tex.stackexchange.com/questions/26538/words-scattered-randomly-in-on-coverpage
-\begin{tikzpicture}[overlay,remember picture,shift=(current page.center)]
-\pgfmathsetseed{3}
 
 
-\foreach [count=\count] \word in {Parola 1, parola 2, parola 3, parola 4, parola 5} {
-\node [
-    xshift={(mod(\count,3)-1)*(\paperwidth/4)},
-    yshift={(mod(\count,7)-3)*(\paperwidth/6)},
-    xshift=rand*4cm,
-    yshift=rand*2cm,
-    % rotate=rand*35,
-    % opacity=rnd*0.5+0.125,
-    font=\large] {\word};
-}
-\end{tikzpicture}
+
 \newpage
 
 \topmargin=6.5cm
-\begin{flushright}
-\emph{
-\LARGE{La dedica}\\\vspace{2mm}
-\LARGE{anche quella se vuoi}\\\vspace{3mm} 
-\LARGE{su più righe} 
-}
-\end{flushright}
+
 \newpage~\newpage
 \pagenumbering{gobble}
 \vspace*{-8cm} 
@@ -235,6 +211,7 @@ L'elaborato è strutturato in tre capitoli principali. Nel primo capitolo viene 
 
 \pagestyle{plain}
 \setcounter{page}{1}
+\begin{onehalfspace}
 A supportare la maggior parte delle infrastrutture di rete troviamo i protocolli 802.3 e 802.11, ethernet standard e WiFi rispettivamente, protocolli che si occupano di gestire il livello 1 (livello fisico) e il livello 2 (livello di data link) della pila protocollare.
 \\
 attraverso una semantica di comunicazione di tipo \textit{best-effort} essi non forniscono garanzie sulla ricezione dei frame, ma il compito viene delegato ai livelli superiori. 
@@ -263,7 +240,7 @@ Il Precision Time Protocol una volta eletto un GM - Grandmaster, ovvero il dispo
 Per estendere i servizi offerti da 802.1AS in reti wireless sarà necessario l'utilizzo di protocolli come TM - \textit{Timing Measurement}  o FTM - \textit{Fine Timing Measurement} che nascono come standard per misurare con precisione la distanza tra un STA e un AP sfruttando RTT, esistono in letteratura \cite{TSN_FTM} soluzioni che propongono un mapping tra gPTP e FTM. I timestamp ottenuti tramite lo scambio di messaggi IEEE 802.1AS sul lato cablato vengono correlati con le misurazioni del tempo di volo, ToF - \textit{Time of Flight}, effettuate tramite il protocollo FTM sul lato wireless.
 \\
 Questo processo permette di compensare le variazioni del mezzo trasmissivo e di estendere il dominio di sincronizzazione TSN ai nodi mobili.
-\section{Latenza Limitata e 0 perdite causate da congestione}
+\section{Latenza limitata e azzeramento delle perdite causate da congestione}
 Uno degli obiettivi di TSN è quello di garantire bassa latenza e azzerare le perdite di frame causate dal congestionamento della rete, per rispettare questi vincoli si utilizzano diversi meccanismi basati sui concetti di schedulazione,modellazione del traffico e prelazione dei frame. 
 \\
 Se nel paradigma \textit{best-effort} abbiamo una semantica di gestione del medium e dei nodi di inoltro del tipo \emph{“Fai ciò che dice il pacchetto appena lo ricevi”}, \cite{intro_to_TSN} in TSN la necessità di determinismo e affidabilità (si veda la figura \ref{fig:tsn_obiettivi}) porta ad una semantica: \emph{“Fai ciò che dice il pacchetto quando lo dice il pacchetto”}.
@@ -2135,7 +2112,7 @@ In conclusione, l'esito positivo dei test condotti permette di validare l'archit
 \\
 È ragionevole affermare che la trasposizione di questo \textit{proof of concept} su dispositivi di rete fisici, dotati di supporto nativo alle specifiche Wi-Fi 7 e TSN, farebbe decadere la quasi totalità dei \textit{workaround} architetturali resisi necessari in questa sede. L'impiego di NIC (\textit{Network Interface Card}) reali, provviste di \textit{PTP Hardware Clock} indipendenti e code multiple fisiche, snellirebbe drasticamente la configurazione dello stack di rete, permettendo al sistema di esprimere appieno il proprio potenziale deterministico e confermando la solidità della convergenza IT/OT per gli scenari industriali di nuova generazione.
 
-
+\end{onehalfspace}
 \chapter*{Riferimenti bibliografici}
 \addcontentsline{toc}{chapter}{Riferimenti bibliografici}
 \printbibliography[heading=none]
@@ -2204,7 +2181,6 @@ Un'interfaccia di rete può essere spostata da un namespace all'altro tramite il
 
 \end{appendices}
 
-\newpage~\newpage
 \chapter*{Ringraziamenti}
-Grazie a tutti
+Sarebbe impossibile ringraziare tutte le persone che hanno reso questo giorno possibile, questo perché ogni persona che negli ultimi anni ha avuto la pazienza di sopportarmi e supportarmi mi ha permesso di concludere questo percorso, e anche perché probabilmente dimenticherei qualcuno. È però dovuto un grazie a mia madre per avermi sempre sostenuto, anche se raramente hai capito cosa stessi facendo, e in quei casi, comunque, non ne eri particolarmente entusiasta. Un grazie a mia nonna che è il motivo per cui sono qui oggi, che con i suoi modi, talvolta discutibili, mi ha sempre incoraggiato e spronato.
 \end{document}
