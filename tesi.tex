@@ -105,9 +105,6 @@
 \begin{document}
 
 
-% (chapter-specific spacing hooks removed due to fragility; `setspace` is loaded above)
-
-% Per spostare i vari elementi più su o più giù gioca con i valori di vspace che ci sono tra uno e l'altro
 \pagestyle{empty}
 \newgeometry{
     left=20mm,
@@ -125,44 +122,49 @@
 
 \vspace{10mm}
 
-% \large is 12pt
 {\large{\bf{Dipartimento di Informatica - Scienza e Ingegneria}}} 
 
 \vspace{5mm}
 
-% \Large is 14.4pt
 {\Large{\bf{Corso di Laurea in Ingegneria Informatica}}}
 
 \vspace{15mm}
 
-{\Huge{\bf TSN over WiFi 7 }}\\
-
+{\Huge{\bf TSN over WiFi 7}}\par
 
 \end{center}
 
-\vspace{10mm}
+% Spazio elastico che spinge i blocchi sottostanti a ridosso della linea orizzontale
+\vfill
 
-\begin{minipage}[t]{0.40\textwidth}
-{\Large{\bf Relatore: Chiar.mo Prof.\\ Paolo Bellavista}}
-
-\vspace{3mm}
-
-
+\noindent
+\begin{minipage}[b]{0.50\textwidth}
+    {\large{\bf Relatore:}}\\[1mm]
+    {\large{\bf Chiar.mo Prof. Paolo Bellavista}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.45\textwidth}
+    \begin{flushright}
+        {\large{\bf Presentata da:}}\\[1mm]
+        {\large{\bf Domenico Formosi}}
+    \end{flushright}
 \end{minipage}
 
-\vspace{100mm}
+\vspace{4mm}
 
-\rule[0.5cm]{15.8cm}{0.6mm}
+\noindent
+\rule{\textwidth}{0.6mm}
+
+\vspace{4mm}
 
 \begin{center}
-{\large{\bf Sessione di ottobre 2026 \\}}
-{\large{\bf Anno Accademico 2025/2026\\}}
+{\large{\bf Sessione di ottobre 2026}}\\[1.5mm]
+{\large{\bf Anno Accademico 2025/2026}}
 \end{center}
 
 \end{titlepage}
 
 \restoregeometry
-
 
 
 \newpage
