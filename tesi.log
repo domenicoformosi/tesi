@@ -1566,4 +1566,98 @@ File: lstlang1.sty 2024/02/21 1.10 listings language file
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 603.
 LaTeX Font Info:    Font shape `T1/npxtt/m/n' will be
 (Font)              scaled to size 10.0pt on input line 603.
-LaTeX Font Info:    Fon
+LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
+(Font)              scaled to size 6.0pt on input line 604.
+LaTeX Font Info:    Font shape `OT1/zpltlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 604.
+LaTeX Font Info:    Font shape `OT1/zpltlf/m/n' will be
+(Font)              scaled to size 7.3pt on input line 604.
+LaTeX Font Info:    Font shape `OT1/zpltlf/m/n' will be
+(Font)              scaled to size 5.5pt on input line 604.
+
+
+LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 604.
+
+LaTeX Font Info:    Font shape `T1/npxtt/m/it' in size <10> not available
+(Font)              Font shape `T1/npxtt/m/sl' tried instead on input line 605.
+LaTeX Font Info:    Font shape `T1/npxtt/m/sl' will be
+(Font)              scaled to size 10.0pt on input line 605.
+[28{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/newpx/px-lms.enc}] [29] [30]
+Underfull \hbox (badness 10000) in paragraph at lines 719--723
+
+ []
+
+[31]
+Underfull \hbox (badness 10000) in paragraph at lines 736--738
+
+ []
+
+[32] [33]
+Overfull \hbox (7.48508pt too wide) in paragraph at lines 769--770
+[]\T1/npxtt/m/n/12 sched-entry\T1/zpltlf/m/n/12 : Ogni ri-ga de-fi-ni-sce uno slot del-la GCL nel for-ma-to \T1/npxtt/m/n/12 sched-entry
+ []
+
+LaTeX Font Info:    Font shape `T1/npxtt/b/n' in size <10> not available
+(Font)              Font shape `T1/npxtt/bx/n' tried instead on input line 791.
+LaTeX Font Info:    Font shape `T1/npxtt/bx/n' will be
+(Font)              scaled to size 10.0pt on input line 791.
+[34] [35] [36]
+Overfull \hbox (4.1158pt too wide) in paragraph at lines 859--866
+\T1/zpltlf/m/n/12 Mentre \T1/npxtt/m/n/12 nsx xdpfrer -m elim -i enp4s0:55 -i enp7s0:56 -e beth0:20 \T1/zpltlf/m/n/12 si-gni-
+ []
+
+[37] [38] [39] [40] [41] [42
+
+]
+Capitolo 3.
+[43]
+<img/componenti.png, id=812, 774.7344pt x 977.0904pt>
+File: img/componenti.png Graphic file (type png)
+<use img/componenti.png>
+Package pdftex.def Info: img/componenti.png  used on input line 1052.
+(pdftex.def)             Requested size: 341.43437pt x 430.62184pt.
+ [44 <./img/componenti.png>] [45]
+<img/topologia_prototipo.png, id=834, 898.3161pt x 541.3023pt>
+File: img/topologia_prototipo.png Graphic file (type png)
+<use img/topologia_prototipo.png>
+Package pdftex.def Info: img/topologia_prototipo.png  used on input line 1081.
+(pdftex.def)             Requested size: 898.3139pt x 541.30098pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 1082.
+See the caption package documentation for explanation.
+
+[46] [47 <./img/topologia_prototipo.png>]
+Overfull \hbox (33.74362pt too wide) in paragraph at lines 1098--1103
+[]\T1/zpltlf/m/n/12 Andando ad emu-la-re un di-spo-si-ti-vo Wi-Fi 7, nel-lo spe-ci-fi-co uti-liz-zan-do [],
+ []
+
+[48]
+Overfull \hbox (14.43565pt too wide) in paragraph at lines 1105--1109
+\T1/zpltlf/m/n/12 pre-sen-ta-to in fi-gu-ra dal-le cop-pie \T1/npxtt/m/n/12 veth-repl0:veth-elim0\T1/zpltlf/m/n/12 , \T1/npxtt/m/n/12 veth-repl1:veth-elim1\T1/zpltlf/m/n/12 ,
+ []
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/02/21 1.10 listings language file
+) (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
+)
+LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
+(Font)              scaled to size 8.8pt on input line 1134.
+LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
+(Font)              scaled to size 7.3pt on input line 1134.
+ [49] [50] [51] [52]
+<img/ptp_talker_wrap.png, id=920, 1212.53pt x 1019.81pt>
+File: img/ptp_talker_wrap.png Graphic file (type png)
+<use img/ptp_talker_wrap.png>
+Package pdftex.def Info: img/ptp_talker_wrap.png  used on input line 1260.
+(pdftex.def)             Requested size: 256.07741pt x 215.38017pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 1261.
+See the caption package documentation for explanation.
+
+[53 <./img/pt
