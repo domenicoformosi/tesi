@@ -62,16 +62,17 @@ Obiettivo del prototipo realizzato è dimostrare la fattibilità infrastruttural
 Il prototipo è stato sviluppato sapendo che utilizzando un ambeinte di emulazione ci si sarebbe limitati ad un unico dominio di clock ed un unico kernel, le conseguenze sono diverse:
 l'impossibilità di far funzionare appieno il protocollo PTP in quanto si va incontro al clock fighting
 l'impossibilita di effettuare preemption per natura stessa delle interfacce radio
-In figura è possibile notare la struttura del prototipo che prevede un talker, un listener, un bridge di replicazione sulla quale avviene la schedulazione del traffico, ed un bridge di eliminazione; i bridge sono collegati da diversi percorsi per poter testare la resilienza, su ttutti i nodi è presente un'istanza di ptp4l per la sincronizzazione: è possibile osservare la presenza di diverse veth (virtual ethernet interfaces) che hanno il compito di incapsulare le interfacce radio, ciò è stato necessario per diversi motivi:
+In figura è possibile notare la struttura del prototipo che prevede un talker, un listener, un bridge di replicazione sulla quale avviene la schedulazione del traffico, ed un bridge di eliminazione; i bridge sono collegati da diversi percorsi per poter testare la resilienza dell'infrastruttura, su tutti i nodi è presente un'istanza di ptp4l per la sincronizzazione. 
+È possibile osservare la presenza di diverse veth (virtual ethernet interfaces) che hanno il compito di incapsulare le interfacce radio, ciò è stato necessario per diversi motivi:
 le interfacce simulate non espongono code, quindi non è possibile effettuare schedulazione del traffico, al contrario durante il processo di creazione delle veth è possibile spcificare il numero di code, per questo motivo in figura è possibile osservare che è stato applicata taprio su veth repl in.
 Inoltre il programma di terze parti XDP FRER per natura stessa del codice XDP si aspetta dei pacchetti lineari che l'interfaccia wlan1 non è in grado di fornire, l'incapuslamento in una veth risolve questo problema linearizzando il pacchetto.
 
 Slide 6
 
-I risultati principali sono stati ottenuti avviando una primo flusso di traffico critico, e successivamente un secondo flusso elevato di traffico best effort che aveva il compito di saturare il canale trasmissivo.
-Dal primo grafico è possibile notare che l'utilizzo di un algorimto di schedulazione del traffico (taprio), che prevede finestre di trasferimento predeterminate permette di ridurre notevolmente le perdite.
-Altri risultati interessanti sono emersi analizzando il thtoughput e la queue depth, ovvero quanti pacchetti erano presenti nel buffer.
-La differenza sostanziate tra l'utilizzo di taprio e pfifo_fast sta nel fatto che utilizzando un algoritmo di schedulazione la queue depth aumenta nei momenti in cui gate sono chiusi causando successivi burst di traffico (osservabile nel thtoughput) quando vengono riaperti, che è il comportamento desiderato in quanto dimostra come vengano separati i diversi flussi.
+I risultati principali sono stati ottenuti tramite il seguente test: lo script avviava un primo flusso di traffico critico, e successivamente un secondo flusso di traffico best effort che aveva il compito di saturare il canale trasmissivo.
+Dal primo grafico è possibile notare che l'utilizzo di un algorimto di schedulazione del traffico (taprio), che prevede finestre di trasferimento predeterminate permette di ridurre notevolmente le perdite nella congestion windows.
+Altri risultati interessanti sono emersi analizzando il througput e la queue depth, ovvero quanti pacchetti sono presenti nel buffer.
+La differenza sostanziate tra l'utilizzo di taprio e pfifo_fast sta nel fatto che utilizzando un algoritmo di schedulazione la queue depth aumenta nei momenti in cui gate sono chiusi causando successivi burst di traffico (osservabile nel througput) quando vengono riaperti, che è il comportamento desiderato in quanto dimostra come vengano separati i diversi flussi.
 
 Slide 7
 
