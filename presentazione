@@ -72,8 +72,8 @@ Slide 6
 I risultati principali sono stati ottenuti tramite il seguente test: lo script avviava un primo flusso di traffico critico, e successivamente un secondo flusso di traffico best effort che aveva il compito di saturare il canale trasmissivo.
 Dal primo grafico è possibile notare che l'utilizzo di un algorimto di schedulazione del traffico (taprio), che prevede finestre di trasferimento predeterminate permette di ridurre notevolmente le perdite nella congestion windows.
 Altri risultati interessanti sono emersi analizzando il througput e la queue depth, ovvero quanti pacchetti sono presenti nel buffer.
-La differenza sostanziate tra l'utilizzo di taprio e pfifo_fast sta nel fatto che utilizzando un algoritmo di schedulazione la queue depth aumenta nei momenti in cui gate sono chiusi causando successivi burst di traffico (osservabile nel througput) quando vengono riaperti, che è il comportamento desiderato in quanto dimostra come vengano separati i diversi flussi.
-
+La differenza sostanziate tra l'utilizzo di taprio e pfifo_fast sta nel fatto che utilizzando un algoritmo di schedulazione la queue depth aumenta nei momenti in cui gate sono chiusi causando successivi burst di traffico (osservabile nel througput) quando vengono riaperti, 
+questo comportamento è coerente con la filosofia del "mai un buffer vuoto" adottata in tsn.
 Slide 7
 
 Il prototipo dimostra la fattibilit di unìinfrastruttura tsn over wifi 7, rispettando gli obiettivi di Affidabilità mediante il programma a basso level xdp frer che permette di replicare ed eliminare i pacchetti ed essere resilienti agli abbattimenti dei collegamenti, lo scheudling deterministico che permette di azzerare quasi la perdita di pacchetti e infine dimostrare il corretto funzionamento dell algorimto bmca per l'elezione dinamica dell'orologio piu preciso in una rete
