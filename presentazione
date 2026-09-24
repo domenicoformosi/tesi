@@ -1,0 +1,83 @@
+slide 1 - intro
+
+L‘avvento della quarta rivoluzione industriale sposta al centro la necessità di integrare il mondo fisico con quello digitale,
+a questi fini la semantica best effort che domina le reti di oggi non è più sufficiente
+In tale contesto macchine e impianti industriali acquisiscono avanzate capacità computazionali e si dotano di una controparte virtuale, il cosiddetto Digital Twin. Questa convergenza
+consente di sfruttare modelli digitali complessi per simulare, monitorare e ottimizzare i processi produttivi in tempo reale, rendendo le fabbriche intelligenti, flessibili e altamente
+interconnesse
+
+Lo standard TSN è in grado di soddisfare le richieste di determinismo, comunicazioni real-time, affidabilità, sicurezza.
+Combinato con le caratteristiche di WiFi 7 apre la strada a infrastrutture di rete resilienti e flessibili
+
+slide 2 - tsn
+
+Sincronizzazione temporale: Per supportare una rete deterministica è necessario che tutti gli host abbiano una visione condivisa e universale del tempo
+
+Latenza limitata e azzeramento delle perdite causate da congestione:
+Mediante tecniche di schedulazione e modellazione del traffico combinate con prelazione dei frame
+
+Affidabilità
+La natura time-sensitive del traffico non permette la ritrasmissione: tecniche di replicazione ed eliminazione dei frame unite ad un controllo esplicito dei percorsi e un filtraggio per-stream garantiscono affidabilità by design
+
+Gestione delle risorse e della rete
+Per garantire un’allocazione efficiente della banda ed una corretta gestione del traffico prioritario è necessario definire un modello architetturale
+
+slide 3 -wifi 7
+Gli aggiornamenti principali apportati da WiFi 7 sono:
+banda a 320 mhz che permette di ottenere velocità maggiori a latenze piu basse
+
+Multiple Resource Unit la quale permette di assegnare ad uno unno stesso Physcal Layer Protocol Data Unit piu resource unit, ovvero blocchi di sottoportanti: aumentando troguhput e permettendno preamble puncturing
+
+Modulazione 4096 QAM che rispetto al 1024 QAM del wifi 6 garantisce un 20% i velocità di picco teorica in piu
+
+1024-mdpu permette di aggregare fino a 1024 mac protocol data unit utilizzando il canale radio in maniera piu efficiente
+
+Restricted Target Wake Time rappresneta un evoluzione dei meccanismi di risparmio energetico nei sistemi wireless
+
+Multi Link Operation permette ad una stazione di utilizzare piu interfacce radio conteporaenmente , aumenteando capacità complessica e migliorando affidabilità, in quanto se un link presenta dei problemi si possono utilizzare gli altri, è naturale quindi immaginare una convergenza di questa tecnologia sullo standard framre replication and elimination for reliability.
+
+slide 4
+
+I moduli kernel fondamentali in questo lavoro di ricerca sono stati:
+
+nl80211 che è l'interfaccia standard tra i processi userspace ed il sottosistema wireless del kernel linux
+
+cfg80211 che è il sottositema che permette di configurare tutte le impostazioni riguardo il protocollo 802.11
+
+mac80211 è il modulo che si occupa di gestire il livello MAC per i dispositivi fisici SoftMAC, ovvero quelli che implementano solo il livello fisico
+
+mac80211_hwsim che permette di emulare una o più radio 802.11, il quale è stato fondaentale per lo sviluppo del prototipo che altrimenti avrebbe richiesto hardware poco accessibile.
+
+Per quanto riguarda invece l'implementazione degli standard tsn per la sincronizzazine temporale linux offre ptp4l che implemente il protocollo PTP e phc2sys che sincronizza l'orologio hw delle schede di rete con l'orologio di sistema
+
+Per la schedulazione del traffico è stata utilizzata la suite di utilities iproute2 e nello specifico il comando traffic control che permette di applicare delle discipine di accodamento alle code associate ad un dispositivo di rete
+
+Per implementare preemption si utilizza il tool ethtool che permette di interagire con intergacce ethernet
+
+Infine per implementare il protocollo frer è stato utilizzato un software di terze parti pen source, XDP FRER, che implementa la replicazione ed eliminazione dei frame su diversi percorsi il campo VLAN identifiier dei pacchetti 802.1Q
+
+slide 5
+
+Obiettivo del prototipo realizzato è dimostrare la fattibilità infrastrutturale di una rete che rispetta gli standard TSN sfruttando allo stesso tempo i vantaggi di wifi 7.
+Il prototipo è stato sviluppato sapendo che utilizzando un ambeinte di emulazione ci si sarebbe limitati ad un unico dominio di clock ed un unico kernel, le conseguenze sono diverse:
+l'impossibilità di far funzionare appieno il protocollo PTP in quanto si va incontro al clock fighting
+l'impossibilita di effettuare preemption per natura stessa delle interfacce radio
+In figura è possibile notare la struttura del prototipo che prevede un talker, un listener, un bridge di replicazione sulla quale avviene la schedulazione del traffico, ed un bridge di eliminazione; i bridge sono collegati da diversi percorsi per poter testare la resilienza dell'infrastruttura, su tutti i nodi è presente un'istanza di ptp4l per la sincronizzazione. 
+È possibile osservare la presenza di diverse veth (virtual ethernet interfaces) che hanno il compito di incapsulare le interfacce radio, ciò è stato necessario per diversi motivi:
+le interfacce simulate non espongono code, quindi non è possibile effettuare schedulazione del traffico, al contrario durante il processo di creazione delle veth è possibile spcificare il numero di code, per questo motivo in figura è possibile osservare che è stato applicata taprio su veth repl in.
+Inoltre il programma di terze parti XDP FRER per natura stessa del codice XDP si aspetta dei pacchetti lineari che l'interfaccia wlan1 non è in grado di fornire, l'incapuslamento in una veth risolve questo problema linearizzando il pacchetto.
+
+Slide 6
+
+I risultati principali sono stati ottenuti tramite il seguente test: lo script avviava un primo flusso di traffico critico, e successivamente un secondo flusso di traffico best effort che aveva il compito di saturare il canale trasmissivo.
+Dal primo grafico è possibile notare che l'utilizzo di un algorimto di schedulazione del traffico (taprio), che prevede finestre di trasferimento predeterminate permette di ridurre notevolmente le perdite nella congestion windows.
+Altri risultati interessanti sono emersi analizzando il througput e la queue depth, ovvero quanti pacchetti sono presenti nel buffer.
+La differenza sostanziate tra l'utilizzo di taprio e pfifo_fast sta nel fatto che utilizzando un algoritmo di schedulazione la queue depth aumenta nei momenti in cui gate sono chiusi causando successivi burst di traffico (osservabile nel througput) quando vengono riaperti, che è il comportamento desiderato in quanto dimostra come vengano separati i diversi flussi.
+
+Slide 7
+
+Il prototipo dimostra la fattibilit di unìinfrastruttura tsn over wifi 7, rispettando gli obiettivi di Affidabilità mediante il programma a basso level xdp frer che permette di replicare ed eliminare i pacchetti ed essere resilienti agli abbattimenti dei collegamenti, lo scheudling deterministico che permette di azzerare quasi la perdita di pacchetti e infine dimostrare il corretto funzionamento dell algorimto bmca per l'elezione dinamica dell'orologio piu preciso in una rete
+a trasposizione di questo proof of concept su dispositivi dotati di supporto nativo alle specifiche Wi-Fi
+7 e TSN, farebbe decadere la quasi totalità dei workaround architetturali, permettendo al sistema di
+esprimere appieno il proprio potenziale deterministico e confermando la solidità della convergenza
+IT/OT per gli scenari industriali di nuova generazione
